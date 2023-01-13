@@ -1,0 +1,37 @@
+.navbar-colored {
+  background-color: #1b3166 !important;
+}
+
+.route-active {
+  background-color: white !important;
+  color: #1b3166 !important;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.route-inactive {
+  background-color: #1b3166 !important;
+  color: white !important;
+  padding: 10px;
+}
+
+.nav-toggle-btn {
+  width: auto;
+  height: auto;
+  padding: 5px;
+  font-size: 25px;
+  color: white;
+}
+
+.navbar-toggler:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.nav-item {
+  text-align: center;
+}
+
+.nav-link span {
+  margin-left: 5px;
+}

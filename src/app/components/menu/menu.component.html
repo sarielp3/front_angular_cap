@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-lg navbar-colored" *ngIf="user">
+  <div class="container-fluid">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+      style="border: 1px solid black;color: white;"
+      (click)="toggleNavbar()"
+    >
+      <span class="navbar-toggler-icon">
+        <fa-icon [icon]="faBars"></fa-icon>
+      </span>
+    </button>
+    <div id="navbarSupportedContent" [ngClass]="{'collapse': navbarOpen, 'navbar-collapse': true}">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#"
+            ><fa-icon [icon]="faHouseUser"></fa-icon>&nbsp;&nbsp;&nbsp;Inicio</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

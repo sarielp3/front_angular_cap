@@ -1,0 +1,92 @@
+<!-- Fixed top Bar  -->
+<nav
+  class="navbar navbar-expand-lg bg-light"
+  *ngIf="isUserAuthenticated && user"
+  style="position: relative;"
+>
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">
+      <img
+        src="https://prod.ucwe.capgemini.com/wp-content/themes/capgemini2020/assets/images/logo.svg" 
+        alt="Capgemini"
+        class="img-fluid"
+        width="180"
+      />
+    </a>
+    <div class="justify-content-end" id="navbarNav">
+      <ul class="navbar-nav d-flex align-items-center">
+        <li class="nav-item">
+          <div ngbDropdown class="d-inline-block">
+            <img
+              id="dropdownBasic1"
+              src="assets/img/avatars/user_perfil.png"
+              alt="bran"
+              width="65"
+              height="65"
+              class="mr-3 rounded-circle img-thumbnail shadow-sm"
+              ngbDropdownToggle
+            />
+            <div
+              ngbDropdownMenu
+              aria-labelledby="dropdownBasic1"
+              class="dropdown-menu dropdown-menu-right drop-menu-adj"
+              style="position: absolute;"
+            >
+              <div class="arrow-up arrow-up-border"></div>
+              <div class="arrow-up"></div>
+              <img
+                id="dropdownBasic1"
+                src="assets/img/avatars/user_perfil.png"
+                alt="bran"
+                width="65"
+                height="65"
+                class="mr-3 rounded-circle img-thumbnail shadow-sm img-drop"
+                ngbDropdownToggle
+              />
+
+              <ul class="nav flex-column nav-list">
+                <li class="nav-item">
+                  <a
+                    ngbDropdownItem                   
+                    class="nav-link text-dark text-uppercase text-center"
+                  >
+                    <span
+                      [innerHTML]="getNickName()"
+                      class="label-nick-font-adj"
+                    ></span>
+                  </a>
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item">
+                  <a
+                    ngbDropdownItem
+                    routerLink="/help"
+                    class="nav-link text-dark mr-3"
+                  >
+                    <img
+                      src="assets/img/help.png"
+                      class="img-fluid mr-3"
+                      width="20"
+                      style="margin-left: 10px;"
+                    />
+                    <span>Ayuda</span>
+                  </a>
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item nav-btn">
+                  <button
+                    class="btn btn-danger btn-adj-font"
+                    (click)="logout()"
+                  >
+                    Cerrar Sessi&oacute;n
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- End Fixed top Bar -->

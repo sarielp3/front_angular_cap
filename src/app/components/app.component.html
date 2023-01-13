@@ -1,0 +1,152 @@
+<!-- Fixed top Bar -->
+
+<app-header
+  [user]="currentUser"
+  [isUserAuthenticated]="isUserAuthenticated()"
+></app-header>
+
+<!-- End Fixed top Bar -->
+
+<!-- Navbar Menu -->
+
+<app-menu
+  [isAdmin]="isAdministrator()"
+  [user]="currentUser"
+></app-menu>
+
+<!-- End Navbar Menu-->
+
+<!-- SideBar & Main Content -->
+<div>
+  <!-- Vertical navbar -->
+  <div
+    id="sidebar"
+    class="vertical-nav"
+    [ngClass]="isCollapse ? 'active' : 'disabled'"
+    style="display:none;"
+  >
+    <!-- Sidebar options for an "Administrator" -->
+    <div *ngIf="isAdministrator()">
+      <!-- Dashboard -->
+      <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">
+        Main
+      </p>
+      <ul class="nav flex-column mb-0">
+        <li class="nav-item">
+          <a
+            routerLink="/"
+            (click)="hideMenuIfNecesary()"
+            class="nav-link text-dark font-italic bg-light"
+          >
+            <i class="fa fa-tachometer mr-3 vertical-icon-color fa-fw"></i>
+            Dashboard
+          </a>
+        </li>
+        <br />
+      </ul>
+
+      <!-- Administration -->
+      <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">
+        Administraci&oacute;n
+      </p>
+      <ul class="nav flex-column mb-0">
+        <li class="nav-item">
+          <a
+            routerLink="inventory"
+            (click)="hideMenuIfNecesary()"
+            class="nav-link text-dark font-italic bg-light"
+          >
+            <i class="fa fa-cubes mr-3 vertical-icon-color fa-fw"></i>
+            Inventario
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            routerLink="menu"
+            (click)="hideMenuIfNecesary()"
+            class="nav-link text-dark font-italic bg-light"
+          >
+            <i class="fa fa-tasks mr-3 vertical-icon-color fa-fw"></i>
+            Menu
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            routerLink="register/close"
+            (click)="hideMenuIfNecesary()"
+            class="nav-link text-dark font-italic bg-light"
+          >
+            <i class="fas fa-cash-register mr-3 vertical-icon-color fa-fw"></i>
+            Cortes de Caja
+          </a>
+        </li>
+      </ul>
+
+      <!-- Reports -->
+      <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">
+        Reportes
+      </p>
+      <ul class="nav flex-column bg-white mb-0">
+        <li class="nav-item">
+          <a
+            href="/reports/sales"
+            (click)="hideMenuIfNecesary()"
+            class="nav-link text-dark font-italic bg-light"
+          >
+            <i
+              class="fas fa-money-bill-wave-alt mr-3 vertical-icon-color fa-fw"
+            ></i>
+            Ventas
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            href="/reports/statics"
+            class="nav-link text-dark font-italic bg-light"
+          >
+            <i class="fas fa-chart-line mr-3 vertical-icon-color fa-fw"></i>
+            Estadisticas
+          </a>
+        </li>
+      </ul>
+
+      <!-- Configuration -->
+      <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">
+        Configuraci&oacute;n
+      </p>
+      <ul class="nav flex-column bg-white mb-0">
+        <li class="nav-item">
+          <a
+            href="config/users"
+            class="nav-link text-dark font-italic bg-light"
+          >
+            <i class="fa fa-user mr-3 vertical-icon-color fa-fw"></i>
+            Usuarios
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            href="config/printer"
+            class="nav-link text-dark font-italic bg-light"
+          >
+            <i class="fa fa-print mr-3 vertical-icon-color fa-fw"></i>
+            Impresora
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- End vertical navbar -->
+  </div>
+
+  <!-- Main content -->
+  <div
+    id="content"
+    [ngClass]="!isUserAuthenticated() ? 'login' : 'row p-5 background-content'">
+    <router-outlet></router-outlet>
+
+    <app-footer></app-footer>
+  </div>
+  <!-- End Main content -->
+</div>
+<!-- End Main Content -->

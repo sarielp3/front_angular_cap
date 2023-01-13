@@ -1,0 +1,49 @@
+.arrow-up {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  position: absolute;
+  margin-top: -16px;
+  margin-left: 125px;
+
+  border-bottom: 10px solid #ffffff;
+}
+
+.arrow-up-border {
+  margin-top: -17px !important;
+  border-bottom: 10px solid rgba(0, 0, 0, 0.15) !important;
+}
+
+.drop-menu-adj {
+  margin-top: 10px;
+  text-align: center;
+  margin-left: -105px;
+  width: 175px;
+  border-radius: 10px;
+  position: absolute;
+}
+
+.img-drop {
+  margin: 0 !important;
+}
+
+.nav-list {
+  text-align: left;
+}
+
+.nav-btn {
+  text-align: center;
+}
+
+.btn-adj-font {
+  font-size: 11px;
+}
+
+.label-nick-font-adj {
+  font-size: 14px !important;
+}
+
+.nav-link img {
+  margin-right: 20px;
+}

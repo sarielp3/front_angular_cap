@@ -1,0 +1,68 @@
+.vertical-nav {
+  min-width: 12rem;
+  width: 12rem;
+  height: 100vh;
+  position: fixed;
+  top: 1;
+  left: 0;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s;
+}
+
+.page-content {
+  width: calc(100% - 12rem);
+  margin-left: 12rem;
+  transition: all 0.4s;
+}
+
+.vertical-icon-color {
+  color: #eb636b;
+}
+
+/* for toggle behavior */
+
+#sidebar {
+  overflow: auto;
+}
+
+#sidebar.active {
+  margin-left: -12rem;
+}
+
+#content.active {
+  width: 100%;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  #sidebar {
+    margin-left: -12rem;
+  }
+  #sidebar.active {
+    margin-left: 0;
+  }
+  #content {
+    width: 100%;
+    margin: 0;
+  }
+  #content.active {
+    margin-left: 12rem;
+    width: calc(100% - 12rem);
+  }
+}
+
+.login {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.background-content {
+  background-color: #f2f7fd;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+

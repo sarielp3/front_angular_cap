@@ -1,0 +1,24 @@
+<section class="login-clean">    
+    <ngb-alert #selfClosingAlert *ngIf="errorMessage" [type]="type" (closed)="errorMessage = ''">{{ errorMessage }}
+    </ngb-alert>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">          
+        <div class="text-center">
+            <span class="mx-auto"><h3>Inicio de Sesi&oacute;n</h3></span>
+        </div>
+        <img class="img-fluid mx-auto d-block" src="assets/img/login_user.png" style="padding-bottom: 10px;"/>
+        <div class="mb-3">
+            <input class="form-control" type="email" name="email" placeholder="UserName"
+                formControlName="userName">
+        </div>
+        <div class="mb-3">
+            <input class="form-control" type="password" name="password" placeholder="Password" formControlName="password">
+        </div>
+        <div class="mb-3">
+            <button class="btn btn-primary d-block w-100" type="submit" [disabled]="!loginForm.valid">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-2"></span>
+                Log In
+            </button>
+        </div>
+        <a class="forgot" href="#">Forgot your email or password?</a>
+    </form>
+</section>
