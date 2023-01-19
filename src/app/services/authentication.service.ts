@@ -10,7 +10,7 @@ import { User } from '../Models/Identity/user';
 export class AuthenticationService {
 
   private StorageKey = 'token';
-  private userSubject: BehaviorSubject<User>;
+  public userSubject: BehaviorSubject<User>;
   private userObservable: Observable<User>;
 
   constructor(private http: HttpClient, private tokenService: JwtService) {
