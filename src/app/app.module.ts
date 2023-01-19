@@ -13,6 +13,7 @@ import { TokenInterceptor } from './services/token.interceptor';
 import { MenuComponent } from './components/menu/menu.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { CuartosComponent } from './componets/cuartos/cuartos.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { FooterComponent } from './components/footer/footer.component';
     MenuComponent,
     HeaderComponent,
     FooterComponent,
+    CuartosComponent,
   ],
   imports: [
     BrowserModule,
