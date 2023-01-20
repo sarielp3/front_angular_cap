@@ -14,6 +14,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CuartosComponent } from './components/cuarto/cuartos.component';
+import { RegistroCuartosComponent } from './components/registro-cuartos/registro-cuartos.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { CuartosComponent } from './components/cuarto/cuartos.component';
     MenuComponent,
     HeaderComponent,
     FooterComponent,
-    CuartosComponent
+    CuartosComponent,
+    RegistroCuartosComponent
   ],
   imports: [
     BrowserModule,

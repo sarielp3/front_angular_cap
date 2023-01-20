@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Cuarto } from '../../models/cuarto';
 import { CuartoService } from '../../services/cuarto.service';
 
@@ -11,7 +12,7 @@ export class CuartosComponent implements OnInit{
 
   habitaciones : Cuarto[];
 
-  constructor(private cuartoService: CuartoService){}
+  constructor(private cuartoService: CuartoService, private router:Router){}
 
     ngOnInit(): void {
      this.obtenerHabitaciones();
@@ -28,5 +29,9 @@ export class CuartosComponent implements OnInit{
   }
     
     );
+  }
+
+  btnAgregar(){
+    this.router.navigate(['/registrarHabitaciones']);
   }
 }

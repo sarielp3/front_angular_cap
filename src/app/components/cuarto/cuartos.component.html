@@ -1,32 +1,48 @@
-<div class="row adjust-promotions text-center">
+<div id="divPadre" >
+    <div class="container">
+      <h3 class="text-lg-start">Lista de habitaciones</h3>
 
-    <div class="row container mt-4">
-      <h2>Lista de Habitaciones</h2>
-
-  <div class="container">
-    <table class="table table-striped">
-      <thead class="table-dark">
-        <tr>
-          <th>Nombre</th>
-          <th>Desscripcion</th>
-          <th>Num. Personas</th>
-          <th>Codigo Cuartos</th>
-          <th>Costo Noche</th>
-          <th>Tipo Cuarto</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let habitacion of habitaciones">
-          <td>{{habitacion.nombreCuarto}}</td>
-          <td>{{habitacion.descripcion}}</td>
-          <td>{{habitacion.numeroPersonas}}</td>
-          <td>{{habitacion.codigoCuartos}}</td>
-          <td>{{habitacion.costoNoche}}</td>
-          <td>{{habitacion.tipoCuarto}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-     
+    	<div class="container-fluid h-100"> 
+    		<div class="row w-100 align-items-center">
+    			<div class="col text-end">
+            <button class="lg-start btn btn-success" (click)="btnAgregar()"><i class="fa fa-plus"> Agregar</i></button>
+    			</div>	
+    		</div>
+    <br>
+    	</div>
+      <table class="table table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th>Nombre</th>
+            <th>Desscripcion</th>
+            <th>Num. Personas</th>
+            <th>Codigo Cuartos</th>
+            <th>Costo Noche</th>
+            <th>Tipo Cuarto</th>
+            <th>Modificar</th>
+            <th>Eliminar</th>
+            <th class="text-center">Estatus</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let habitacion of habitaciones">
+            <td>{{habitacion.nombreCuarto}}</td>
+            <td>{{habitacion.descripcion}}</td>
+            <td>{{habitacion.numeroPersonas}}</td>
+            <td>{{habitacion.codigoCuartos}}</td>
+            <td>{{habitacion.costoNoche}}</td>
+            <td>{{habitacion.tipoCuarto}}</td>
+            <td><button class="btn btn-warning" style="color: white;"><i class="fa fa-pencil"></i></button></td>
+            <td><button class="btn btn-danger" style="color: white;"><i class="fa fa-trash"></i></button></td>
+            <td> 
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Habilitar/deshabilitar</label>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-  </div>
+    </div>
+    
