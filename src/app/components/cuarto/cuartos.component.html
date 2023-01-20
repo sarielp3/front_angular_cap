@@ -1,0 +1,32 @@
+<div class="row adjust-promotions text-center">
+
+    <div class="row container mt-4">
+      <h2>Lista de Habitaciones</h2>
+
+  <div class="container">
+    <table class="table table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>Nombre</th>
+          <th>Desscripcion</th>
+          <th>Num. Personas</th>
+          <th>Codigo Cuartos</th>
+          <th>Costo Noche</th>
+          <th>Tipo Cuarto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let habitacion of habitaciones">
+          <td>{{habitacion.nombreCuarto}}</td>
+          <td>{{habitacion.descripcion}}</td>
+          <td>{{habitacion.numeroPersonas}}</td>
+          <td>{{habitacion.codigoCuartos}}</td>
+          <td>{{habitacion.costoNoche}}</td>
+          <td>{{habitacion.tipoCuarto}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+     
+    </div>
+  </div>
