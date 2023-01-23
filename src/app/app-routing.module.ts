@@ -3,6 +3,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AuthenticationGuard } from './services/authentication-guard';
+import { BuscarVuelosComponent } from './components/vuelos/pages/buscar-vuelos/buscar-vuelos.component';
 
 const routes: Routes = [
   {
@@ -21,7 +22,10 @@ const routes: Routes = [
   },
 
   // more routiings
-  { path: '**', component: NotFoundComponent }
+  {
+    path: 'vuelos',
+    component:  BuscarVuelosComponent
+  }
 ];
 
 export const AppRoutingModule = RouterModule.forRoot(routes, {

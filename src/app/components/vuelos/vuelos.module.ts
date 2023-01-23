@@ -12,6 +12,11 @@ import { BuscarVuelosComponent } from './pages/buscar-vuelos/buscar-vuelos.compo
     FiltrosVuelosComponent,
     BuscarVuelosComponent
   ],
+  exports:[
+    TablaVuelosComponent,
+    FiltrosVuelosComponent,
+    BuscarVuelosComponent
+  ],
   imports: [
     CommonModule
   ]

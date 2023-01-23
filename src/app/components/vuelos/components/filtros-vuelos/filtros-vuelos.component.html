@@ -1,1 +1,6 @@
-<p>filtros-vuelos works!</p>
+<div>
+    <button (click)="getAerolineas1()" class="button">Aerolineas</button>
+    <ul *ngFor="let aerolinea of aerolineas">
+        <li>{{ aerolinea.nombreAerolinea }}</li>
+    </ul>
+</div>
