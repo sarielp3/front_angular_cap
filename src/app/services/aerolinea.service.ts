@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Aerolinea } from '../interfaces/aerolinea.interface';
+import { Aerolinea } from '../models/aerolinea.interface';
 
 @Injectable({
   providedIn: 'root'

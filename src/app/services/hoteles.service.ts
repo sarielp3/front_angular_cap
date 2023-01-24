@@ -14,16 +14,16 @@ export class HotelesServiceTsService {
 
   public getHoteles():Observable<Hoteles[]>{
     
-    return this.http.get<Hoteles[]>('AgenciaViajeTD/hoteles');
+    return this.http.get<Hoteles[]>('http://localhost:8080/AgenciaViajeTD/hoteles');
   }
 
   public getCiudades():Observable<Ciudades[]>{
     
-    return this.http.get<Ciudades[]>('AgenciaViajeTD/ciudades');
+    return this.http.get<Ciudades[]>('http://localhost:8080/AgenciaViajeTD/ciudades');
   }
 
   public getFiltrosHoteles(nomHotel:string = '',codHotel:string= '',ciudad:string= ''):Observable<Hoteles[]>{
     
-    return this.http.get<Hoteles[]>('AgenciaViajeTD/hoteles/filtros?nomHotel='+ nomHotel +'&codHotel='+ codHotel +'&ciudad='+ciudad);
+    return this.http.get<Hoteles[]>('http://localhost:8080/AgenciaViajeTD/hoteles/filtros?nomHotel='+ nomHotel +'&codHotel='+ codHotel +'&ciudad='+ciudad);
   }
 }

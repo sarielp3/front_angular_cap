@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { AerolineaService } from '../../services/aerolinea.service';
-import { Aerolinea } from '../../interfaces/aerolinea.interface';
-import { CiudadesService } from '../../services/ciudades.service';
-import { Ciudad } from '../../interfaces/ciudad.interface';
+import { Aerolinea } from '../../../models/aerolinea.interface';
+import { Ciudad } from '../../../models/ciudad.interface';
+import { AerolineaService } from 'src/app/services/aerolinea.service';
+import { CiudadesService } from 'src/app/services/ciudades.service';
+
+
 
 @Component({
   selector: 'app-filtros-vuelos',
