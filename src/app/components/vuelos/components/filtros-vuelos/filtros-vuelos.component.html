@@ -1,6 +1,10 @@
 <div>
-    <button (click)="getAerolineas1()" class="button">Aerolineas</button>
+    <button (click)="getAerolineas()" class="button">Aerolineas</button>
     <ul *ngFor="let aerolinea of aerolineas">
         <li>{{ aerolinea.nombreAerolinea }}</li>
+    </ul>
+    <button (click)="getOrigenes()" class="button">Ciudades de origen</button>
+    <ul *ngFor="let origen of origenes">
+        <li>{{ origen.nombreCiudad }}</li>
     </ul>
 </div>
