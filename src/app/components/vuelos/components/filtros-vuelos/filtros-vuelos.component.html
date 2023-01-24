@@ -7,4 +7,8 @@
     <ul *ngFor="let origen of origenes">
         <li>{{ origen.nombreCiudad }}</li>
     </ul>
+    <button (click)="getDestinos()" class="button">Ciudades de destino</button>
+    <ul *ngFor="let destino of destinos">
+        <li>{{ destino.nombreCiudad }}</li>
+    </ul>
 </div>

@@ -13,6 +13,7 @@ export class FiltrosVuelosComponent {
 
   aerolineas: Aerolinea[] = [];
   origenes: Ciudad[] = [];
+  destinos: Ciudad[] = [];
 
   constructor(private aerolineaService: AerolineaService, private ciudadesService:CiudadesService){}
 
@@ -32,7 +33,17 @@ export class FiltrosVuelosComponent {
         }, err => {
           console.log('Error');
           console.info(err);
-          this.aerolineas = [];
+          this.origenes = [];
+        });
+  }
+  getDestinos(){
+    this.ciudadesService.getCiudades("destino")
+        .subscribe( destinos =>{
+          this.destinos = destinos;
+        }, err => {
+          console.log('Error');
+          console.info(err);
+          this.destinos = [];
         });
   }
 
