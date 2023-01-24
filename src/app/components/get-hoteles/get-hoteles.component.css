@@ -5,19 +5,25 @@
   overflow-x: scroll;
 }
   td,th{
-    width: 130px;
+    width: 100px;
+  }
+  mat-grid-tile{
   }
 
   th{
-    font-size: medium;
+    font-size: 14px;
   }
 
   #direccion{
-    width: 220px;
+    width: 150px;
   }
 
-  .habilitar{
-    width: 220px;
+  #accion{
+    text-align: center;
+    margin: 8px 8px 8px 0;
+    display: flex;
+    justify-content: center;
+  
   }
 
   p{
@@ -26,3 +32,4 @@
     font-size: 20px;
     font-weight: bold;
   }
+

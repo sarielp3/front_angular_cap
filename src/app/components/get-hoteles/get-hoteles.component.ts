@@ -20,6 +20,7 @@ export class GetHotelesComponent implements OnInit {
   codigoHotel = '';
   nombreHotel = '';
   public ListaHoteles: Hoteles[] = [];
+  public NombreHoteles: Hoteles[] = [];
   public ciudades:Ciudades[] = [];
   public filtroForm: UntypedFormGroup;
   dataSource = new MatTableDataSource<Hoteles>(this.ListaHoteles);
@@ -37,6 +38,7 @@ export class GetHotelesComponent implements OnInit {
   public ngOnInit(): void {
     this.getHoteles();
     this.getCiudades();
+    this.getNombreHoteles();
     this.dataSource.paginator = this.paginator;
 
     this.onSubmit();
@@ -65,6 +67,14 @@ export class GetHotelesComponent implements OnInit {
           }
         )
   }
+
+  public getNombreHoteles(){
+    this.serviceHoteles.getHoteles().subscribe(
+      (data)=>{
+        this.NombreHoteles=data;   
+      }
+    )
+}
 
   public getCiudades(){
     this.serviceHoteles.getCiudades().subscribe(
