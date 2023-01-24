@@ -7,12 +7,12 @@
   td,th{
     width: 100px;
   }
-  mat-grid-tile{
-  }
 
   th{
     font-size: 14px;
+
   }
+
 
   #direccion{
     width: 150px;
