@@ -71,33 +71,6 @@ export class LoginComponent implements OnInit {
           this.router.navigate([this.returnUrl]);
         },
         response => {
-          console.log(response);
-          const user = new User();
-          const sesion = new Session(); 
-          let expira = new Date();
-          const now = new Date();
-          expira.setMinutes(now.getMinutes() + 30);
-          user.Id = 1;
-          user.UserName = 'Izteotl Morales';
-          user.Email = 'izteotl.morales@capgemini.com';
-          user.Role = Role.Administrator;
-          user.Permisions = [];
-          user.Apellidos = 'Morales';
-          user.Celular = '72343214321';
-          user.Alias = 'Izte'; 
-          sesion.Id = '01';
-          sesion.IsValid = true;
-          sesion.Expires = expira;
-          sesion.Issued = new Date();
-          user.Token = sesion;
-          localStorage.setItem('token', JSON.stringify(user));
-          this.authenticationService.userSubject.next(user);
-          this.loading = false;
-          console.log("RUTA: " + this.returnUrl );
-          this.router.navigate([this.returnUrl]);
-
-          console.log("FALLA LLAMADO A API");
-
           console.log("Creamos usuario dummy");
 
           const user = new User();  
