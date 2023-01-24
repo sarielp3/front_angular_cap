@@ -13,6 +13,14 @@ import { TokenInterceptor } from './services/token.interceptor';
 import { MenuComponent } from './components/menu/menu.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { GetHotelesComponent } from './components/get-hoteles/get-hoteles.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {MatTableModule} from '@angular/material/table';
+import {MatIconModule} from '@angular/material/icon'
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -21,7 +29,8 @@ import { FooterComponent } from './components/footer/footer.component';
     LoginComponent,
     MenuComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    GetHotelesComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +39,14 @@ import { FooterComponent } from './components/footer/footer.component';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NoopAnimationsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatInputModule,
+    MatIconModule,
+    MatSelectModule,
+    MatButtonModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

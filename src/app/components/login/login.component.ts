@@ -5,6 +5,9 @@ import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Role } from 'src/app/Models/Identity/role';
+import { Session } from 'src/app/Models/Identity/session';
+import { User } from 'src/app/Models/Identity/user';
 
 @Component({
   selector: 'app-login',
@@ -70,7 +73,59 @@ export class LoginComponent implements OnInit {
         response => {
           console.log(response);
 
-          var message = "";
+          console.log("FALLA LLAMADO A API");
+
+          console.log("Creamos usuario dummy");
+
+          const user = new User();  
+
+          const sesion = new Session();    
+
+          let expira = new Date();
+
+          const now = new Date();
+
+          expira.setMinutes(now.getMinutes() + 30);
+
+          user.Id = 1;
+
+          user.UserName = 'Acosta Victor';
+
+          user.Email = 'victor.acosta@capgemini.com';          
+
+          user.Role = Role.Administrator;
+
+          user.Permisions = [];
+
+          user.Apellidos = 'Acosta';
+
+          user.Celular = '6681500254';
+
+          user.Alias = 'sariel';  
+
+          sesion.Id = '01';
+
+          sesion.IsValid = true;
+
+          sesion.Expires = expira;
+
+          sesion.Issued  = new Date();
+
+          user.Token = sesion;
+
+         
+
+          localStorage.setItem('token', JSON.stringify(user));
+
+          this.authenticationService.userSubject.next(user);
+
+          this.loading = false;
+
+          console.log("RUTA: " + this.returnUrl );
+
+          this.router.navigate([this.returnUrl]);
+
+        /*  var message = "";
           if(response.error != undefined && response.error instanceof ProgressEvent){
             message = "Error inesperado. Por favor espere, estamos trabajando en ello.";
             this.type = "danger";
@@ -85,7 +140,7 @@ export class LoginComponent implements OnInit {
           this.loginForm.setValue({
             userName: "",
             password: ""
-          });
+          });*/
         });
   }
 }
