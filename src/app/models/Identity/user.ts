@@ -1,4 +1,4 @@
-import { Role } from "./role";
+import { Role } from "src/app/Models/Identity/role";
 import { Session } from "./session";
 
 
