@@ -21,6 +21,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
+import { ReservasComponent } from './components/reservas/reservas.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {MatButtonModule} from '@angular/material/button';
     MenuComponent,
     HeaderComponent,
     FooterComponent,
-    GetHotelesComponent
+    GetHotelesComponent,
+    ReservasComponent
   ],
   imports: [
     BrowserModule,
