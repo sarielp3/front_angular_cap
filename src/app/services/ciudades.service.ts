@@ -8,7 +8,7 @@ import { Ciudad } from '../models/ciudad.interface';
 })
 export class CiudadesService {
   private apiUrl: string = 'http://localhost:8080/AgenciaViajeTD/ciudades';
-  
+
   constructor( private http: HttpClient ) { }
 
   getCiudades(param: string): Observable<Ciudad[]>{

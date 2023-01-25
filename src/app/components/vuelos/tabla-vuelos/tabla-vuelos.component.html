@@ -1,2 +1,32 @@
 
-<h1>tabla-vuelos works!</h1>
+<h1>Lista de Vuelos</h1>
+
+<div>
+    <table>
+        <tr>
+            <th>Origen</th>
+            <th>Destino</th>
+            <th>Aerolinea</th>
+            <th>Estatus</th>
+            <th>Hora de llegada</th>
+            <th>Hora de salida</th>
+            <th>Codigo del vuelo</th>
+            <th>Modificar</th>
+            <th>Habilitar</th>
+            <th>Eliminar</th>
+        </tr>
+        <tr *ngFor="let vuelo of vuelos">
+            <td>{{ vuelo.origen.nombreCiudad }}</td>
+            <td>{{ vuelo.destino.nombreCiudad }}</td>
+            <td>{{ vuelo.aerolinea.nombreAerolinea }}</td>
+            <td>{{ vuelo.estatus }}</td>
+            <td>{{ vuelo.horaLlegada }}</td>
+            <td>{{ vuelo.horaSalida }}</td>
+            <td>{{ vuelo.codigoVuelo }}</td>
+            <th><button>Modificar</button></th>
+            <th><button>Habilitar</button></th>
+            <th><button>Eliminar</button></th>
+        </tr>
+
+    </table>
+</div>

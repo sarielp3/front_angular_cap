@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { TablaVuelosComponent } from './tabla-vuelos/tabla-vuelos.component';
 import { BuscarVuelosComponent } from './buscar-vuelos/buscar-vuelos.component';
 import { FiltrosVuelosComponent } from './filtros-vuelos/filtros-vuelos.component';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 
@@ -18,7 +20,9 @@ import { FiltrosVuelosComponent } from './filtros-vuelos/filtros-vuelos.componen
     BuscarVuelosComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    BrowserModule
   ]
 })
 export class VuelosModule { }

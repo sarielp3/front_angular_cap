@@ -1,14 +1,26 @@
 <div>
-    <button (click)="getAerolineas()" class="button">Aerolineas</button>
-    <ul *ngFor="let aerolinea of aerolineas">
-        <li>{{ aerolinea.nombreAerolinea }}</li>
-    </ul>
-    <button (click)="getOrigenes()" class="button">Ciudades de origen</button>
-    <ul *ngFor="let origen of origenes">
-        <li>{{ origen.nombreCiudad }}</li>
-    </ul>
-    <button (click)="getDestinos()" class="button">Ciudades de destino</button>
-    <ul *ngFor="let destino of destinos">
-        <li>{{ destino.nombreCiudad }}</li>
-    </ul>
+    <form [formGroup]="form">
+        <h3 for="">Origen</h3>
+        <select [formControl]="origenControl" class="form-select" name="origenes" [(ngModel)] = "origenesSelect" id="">
+            <option [value]="origen.idCiudad" *ngFor="let origen of origenes">{{ origen.nombreCiudad }}</option>
+        </select>
+        <hr>
+
+        <h3 for="">Destino</h3>
+        <select class="form-select" name="destinos" [(ngModel)] = "destinosSelect" id="">
+            <option value="" selected>Ciudades de destino</option>
+            <option [value]="destino.idCiudad" *ngFor="let destino of destinos">{{ destino.nombreCiudad }}</option>
+        </select>
+        <hr>
+
+        <h3 for="">Aerolinea</h3>
+        <select class="form-select" name="aerolineas" [(ngModel)] = "aerolineasSelect" id="">
+            <option value="" selected>Aerolineas</option>
+            <option [value]="aerolinea.idAerolinea" *ngFor="let aerolinea of aerolineas">{{ aerolinea.nombreAerolinea }}</option>
+        </select>
+        <hr>
+        <br>
+        <button (click)="filtros()">Buscar</button>
+    </form>
+    
 </div>
