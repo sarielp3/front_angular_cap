@@ -33,8 +33,7 @@ export class ReservasComponent implements OnInit {
               private ciudadesService : CiudadesService,
               public dialog: MatDialog) { };
 
-  public ngOnInit(): void {
-    this.getReservas();
+  public ngOnInit(): void {    
     this.ciudadesService.getCiudadesOrigen().subscribe(
       data => {
         console.log("Data =>",data);
@@ -43,17 +42,16 @@ export class ReservasComponent implements OnInit {
         console.log("Error =>",error);
       }
     )
-    //this.getHoteles();
-    //this.getCuartos();
-    //this.getVuelos();
-  }
-   public getReservas() {
     this.service.getReservas().subscribe(reservas => {
       console.log(reservas);
       this.reservas = reservas;
       this.dataSource = new MatTableDataSource<Reservas>(this.reservas);
     });
+    //this.getHoteles();
+    //this.getCuartos();
+    //this.getVuelos();
   }
+  
    public getHoteles() {
     this.service.getHotel().subscribe(hoteles => {
       this.hoteles = hoteles;
