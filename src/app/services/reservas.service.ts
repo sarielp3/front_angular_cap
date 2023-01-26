@@ -5,6 +5,7 @@ import { Observable} from 'rxjs';
 import { HotelesReservas } from '../models/Identity/hotelesReservas';
 import { CuartosReservas } from '../models/Identity/cuartosReservas';
 import { VuelosReservas } from '../models/Identity/vuelosReservas';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class ReservasService {
   constructor(private http: HttpClient) { }
 
   public getReservas(): Observable<Reservas[]>{
-    return this.http.get<Reservas[]>('AgenciaViajeTD/reservas');
+    return this.http.get<Reservas[]>(environment.apiUrl +'reservas');
   }
 
   public getHotel(): Observable<HotelesReservas[]>{

@@ -22,6 +22,10 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
 import { ReservasComponent } from './components/reservas/reservas.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { AltaReservaComponent } from './components/reservas/alta-reserva/alta-reserva.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +36,9 @@ import { ReservasComponent } from './components/reservas/reservas.component';
     HeaderComponent,
     FooterComponent,
     GetHotelesComponent,
-    ReservasComponent
+    ReservasComponent,
+    AltaReservaComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -48,7 +54,9 @@ import { ReservasComponent } from './components/reservas/reservas.component';
     MatInputModule,
     MatIconModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule,
+    MatDatepickerModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

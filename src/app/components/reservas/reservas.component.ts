@@ -5,7 +5,11 @@ import { CuartosReservas } from 'src/app/models/Identity/cuartosReservas';
 import { HotelesReservas } from 'src/app/models/Identity/hotelesReservas';
 import { Reservas } from 'src/app/models/Identity/reservas';
 import { VuelosReservas } from 'src/app/models/Identity/vuelosReservas';
+import { CiudadesService } from 'src/app/services/ciudades.service';
 import { ReservasService } from 'src/app/services/reservas.service';
+import { FormControl } from '@angular/forms';
+import {MatDialog} from '@angular/material/dialog';
+import { AltaReservaComponent } from './alta-reserva/alta-reserva.component';
 
 @Component({
   selector: 'app-reservas',
@@ -14,23 +18,40 @@ import { ReservasService } from 'src/app/services/reservas.service';
 })
 export class ReservasComponent implements OnInit {
 
+  displayedColumns: string[] = ['Origen', 'Destino', 'Nombre del Cliente', 'Descripción de la reserva','Fecha Creacion','Modificar','Eliminar'];
   titulo = 'Listado de Reservas';
   public reservas: Reservas[] = [];
   public hoteles: HotelesReservas[] = [];
   public cuartos: CuartosReservas[] = [];
   public vuelos: VuelosReservas[] = [];
   dataSource = new MatTableDataSource<Reservas>(this.reservas);
-  constructor(private service: ReservasService) { };
+
+  ciudadesOrigen : Ciudades[];
+  selectedCiudadOrigen = new FormControl();
+
+  constructor(private service: ReservasService,
+              private ciudadesService : CiudadesService,
+              public dialog: MatDialog) { };
 
   public ngOnInit(): void {
     this.getReservas();
-    this.getHoteles();
-    this.getCuartos();
-    this.getVuelos();
+    this.ciudadesService.getCiudadesOrigen().subscribe(
+      data => {
+        console.log("Data =>",data);
+        this.ciudadesOrigen = data;
+      },error => {
+        console.log("Error =>",error);
+      }
+    )
+    //this.getHoteles();
+    //this.getCuartos();
+    //this.getVuelos();
   }
    public getReservas() {
     this.service.getReservas().subscribe(reservas => {
+      console.log(reservas);
       this.reservas = reservas;
+      this.dataSource = new MatTableDataSource<Reservas>(this.reservas);
     });
   }
    public getHoteles() {
@@ -51,5 +72,24 @@ export class ReservasComponent implements OnInit {
     this.service.getVuelo().subscribe(vuelos => {
       this.vuelos = vuelos;
     });
+  }
+
+  buscar(){
+    console.log(this.selectedCiudadOrigen.value);
+  }
+
+  modificar(elemento){
+    console.log('Elemento =>', elemento);
+  }
+  
+  altaReserva(){
+    console.log('Clic en boton Alta');
+    const dialogoRef = this.dialog.open(AltaReservaComponent,{
+      disableClose: true ,     
+    });
+    dialogoRef.afterClosed().subscribe(result =>{
+      console.log(result);
+    });
+
   }
 }

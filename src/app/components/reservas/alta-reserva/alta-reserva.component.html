@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Alta Reserva</h1>
+            <form [formGroup] = 'altaReserva'>
+                <h4>Origen</h4>
+                <mat-form-field appearance="fill">
+                    <mat-label>Selecciona una opción</mat-label>
+                    <mat-select>
+                        <mat-option *ngFor="let ciudadOrigen of ciudadesOrigen"
+                            [value]="ciudadOrigen.idCiudad">{{ciudadOrigen.nombreCiudad}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <h4>Destino</h4>
+                <mat-form-field appearance="fill">
+                    <mat-label>Selecciona una opción</mat-label>
+                    <mat-select>
+                        <mat-option *ngFor="let ciudadOrigen of ciudadesOrigen"
+                            [value]="ciudadOrigen.idCiudad">{{ciudadOrigen.nombreCiudad}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <h4>Vuelos</h4>
+                <mat-form-field appearance="fill">
+                    <mat-label>Selecciona una opción</mat-label>
+                    <mat-select>
+                        <mat-option *ngFor="let ciudadOrigen of ciudadesOrigen"
+                            [value]="ciudadOrigen.idCiudad">{{ciudadOrigen.nombreCiudad}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <h4>Hotel</h4>
+                <mat-form-field appearance="fill">
+                    <mat-label>Selecciona una opción</mat-label>
+                    <mat-select>
+                        <mat-option *ngFor="let ciudadOrigen of ciudadesOrigen"
+                            [value]="ciudadOrigen.idCiudad">{{ciudadOrigen.nombreCiudad}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <table>
+                    <td>
+                        <h4>Tipo de Cuarto</h4>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Selecciona una opción</mat-label>
+                            <mat-select>
+                                <mat-option *ngFor="let ciudadOrigen of ciudadesOrigen"
+                                    [value]="ciudadOrigen.idCiudad">{{ciudadOrigen.nombreCiudad}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <h4>Costo</h4>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Postal Code</mat-label>
+                            <input matInput #postalCode maxlength="5" placeholder="Ex. 94105" value="94043">
+                            <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
+                          </mat-form-field>
+                    </td>
+                </table>
+                <!--FALTA DATAPIKER-->
+                <mat-form-field class="example-full-width">
+                    <mat-label>Nombre</mat-label>
+                    <input formControlName="nombre" matInput placeholder="Nombre" value="">
+                </mat-form-field>
+                <br/>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Apellido Paterno</mat-label>
+                    <input matInput placeholder="Apellido Paterno" value="">
+                </mat-form-field>
+                <br/>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Apellido Materno</mat-label>
+                    <input matInput placeholder="Apellido Paterno" value="">
+                </mat-form-field>
+                <br/>
+                <button class="btn btn-primary" type="submit" (click)="guardar()" >Guardar</button>   
+
+            </form>
+        </div>
+    </div>
+</div>
