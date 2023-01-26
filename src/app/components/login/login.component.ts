@@ -68,7 +68,6 @@ export class LoginComponent implements OnInit {
           this.router.navigate([this.returnUrl]);
         },
         response => {
-          console.log(response);
 
           var message = "";
           if(response.error != undefined && response.error instanceof ProgressEvent){
@@ -86,6 +85,7 @@ export class LoginComponent implements OnInit {
             userName: "",
             password: ""
           });
+          
         });
   }
 }

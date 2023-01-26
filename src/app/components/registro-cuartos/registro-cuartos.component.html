@@ -1,0 +1,47 @@
+<div class="col-md-6 offset-md-3">
+<h3 class="text-center">Registro de habitaciones</h3>
+
+<form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label>Nombre cuarto: </label>
+        <input type="text" class="form-control" 
+          id="nombreCuarto" 
+          [(ngModel)]="habitacion.nombreCuarto" 
+          name="nombreCuarto"
+        >
+        <label>Descripcion: </label>
+        <input type="text" class="form-control" 
+          id="descripcion" 
+          [(ngModel)]="habitacion.descripcion" 
+          name="descripcion"
+        >
+        <label>Numero Personas: </label>
+        <input type="number" class="form-control" 
+          id="numeroPersonas" 
+          [(ngModel)]="habitacion.numeroPersonas" 
+          name="numeroPersonas"
+        >
+        <label>Codigo cuarto: </label>
+        <input type="text" class="form-control" 
+          id="codigoCuartos" 
+          [(ngModel)]="habitacion.codigoCuartos" 
+          name="codigoCuartos"
+        >
+        <label>Costo Noche: </label>
+        <input type="number" class="form-control" 
+          id="costoNoche" 
+          [(ngModel)]="habitacion.costoNoche" 
+          name="costoNoche"
+        >
+        <label>Tipo Cuarto: </label>
+        <input type="text" class="form-control" 
+          id="tipoCuarto" 
+          [(ngModel)]="habitacion.tipoCuarto" 
+          name="tipoCuarto"
+        >
+    </div>
+ <br>
+    <button class="btn btn-success">Guardar</button>
+</form>
+
+</div>
