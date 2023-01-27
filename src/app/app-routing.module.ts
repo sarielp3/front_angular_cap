@@ -5,6 +5,9 @@ import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RegistroCuartosComponent } from './components/registro-cuartos/registro-cuartos.component';
 import { AuthenticationGuard } from './services/authentication-guard';
+import {MenuComponent} from './components/menu/menu.component';
+import {GetHotelesComponent} from './components/get-hoteles/get-hoteles.component'
+import { ReservasComponent } from './components/reservas/reservas.component';
 
 const routes: Routes = [
   {
@@ -22,6 +25,20 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
+
+    path: 'menu',
+    component: MenuComponent
+  },
+  {
+    path: 'ConsultarHoteles',
+    component: GetHotelesComponent
+  },
+  {
+    path: 'reservas',
+    component: ReservasComponent
+  },{
+
+
     path: 'habitaciones',
     component: CuartosComponent,
   },
@@ -29,6 +46,7 @@ const routes: Routes = [
     path: 'registrarHabitaciones',
     component: RegistroCuartosComponent
   },
+
   // more routiings
   { path: '**', component: NotFoundComponent }
 ];

@@ -1,0 +1,28 @@
+.campos{
+  text-align: center;
+}
+.container{
+  overflow-x: scroll;
+}
+  td,th{
+    width: 130px;
+  }
+
+  th{
+    font-size: medium;
+  }
+
+  #direccion{
+    width: 220px;
+  }
+
+  .habilitar{
+    width: 220px;
+  }
+
+  p{
+    align-items: center;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+  }

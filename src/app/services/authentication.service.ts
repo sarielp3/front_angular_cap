@@ -32,7 +32,7 @@ export class AuthenticationService {
   }
 
   public login(username: string, password: string): Observable<User> {
-    var url = `${environment.apiUrl}/Authentication/Login`;
+    var url = `${environment.apiUrl}Authentication/Login`;
     return this.http.post(url, { "userData": username, "password": password }, {responseType: 'text'})
     .pipe(map(result => {
 
