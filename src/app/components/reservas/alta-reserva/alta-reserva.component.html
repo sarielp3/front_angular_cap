@@ -2,21 +2,19 @@
     <div class="row">
         <div class="col">
             <h1>Alta Reserva</h1>
-            <form [formGroup] = 'altaReserva'>
-                <h4>Origen</h4>
+            <form [formGroup] = 'altaReserva'>                
                 <mat-form-field appearance="fill">
-                    <mat-label>Selecciona una opción</mat-label>
-                    <mat-select>
+                    <mat-label>Origen</mat-label>
+                    <mat-select (selectionChange)="origenChange()" formControlName="origenSelect">
                         <mat-option *ngFor="let ciudadOrigen of ciudadesOrigen"
                             [value]="ciudadOrigen.idCiudad">{{ciudadOrigen.nombreCiudad}}</mat-option>
                     </mat-select>
-                </mat-form-field>
-                <h4>Destino</h4>
+                </mat-form-field>                
                 <mat-form-field appearance="fill">
-                    <mat-label>Selecciona una opción</mat-label>
+                    <mat-label>Destino</mat-label>
                     <mat-select>
-                        <mat-option *ngFor="let ciudadOrigen of ciudadesOrigen"
-                            [value]="ciudadOrigen.idCiudad">{{ciudadOrigen.nombreCiudad}}</mat-option>
+                        <mat-option *ngFor="let ciudad of ciudadesDestino"
+                            [value]="ciudad.idCiudad">{{ciudad.nombreCiudad}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <h4>Vuelos</h4>
@@ -56,6 +54,31 @@
                     </td>
                 </table>
                 <!--FALTA DATAPIKER-->
+                <mat-form-field appearance="fill" class="example-form-field">
+                    <mat-label>Fecha Inicio</mat-label>
+                    <input matInput [matDatepicker]="datepicker">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #datepicker>
+                      <mat-datepicker-actions>
+                        <button mat-button matDatepickerCancel>Cancelar</button>
+                        <button mat-raised-button color="primary" matDatepickerApply>Aceptar</button>
+                      </mat-datepicker-actions>
+                    </mat-datepicker>
+                </mat-form-field>                
+                <mat-form-field appearance="fill" class="example-form-field">
+                    <mat-label>Fecha Fin</mat-label>
+                    <input matInput [matDatepicker]="datepickerFin">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="datepickerFin"></mat-datepicker-toggle>
+                    <mat-datepicker #datepickerFin>
+                      <mat-datepicker-actions>
+                        <button mat-button matDatepickerCancel>Cancelar</button>
+                        <button mat-raised-button color="primary" matDatepickerApply>Aceptar</button>
+                      </mat-datepicker-actions>
+                    </mat-datepicker>
+                </mat-form-field>
+                <br/>
                 <mat-form-field class="example-full-width">
                     <mat-label>Nombre</mat-label>
                     <input formControlName="nombre" matInput placeholder="Nombre" value="">
@@ -72,6 +95,7 @@
                 </mat-form-field>
                 <br/>
                 <button class="btn btn-primary" type="submit" (click)="guardar()" >Guardar</button>   
+                <button class="btn btn-primary" type="submit" (click)="cancelar()" >Cancelar</button>   
 
             </form>
         </div>

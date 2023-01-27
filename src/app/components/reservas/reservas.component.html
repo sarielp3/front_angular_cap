@@ -1,105 +1,115 @@
-<div class="">
-  <p>{{titulo}}</p>
-  <div>
-    <div class="row">
-      <div class="col-11">
-  
-      </div>
-      <div class="col-1">
-        <button mat-stroked-button color="primary" (click)="altaReserva()">Alta Reserva</button>
-        <br/>
-      </div>    
-    </div>
-    <div></div>
-    <div class="row">
-      <div class="col-2">
-        <form>
-          <h4>Origen</h4>
-          <mat-form-field appearance="fill">
-            <mat-label>Selecciona una opción</mat-label>
-            <mat-select [formControl]="selectedCiudadOrigen">
-              <mat-option *ngFor="let ciudadOrigen of ciudadesOrigen" [value]="ciudadOrigen.idCiudad">{{ciudadOrigen.nombreCiudad}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-  
-          <h4>Destino</h4>
-          <mat-form-field appearance="fill">
-            <mat-label>Selecciona una opción</mat-label>
-            <mat-select>
-              <mat-option value="option1">Option 1</mat-option>
-              <mat-option value="option2" disabled>Option 2 (disabled)</mat-option>
-              <mat-option value="option3">Option 3</mat-option>
-            </mat-select>
-          </mat-form-field>
-  
-          <h4>Aerolinea</h4>
-          <mat-form-field appearance="fill">
-            <mat-label>Selecciona una opción</mat-label>
-            <mat-select>
-              <mat-option value="option1">Option 1</mat-option>
-              <mat-option value="option2" disabled>Option 2 (disabled)</mat-option>
-              <mat-option value="option3">Option 3</mat-option>
-            </mat-select>
-          </mat-form-field>
-  
-          <h4>Hotel</h4>
-          <mat-form-field appearance="fill">
-            <mat-label>Selecciona una opción</mat-label>
-            <mat-select>
-              <mat-option value="option1">Option 1</mat-option>
-              <mat-option value="option2" disabled>Option 2 (disabled)</mat-option>
-              <mat-option value="option3">Option 3</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <br />
-          <button mat-button (click)="buscar()">Buscar</button>
-        </form>
-  
-      </div>
-      <div class="col-10">
-        <table mat-table [dataSource]="dataSource">
-          <!-- Position Column -->
-          <ng-container matColumnDef="Origen">
-            <th mat-header-cell *matHeaderCellDef>Origen</th>
-            <td mat-cell *matCellDef="let element"> {{element.vuelo.origen.nombreCiudad}} </td>
-          </ng-container>
-  
-          <ng-container matColumnDef="Destino">
-            <th mat-header-cell *matHeaderCellDef>Destino</th>
-            <td mat-cell *matCellDef="let element"> {{element.vuelo.destino.nombreCiudad}} </td>
-          </ng-container>
-  
-          <ng-container matColumnDef="Nombre del Cliente">
-            <th mat-header-cell *matHeaderCellDef>Nombre del Cliente</th>
-            <td mat-cell *matCellDef="let element"> {{element.nombreCliente}} {{ element.apellidoPaternoCliente}}
-              {{element.apellidoMaternoCliente}} </td>
-          </ng-container>
-  
-          <ng-container matColumnDef="Descripción de la reserva">
-            <th mat-header-cell *matHeaderCellDef>Descripcion de la reserva</th>
-            <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
-          </ng-container>
-  
-          <ng-container matColumnDef="Fecha Creacion">
-            <th mat-header-cell *matHeaderCellDef>Fecha Creacion</th>
-            <td mat-cell *matCellDef="let element"> {{element.fechaInicio}} </td>
-          </ng-container>
-  
-          <ng-container matColumnDef="Modificar">
-            <th mat-header-cell *matHeaderCellDef>Modificar</th>
-            <td mat-cell *matCellDef="let element"> <button mat-stroked-button color="accent" (click)="modificar(element)">Modificar</button> </td>
-          </ng-container>
-  
-          <ng-container matColumnDef="Eliminar">
-            <th mat-header-cell *matHeaderCellDef>Eliminar</th>
-            <td mat-cell *matCellDef="let element"> <button mat-button color="warn">Eliminar</button> </td>
-          </ng-container>
-  
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-      </div>
-    </div>
-  
-  </div>
+
+<div *ngIf="loading; else content">
+  <mat-spinner></mat-spinner>
 </div>
+
+<ng-template #content>
+  <div class="">
+    <p>{{titulo}}</p>
+    <div>
+      <div class="row">
+        <div class="col-11">
+    
+        </div>
+        <div class="col-1">
+          <button mat-stroked-button color="primary" (click)="altaReserva()">Alta Reserva</button>
+          <br/>
+        </div>    
+      </div>
+      <div></div>
+      <div class="row">
+        <div class="col-2">
+          <form>
+            <h4>Origen</h4>
+            <mat-form-field appearance="fill">
+              <mat-label>Selecciona una opción</mat-label>
+              <mat-select [formControl]="selectedCiudadOrigen">
+                <mat-option *ngFor="let ciudadOrigen of ciudadesOrigen" [value]="ciudadOrigen.nombreCiudad">{{ciudadOrigen.nombreCiudad}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+    
+            <h4>Destino</h4>
+            <mat-form-field appearance="fill">
+              <mat-label>Selecciona una opción</mat-label>
+              <mat-select>
+                <mat-option value="option1">Option 1</mat-option>
+                <mat-option value="option2" disabled>Option 2 (disabled)</mat-option>
+                <mat-option value="option3">Option 3</mat-option>
+              </mat-select>
+            </mat-form-field>
+    
+            <h4>Aerolinea</h4>
+            <mat-form-field appearance="fill">
+              <mat-label>Selecciona una opción</mat-label>
+              <mat-select>
+                <mat-option value="option1">Option 1</mat-option>
+                <mat-option value="option2" disabled>Option 2 (disabled)</mat-option>
+                <mat-option value="option3">Option 3</mat-option>
+              </mat-select>
+            </mat-form-field>
+    
+            <h4>Hotel</h4>
+            <mat-form-field appearance="fill">
+              <mat-label>Selecciona una opción</mat-label>
+              <mat-select>
+                <mat-option value="option1">Option 1</mat-option>
+                <mat-option value="option2" disabled>Option 2 (disabled)</mat-option>
+                <mat-option value="option3">Option 3</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <br />
+            <button mat-button (click)="buscar()">Buscar</button>
+          </form>
+    
+        </div>
+        <div class="col-10">
+          <table mat-table [dataSource]="dataSource">
+            <!-- Position Column -->
+            <ng-container matColumnDef="Origen">
+              <th mat-header-cell *matHeaderCellDef>Origen</th>
+              <td mat-cell *matCellDef="let element"> {{element.vuelo.origen.nombreCiudad}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="Destino">
+              <th mat-header-cell *matHeaderCellDef>Destino</th>
+              <td mat-cell *matCellDef="let element"> {{element.vuelo.destino.nombreCiudad}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="Nombre del Cliente">
+              <th mat-header-cell *matHeaderCellDef>Nombre del Cliente</th>
+              <td mat-cell *matCellDef="let element"> {{element.nombreCliente}} {{ element.apellidoPaternoCliente}}
+                {{element.apellidoMaternoCliente}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="Descripción de la reserva">
+              <th mat-header-cell *matHeaderCellDef>Descripcion de la reserva</th>
+              <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="Fecha Creacion">
+              <th mat-header-cell *matHeaderCellDef>Fecha Creacion</th>
+              <td mat-cell *matCellDef="let element"> {{element.fechaInicio}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="Modificar">
+              <th mat-header-cell *matHeaderCellDef>Modificar</th>
+              <td mat-cell *matCellDef="let element"> <button mat-stroked-button color="accent" (click)="modificar(element)">Modificar</button> </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="Eliminar">
+              <th mat-header-cell *matHeaderCellDef>Eliminar</th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-button color="warn" (click)="eliminar(element)">Eliminar</button> 
+              </td>
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+      </div>
+    
+    </div>
+  </div>
+  
+</ng-template>

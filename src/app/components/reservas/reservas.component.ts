@@ -10,6 +10,8 @@ import { ReservasService } from 'src/app/services/reservas.service';
 import { FormControl } from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import { AltaReservaComponent } from './alta-reserva/alta-reserva.component';
+import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
+import { ModificaReservaComponent } from './modifica-reserva/modifica-reserva.component';
 
 @Component({
   selector: 'app-reservas',
@@ -28,6 +30,9 @@ export class ReservasComponent implements OnInit {
 
   ciudadesOrigen : Ciudades[];
   selectedCiudadOrigen = new FormControl();
+  loading: boolean = true;
+  value = 0;
+  mode = 'indeterminate';
 
   constructor(private service: ReservasService,
               private ciudadesService : CiudadesService,
@@ -46,10 +51,8 @@ export class ReservasComponent implements OnInit {
       console.log(reservas);
       this.reservas = reservas;
       this.dataSource = new MatTableDataSource<Reservas>(this.reservas);
-    });
-    //this.getHoteles();
-    //this.getCuartos();
-    //this.getVuelos();
+      this.loading = false;
+    });  
   }
   
    public getHoteles() {
@@ -78,6 +81,14 @@ export class ReservasComponent implements OnInit {
 
   modificar(elemento){
     console.log('Elemento =>', elemento);
+    console.log('Clic en boton Alta');
+    const dialogoRef = this.dialog.open(ModificaReservaComponent,{
+      data: elemento,
+      disableClose: true ,     
+    });
+    dialogoRef.afterClosed().subscribe(result =>{
+      console.log(result);
+    });
   }
   
   altaReserva(){
@@ -89,5 +100,18 @@ export class ReservasComponent implements OnInit {
       console.log(result);
     });
 
+  }
+
+  eliminar(elemento:Reservas){
+    console.log('Clic en boton Eliminar', elemento);
+    const dialogoRef = this.dialog.open(ConfirmDialogComponent,{
+      disableClose:true
+    });
+    dialogoRef.afterClosed().subscribe(respuesta =>{
+      console.log(respuesta);
+      if(respuesta){
+        console.log('Eliminamos Registro con Id',elemento.idReserva );
+      }
+    })
   }
 }

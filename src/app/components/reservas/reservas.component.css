@@ -26,3 +26,7 @@
       font-size: 20px;
       font-weight: bold;
     }
+    .spinner__loading {
+      display: flex;
+      justify-content: center;
+    }
