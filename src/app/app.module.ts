@@ -33,6 +33,8 @@ import { SnackBarComponent } from './shared/components/snack-bar/snack-bar.compo
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CuartosComponent } from './components/cuarto/cuartos.component';
+import { RegistroCuartosComponent } from './components/registro-cuartos/registro-cuartos.component';
 
 
 
@@ -50,8 +52,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ConfirmDialogComponent,
     ModificaReservaComponent,
     SnackBarComponent,
-    
-    
+    CuartosComponent,
+    RegistroCuartosComponent
+
   ],
   imports: [
     BrowserModule,

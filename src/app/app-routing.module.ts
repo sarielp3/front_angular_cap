@@ -1,7 +1,9 @@
 import { Routes, RouterModule } from '@angular/router';
+import { CuartosComponent } from './components/cuarto/cuartos.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { RegistroCuartosComponent } from './components/registro-cuartos/registro-cuartos.component';
 import { AuthenticationGuard } from './services/authentication-guard';
 import {MenuComponent} from './components/menu/menu.component';
 import {GetHotelesComponent} from './components/get-hoteles/get-hoteles.component'
@@ -23,6 +25,7 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
+
     path: 'menu',
     component: MenuComponent
   },
@@ -33,6 +36,15 @@ const routes: Routes = [
   {
     path: 'reservas',
     component: ReservasComponent
+  },{
+
+
+    path: 'habitaciones',
+    component: CuartosComponent,
+  },
+  {
+    path: 'registrarHabitaciones',
+    component: RegistroCuartosComponent
   },
 
   // more routiings

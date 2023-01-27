@@ -45,6 +45,12 @@ export class MenuComponent implements OnInit {
       route: '/home',
       text: 'Home',
     });
+    this.navitems.push({
+      active: false,
+      icon: faReceipt,
+      route: '/habitaciones',
+      text: 'rooms',
+    });
   }
 
   changeClass(item : any) {

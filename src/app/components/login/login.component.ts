@@ -72,8 +72,11 @@ export class LoginComponent implements OnInit {
           this.router.navigate([this.returnUrl]);
         },
         response => {
+
          
           console.log(response);
+
+
 
           console.log("FALLA LLAMADO A API");
 
@@ -142,7 +145,10 @@ export class LoginComponent implements OnInit {
           this.loginForm.setValue({
             userName: "",
             password: ""
+
           }); */
-        });
+
+          });
+ 
   }
 }
