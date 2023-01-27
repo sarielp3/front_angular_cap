@@ -15,7 +15,7 @@ import {MatTableDataSource} from '@angular/material/table';
   templateUrl: './get-hoteles.component.html',
   styleUrls: ['./get-hoteles.component.css']
 })
-export class GetHotelesComponent implements OnInit {
+export class GetHotelesComponent implements OnInit,AfterViewInit {
   displayedColumns = ['id','ciudad','nombre','codigo','direccion','estatus','logo','modificar','habilitar','eliminar'];
   codigoHotel = '';
   nombreHotel = '';
@@ -23,7 +23,7 @@ export class GetHotelesComponent implements OnInit {
   public NombreHoteles: Hoteles[] = [];
   public ciudades:Ciudades[] = [];
   public filtroForm: UntypedFormGroup;
-  dataSource = new MatTableDataSource<Hoteles>(this.ListaHoteles);
+  dataSource!:MatTableDataSource<Hoteles>;
   constructor(private serviceHoteles:HotelesServiceTsService){
     this.filtroForm = new UntypedFormGroup({
       nombreHotel: new UntypedFormControl('', [Validators.required, Validators.minLength(1)]),
@@ -33,15 +33,20 @@ export class GetHotelesComponent implements OnInit {
     
   }
 
-  @ViewChild('paginator') paginator: MatPaginator | null = null;
+  @ViewChild('paginator', {static:false}) paginator: MatPaginator | null = null;
 
-  public ngOnInit(): void {
+  ngOnInit() {
     this.getHoteles();
     this.getCiudades();
     this.getNombreHoteles();
-    this.dataSource.paginator = this.paginator;
-
+    
     this.onSubmit();
+    this.dataSource = new MatTableDataSource<Hoteles>(this.ListaHoteles);
+  }
+
+  ngAfterViewInit(){
+    
+    this.dataSource.paginator = this.paginator;
   }
   
   public onSubmit(){
