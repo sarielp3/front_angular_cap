@@ -1,26 +1,27 @@
 <div>
-    <form [formGroup]="form">
-        <h3 for="">Origen</h3>
-        <select [formControl]="origenControl" class="form-select" name="origenes" [(ngModel)] = "origenesSelect" id="">
-            <option [value]="origen.idCiudad" *ngFor="let origen of origenes">{{ origen.nombreCiudad }}</option>
-        </select>
-        <hr>
+    <form >
+        <mat-form-field appearance="fill">
+            <mat-label>Origen</mat-label>
+            <mat-select [formControl]="origenControl">
+              <mat-option *ngFor="let origen of origenes" [value]="origen.idCiudad">{{origen.nombreCiudad}}</mat-option>
+            </mat-select>
+        </mat-form-field>
 
-        <h3 for="">Destino</h3>
-        <select class="form-select" name="destinos" [(ngModel)] = "destinosSelect" id="">
-            <option value="" selected>Ciudades de destino</option>
-            <option [value]="destino.idCiudad" *ngFor="let destino of destinos">{{ destino.nombreCiudad }}</option>
-        </select>
-        <hr>
+        <mat-form-field appearance="fill">
+            <mat-label>Destino</mat-label>
+            <mat-select [formControl]="destinoControl">
+              <mat-option *ngFor="let destino of destinos" [value]="destino.idCiudad">{{destino.nombreCiudad}}</mat-option>
+            </mat-select>
+        </mat-form-field>
 
-        <h3 for="">Aerolinea</h3>
-        <select class="form-select" name="aerolineas" [(ngModel)] = "aerolineasSelect" id="">
-            <option value="" selected>Aerolineas</option>
-            <option [value]="aerolinea.idAerolinea" *ngFor="let aerolinea of aerolineas">{{ aerolinea.nombreAerolinea }}</option>
-        </select>
-        <hr>
-        <br>
-        <button (click)="filtros()">Buscar</button>
+        <mat-form-field appearance="fill">
+            <mat-label>Aerolinea</mat-label>
+            <mat-select [formControl]="aerolineaControl">
+              <mat-option *ngFor="let aerolinea of aerolineas" [value]="aerolinea.idAerolinea">{{aerolinea.nombreAerolinea}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br>        
+        <button mat-button (click)="filtros()">Buscar</button>
     </form>
     
 </div>

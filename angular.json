@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/test-coverage",
+            "outputPath": "dist/AgenciaViajeFETD",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -100,6 +100,6 @@
     }
   },
   "cli": {
-    "analytics": false
+    "analytics": "84e28ed0-4f46-4a00-825c-f020af25dc83"
   }
 }

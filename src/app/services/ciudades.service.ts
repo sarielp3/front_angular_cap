@@ -1,17 +1,24 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Ciudad } from '../models/ciudad.interface';
+import { Injectable } from '@angular/core';
+import { Ciudades } from '../models/Identity/ciudades';
+import { Observable} from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
-})
+    providedIn: 'root'
+  })
 export class CiudadesService {
-  private apiUrl: string = 'http://localhost:8080/AgenciaViajeTD/ciudades';
+    constructor(private http: HttpClient) { }
 
-  constructor( private http: HttpClient ) { }
+    public getCiudadesOrigen():Observable<Ciudades[]>{
+        return this.http.get<Ciudades[]>(environment.apiUrl + 'ciudades/origen');
+    }
 
-  getCiudades(param: string): Observable<Ciudad[]>{
-    return this.http.get<Ciudad[]>( this.apiUrl+"/"+param);
-  }
+    public getCiudadesDestino():Observable<Ciudades[]>{
+        return this.http.get<Ciudades[]>(environment.apiUrl + 'ciudades/destino');
+    }
+
+    getCiudades(param: string): Observable<Ciudades[]>{
+      return this.http.get<Ciudades[]>( environment.apiUrl + 'ciudades/' + param);
+    }
 }

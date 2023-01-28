@@ -7,7 +7,7 @@ import { Vuelo } from '../models/vuelo.interface';
   providedIn: 'root'
 })
 export class VuelosService {
-  private apiUrl: string = 'http://localhost:8080/AgenciaViajeTD/vuelos';
+  private apiUrl: string = 'https://capbasanapptdd01.azurewebsites.net/AgenciaViajeTD/vuelos';
 
   vuelos: Vuelo[] = [];
   emisor = new EventEmitter<Vuelo[]>();

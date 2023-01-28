@@ -9,6 +9,7 @@ import { Role } from 'src/app/Models/Identity/role';
 import { Session } from 'src/app/Models/Identity/session';
 import { User } from 'src/app/Models/Identity/user';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -71,6 +72,14 @@ export class LoginComponent implements OnInit {
           this.router.navigate([this.returnUrl]);
         },
         response => {
+
+         
+          console.log(response);
+
+
+
+          console.log("FALLA LLAMADO A API");
+
           console.log("Creamos usuario dummy");
 
           const user = new User();  
@@ -121,7 +130,7 @@ export class LoginComponent implements OnInit {
 
           this.router.navigate([this.returnUrl]);
 
-        /*  var message = "";
+         /*  var message = "";
           if(response.error != undefined && response.error instanceof ProgressEvent){
             message = "Error inesperado. Por favor espere, estamos trabajando en ello.";
             this.type = "danger";
@@ -136,7 +145,10 @@ export class LoginComponent implements OnInit {
           this.loginForm.setValue({
             userName: "",
             password: ""
-          });*/
-        });
+
+          }); */
+
+          });
+ 
   }
 }

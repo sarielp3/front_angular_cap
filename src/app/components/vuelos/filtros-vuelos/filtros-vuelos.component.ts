@@ -1,11 +1,11 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule } from '@angular/forms';
+import { Component} from '@angular/core';
 import { Aerolinea } from '../../../models/aerolinea.interface';
-import { Ciudad } from '../../../models/ciudad.interface';
 import { AerolineaService } from 'src/app/services/aerolinea.service';
 import { CiudadesService } from 'src/app/services/ciudades.service';
 import { VuelosService } from 'src/app/services/vuelos.service';
 import { Vuelo } from '../../../models/vuelo.interface';
+import { Ciudades } from 'src/app/models/Identity/ciudades';
+import { FormControl, FormGroup } from '@angular/forms';
 
 
 
@@ -14,12 +14,13 @@ import { Vuelo } from '../../../models/vuelo.interface';
   templateUrl: './filtros-vuelos.component.html',
   styleUrls: ['./filtros-vuelos.component.css']
 })
+
 export class FiltrosVuelosComponent {
   form: FormGroup;
 
   aerolineas: Aerolinea[] = [];
-  origenes: Ciudad[] = [];
-  destinos: Ciudad[] = [];
+  origenes: Ciudades[] = [];
+  destinos: Ciudades[] = [];
   vuelos: Vuelo[] = [];
 
   origenesSelect: any;
@@ -28,9 +29,10 @@ export class FiltrosVuelosComponent {
 
   filtrosBusqueda: string = '';
 
-  origenControl = new FormControl(this.origenes[0].nombreCiudad);
-  destinoControl = new FormControl(this.destinos[0].nombreCiudad);
-  aerolineaControl = new FormControl(this.aerolineas[0].nombreAerolinea);
+  
+  origenControl = new FormControl();
+  destinoControl = new FormControl();
+  aerolineaControl = new FormControl();
 
   constructor(private aerolineaService: AerolineaService, 
     private ciudadesService:CiudadesService, 
@@ -78,7 +80,7 @@ export class FiltrosVuelosComponent {
   }
 
   filtros(){
-    this.filtrosBusqueda = '?origen=' + this.origenesSelect + '&destino=' + this.destinosSelect + '&aerolinea=' + this.aerolineasSelect;
+    this.filtrosBusqueda = '?origen=' + this.origenControl.value + '&destino=' + this.destinoControl.value + '&aerolinea=' + this.aerolineaControl.value;
     console.log('Termino de busqueda ' + this.filtrosBusqueda);
 
     this.vueloService.getVuelos(this.filtrosBusqueda)
@@ -89,7 +91,6 @@ export class FiltrosVuelosComponent {
           console.log('Error en GET vuelos');
           console.info(err);
           this.vuelos  = [];
-        })
-    console.log(this.vuelos);
+        })    
   }
 }
