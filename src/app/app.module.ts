@@ -36,6 +36,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CuartosComponent } from './components/cuarto/cuartos.component';
 import { RegistroCuartosComponent } from './components/registro-cuartos/registro-cuartos.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { AltaHotelesComponent } from './components/get-hoteles/alta-hoteles/alta-hoteles.component';
+import { ModificarHotelesComponent } from './components/get-hoteles/modificar-hoteles/modificar-hoteles.component';
 
 
 
@@ -56,7 +59,8 @@ import { RegistroCuartosComponent } from './components/registro-cuartos/registro
     SnackBarComponent,
     CuartosComponent,
     RegistroCuartosComponent,
-    
+    AltaHotelesComponent,
+    ModificarHotelesComponent
 
   ],
   imports: [
@@ -79,8 +83,9 @@ import { RegistroCuartosComponent } from './components/registro-cuartos/registro
     MatToolbarModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
-    BrowserAnimationsModule,    
-    VuelosModule,
+    BrowserAnimationsModule,
+    MatGridListModule,
+    VuelosModule
     
     
   ],
