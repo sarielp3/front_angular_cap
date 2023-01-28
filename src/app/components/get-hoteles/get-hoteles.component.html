@@ -94,7 +94,7 @@
                 <ng-container matColumnDef="eliminar">
                   <th mat-header-cell *matHeaderCellDef>Eliminar</th>
                   <td mat-cell *matCellDef="let element"> 
-                    <button id="accion" mat-fab color="warn" type="button"><mat-icon>delete_forever</mat-icon></button>
+                    <button id="accion" mat-fab color="warn" type="button" (click)="eliminar(element)"><mat-icon>delete_forever</mat-icon></button>
                   </td>
                 </ng-container>
                 

@@ -34,4 +34,8 @@ export class HotelesServiceTsService {
   public modificar(id:any,hotel:Hoteles):Observable<Hoteles>{
     return this.http.put<Hoteles>('http://127.0.0.1:8080/AgenciaViajeTD/hoteles/update-hotel/' +id,hotel);
   }
+
+  public eliminar(id:any):Observable<Hoteles>{
+    return this.http.delete<Hoteles>('http://127.0.0.1:8080/AgenciaViajeTD/hoteles/delete-hotel/' +id);
+  }
 }

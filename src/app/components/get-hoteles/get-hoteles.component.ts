@@ -8,6 +8,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
 import { AltaHotelesComponent } from '../../components/get-hoteles/alta-hoteles/alta-hoteles.component';
 import { ModificarHotelesComponent } from '../../components/get-hoteles/modificar-hoteles/modificar-hoteles.component';
+import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-get-hoteles',
@@ -112,4 +113,23 @@ export class GetHotelesComponent implements OnInit,AfterViewInit {
       console.log(result);
     });
   }
+
+  eliminar(elemento:Hoteles){
+    const dialogoRef = this.dialog.open(ConfirmDialogComponent,{
+      disableClose:true
+    });
+    dialogoRef.afterClosed().subscribe(respuesta =>{
+      console.log(respuesta);
+      if(respuesta){
+        
+        this.serviceHoteles.eliminar(elemento.idHotel).subscribe(
+          (data)=>{
+            console.log('Eliminamos Registro con Id',elemento.idHotel );
+            this.getHoteles();
+          }
+        )
+      }
+    })
+  }
+  
 }
