@@ -1,101 +1,125 @@
-<p>Lista hoteles!</p>
+<p>Lista Hoteles</p>
+    <mat-grid-list cols="4" rowHeight="200px">
+      <mat-grid-tile colspan="1" rowspan="2"><div class="campos">
+        <h3>Filtros</h3>
 
-<div class="campos">
-  <form [formGroup]="filtroForm" (ngSubmit)="onSubmit()"> 
-    <h3>Filtros</h3>
-<mat-form-field>
-  <mat-label>Nombre del Hotel</mat-label>
-  <input formControlName="nombreHotel" matInput placeholder="hamaya">
-  <button *ngIf="nombreHotel" matSuffix mat-icon-button aria-label="Clear" (click)="nombreHotel=''">
-    <mat-icon>close</mat-icon>
-  </button>
-</mat-form-field>
-
-<mat-form-field>
-  <mat-label>Codigo del Hotel</mat-label>
-  <input formControlName="codigoHotel" formControlName="codigoHotel" matInput placeholder="63323">
-  <button *ngIf="codigoHotel" matSuffix mat-icon-button aria-label="Clear" (click)="codigoHotel=''">
-    <mat-icon>close</mat-icon>
-  </button>
-</mat-form-field>
-
-<mat-form-field>
-  <mat-label>Ciudad de destino</mat-label>
-  <mat-select formControlName="ciudadHotel">
-    <mat-option *ngFor="let ciudad of ciudades" [value]="ciudad.idCiudad">
-      {{ciudad.nombreCiudad}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-<button class="btn btn-primary d-block w-100" type="submit">Aplicar</button>
-  </form>
-</div>
-<div class="container">
-<table mat-table [dataSource]="ListaHoteles" class="mat-elevation-z8">
-
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> No. ID </th>
-      <td mat-cell *matCellDef="let element"> {{element.idHotel}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="ciudad">
-      <th mat-header-cell *matHeaderCellDef> Ciudad </th>
-      <td mat-cell *matCellDef="let element"> {{element.ciudad.nombreCiudad}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="nombre">
-      <th mat-header-cell *matHeaderCellDef> Nombre de Hotel </th>
-      <td mat-cell *matCellDef="let element"> {{element.nombreHotel}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="codigo">
-      <th mat-header-cell *matHeaderCellDef> Codigo de Hotel </th>
-      <td mat-cell *matCellDef="let element"> {{element.codigoHotel}} </td>
-    </ng-container>
-
-    <ng-container  matColumnDef="direccion">
-        <th id="direccion" mat-header-cell *matHeaderCellDef> Direccion </th>
-        <td id="direccion" mat-cell *matCellDef="let element"> {{element.direccion}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="estatus">
-        <th mat-header-cell *matHeaderCellDef> Estatus </th>
-        <td mat-cell *matCellDef="let element" ><h5 *ngIf="element.estatus=='1'"> Activo</h5>
-           <h5 *ngIf="element.estatus=='0'"> Deshabilitado</h5> </td>
+        <form [formGroup]="filtroForm" (ngSubmit)="onSubmit()"> 
+        <mat-form-field>
+          <mat-label>Nombre del Hotel</mat-label>
+          <mat-select formControlName="nombreHotel">
+            <mat-option *ngFor="let nombre of NombreHoteles" [value]="nombre.nombreHotel">
+              {{nombre.nombreHotel}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+        <mat-form-field>
+          <mat-label>Codigo del Hotel</mat-label>
+          <mat-select formControlName="codigoHotel">
+            <mat-option *ngFor="let codigo of NombreHoteles" [value]="codigo.codigoHotel">
+              {{codigo.codigoHotel}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+        <mat-form-field>
+          <mat-label>Ciudad de destino</mat-label>
+          <mat-select formControlName="ciudadHotel">
+            <mat-option *ngFor="let ciudad of ciudades" [value]="ciudad.idCiudad">
+              {{ciudad.nombreCiudad}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field><br>
+        <button mat-raised-button color="primary"  type="submit">Aplicar</button><br><br>
+        <button mat-stroked-button color="primary" (click)="altaHotel()">Alta Hotel</button>
+          </form>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="3" rowspan="3">
+        
+        <div class="container">
           
-      </ng-container>
+          <table mat-table [dataSource]="ListaHoteles" class="mat-elevation-z8">
+            
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> No. ID </th>
+                <td mat-cell *matCellDef="let element"> {{element.idHotel}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="ciudad">
+                <th mat-header-cell *matHeaderCellDef> Ciudad </th>
+                <td mat-cell *matCellDef="let element"> {{element.ciudad.nombreCiudad}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="nombre">
+                <th mat-header-cell *matHeaderCellDef> Nombre de Hotel </th>
+                <td mat-cell *matCellDef="let element"> {{element.nombreHotel}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="codigo">
+                <th mat-header-cell *matHeaderCellDef> Codigo de Hotel </th>
+                <td mat-cell *matCellDef="let element"> {{element.codigoHotel}} </td>
+              </ng-container>
+          
+              <ng-container  matColumnDef="direccion">
+                  <th id="direccion" mat-header-cell *matHeaderCellDef> Direccion </th>
+                  <td id="direccion" mat-cell *matCellDef="let element"> {{element.direccion}} </td>
+                </ng-container>
+          
+                <ng-container matColumnDef="estatus">
+                  <th mat-header-cell *matHeaderCellDef> Estatus </th>
+                  <td mat-cell *matCellDef="let element" ><h5 *ngIf="element.estatus=='1'"> Activo</h5>
+                     <h5 *ngIf="element.estatus=='0'"> Deshabilitado</h5> </td>
+                    
+                </ng-container>
+          
+                <ng-container matColumnDef="logo">
+                  <th mat-header-cell *matHeaderCellDef> Logo </th>
+                  <td mat-cell *matCellDef="let element" ><img width="50px" height="50px"  src="data:image/png;base64,{{element.logo}}"/></td>
+                </ng-container>
+          
+                <ng-container matColumnDef="modificar">
+                  <th mat-header-cell *matHeaderCellDef>Modificar</th>
+                  <td mat-cell *matCellDef="let element"> 
+                    <button id="accion" mat-fab color="accent" type="button" (click)="modificar(element)" >
+                      <mat-icon>edit</mat-icon></button>
+                  </td>
+                </ng-container>
+                <ng-container  matColumnDef="habilitar">
+                  <th mat-header-cell *matHeaderCellDef>Habilitar/Deshabilitar</th>
+                  <td mat-cell *matCellDef="let element"> 
+                    <button id="accion" mat-fab color="primary" type="button"><mat-icon>done</mat-icon></button>
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="eliminar">
+                  <th mat-header-cell *matHeaderCellDef>Eliminar</th>
+                  <td mat-cell *matCellDef="let element"> 
+                    <button id="accion" mat-fab color="warn" type="button" (click)="eliminar(element)"><mat-icon>delete_forever</mat-icon></button>
+                  </td>
+                </ng-container>
+                
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              
+              <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+          
+            </table>
+            
+            <div class="d-flex justify-content-center">
+              <div *ngIf="loading" class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+            <mat-paginator #paginator [pageSizeOptions]="[5, 10, 20]"
+                           showFirstLastButtons
+                           aria-label="Select page">
+            </mat-paginator>
 
-      <ng-container matColumnDef="logo">
-        <th mat-header-cell *matHeaderCellDef> Logo </th>
-        <td mat-cell *matCellDef="let element" ><img width="50px" height="50px"  src="data:image/png;base64,{{element.logo}}"/></td>
-      </ng-container>
+          </div>
+            
 
-      <ng-container matColumnDef="modificar">
-        <th mat-header-cell *matHeaderCellDef>  </th>
-        <td mat-cell *matCellDef="let element"> 
-          <button mat-raised-button color="accent" type="button">Modificar</button>
-        </td>
-      </ng-container>
-      <ng-container  matColumnDef="habilitar">
-        <th class="habilitar" mat-header-cell *matHeaderCellDef>  </th>
-        <td class="habilitar" mat-cell *matCellDef="let element"> 
-          <button mat-raised-button color="primary" type="button">Habilitar/DesHabilitar</button>
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="eliminar">
-        <th mat-header-cell *matHeaderCellDef>  </th>
-        <td mat-cell *matCellDef="let element"> 
-          <button mat-raised-button color="warn" type="button">Eliminar</button>
-        </td>
-      </ng-container>
+      </mat-grid-tile>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    
-    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-grid-list>
 
-  </table>
-</div>
-  <mat-paginator #paginator [pageSizeOptions]="[5, 10, 20]"
-                 showFirstLastButtons
-                 aria-label="Select page">
-  </mat-paginator>
+  
+
