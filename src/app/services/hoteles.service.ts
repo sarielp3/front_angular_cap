@@ -26,4 +26,12 @@ export class HotelesServiceTsService {
     
     return this.http.get<Hoteles[]>('http://127.0.0.1:8080/AgenciaViajeTD/hoteles/filtros?nomHotel='+ nomHotel +'&codHotel='+ codHotel +'&ciudad='+ciudad);
   }
+
+  public altaHotel(hotel:Hoteles):Observable<Hoteles>{
+    return this.http.post<Hoteles>('http://127.0.0.1:8080/AgenciaViajeTD/hoteles/nuevo-hotel',hotel);
+  }
+
+  public modificar(id:any,hotel:Hoteles):Observable<Hoteles>{
+    return this.http.put<Hoteles>('http://127.0.0.1:8080/AgenciaViajeTD/hoteles/update-hotel/' +id,hotel);
+  }
 }

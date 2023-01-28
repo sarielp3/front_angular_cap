@@ -5,7 +5,8 @@ import {
   faUtensils,
   faCoins,
   faReceipt,
-  faBars
+  faBars,
+  faBed
 } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/app/Models/Identity/user';
 import { NavItem } from '../../models/navbar';
@@ -28,6 +29,7 @@ export class MenuComponent implements OnInit {
   faCoins = faCoins;
   faReceipt = faReceipt;
   faBars = faBars;
+  fabed = faBed;
 
   constructor(private router: Router) {
     this.router.events.subscribe(event => {
