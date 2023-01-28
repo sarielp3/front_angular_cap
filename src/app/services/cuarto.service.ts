@@ -2,28 +2,30 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Cuarto } from '../models/cuarto';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CuartoService {
+  constructor(private httpClient: HttpClient) {}
 
-  //URL que obtine el dato de un solo cuarto
-  private baseURL = "http://localhost:8080/AgenciaViajeTD/cuartos/filter-cuartos/61";
-
-  //URL para agregar habitaciones
-  private baseURLR = "http://localhost:8080/AgenciaViajeTD/cuartos/agregar/61";
-
-  constructor(private httpClient : HttpClient) { }
-
-  obtenerListaDeHabitaciones(): Observable<Cuarto[]>{
-    return this.httpClient.get<Cuarto[]>(`${this.baseURL}`);
+  obtenerListaDeHabitaciones(): Observable<Cuarto[]> {
+    return this.httpClient.get<Cuarto[]>(
+      environment.apiUrl + 'cuartos/lista-cuartos/'
+    );
   }
 
-  //metodo que nos sirve para insertar habitaciones
-  registraHabitaciones(habitacion:Cuarto) : Observable<Object>{
-   return this.httpClient.post(`${this.baseURLR}`, habitacion);
+  registraHabitaciones(habitacion: Cuarto): Observable<Object> {
+    return this.httpClient.post(
+      environment.apiUrl + '/cuartos/agregar/81',
+      habitacion
+    );
   }
 
-
+  eliminarHabitacion(idHotel: number): Observable<Object> {
+    return this.httpClient.delete(
+      environment.apiUrl + `cuartos/eliminar-cuarto/${idHotel}`
+    );
+  }
 }
