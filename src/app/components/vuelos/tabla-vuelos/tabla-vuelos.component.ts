@@ -23,8 +23,10 @@ export class TablaVuelosComponent {
   constructor( private vueloService: VuelosService,
     public dialog: MatDialog){
     this.refreshTabla = this.vueloService.emisor.subscribe(
-      ( vuelos ) =>{
+      ( vuelos: Vuelo[] ) =>{
         this.vuelos = vuelos;
+        this.dataSource = new MatTableDataSource<Vuelo>(this.vuelos);
+        console.log('vuelos tabla ' + this.vuelos);
       }
     )
   }

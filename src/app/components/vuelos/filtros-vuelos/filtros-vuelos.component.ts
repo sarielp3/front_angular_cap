@@ -23,16 +23,12 @@ export class FiltrosVuelosComponent {
   destinos: Ciudades[] = [];
   vuelos: Vuelo[] = [];
 
-  origenesSelect: any;
-  destinosSelect: any;
-  aerolineasSelect: any;
-
   filtrosBusqueda: string = '';
 
   
-  origenControl = new FormControl();
-  destinoControl = new FormControl();
-  aerolineaControl = new FormControl();
+  origenControl = new FormControl('');
+  destinoControl = new FormControl('');
+  aerolineaControl = new FormControl('');
 
   constructor(private aerolineaService: AerolineaService, 
     private ciudadesService:CiudadesService, 
@@ -80,17 +76,31 @@ export class FiltrosVuelosComponent {
   }
 
   filtros(){
-    this.filtrosBusqueda = '?origen=' + this.origenControl.value + '&destino=' + this.destinoControl.value + '&aerolinea=' + this.aerolineaControl.value;
+      
+    this.filtrosBusqueda = '?origen=' 
+    + this.origenControl.value 
+    + '&destino=' 
+    + this.destinoControl.value 
+    + '&aerolinea=' + this.aerolineaControl.value;
+    
     console.log('Termino de busqueda ' + this.filtrosBusqueda);
 
     this.vueloService.getVuelos(this.filtrosBusqueda)
         .subscribe( vuelos => {
           this.vuelos  = vuelos;
           this.vueloService.emisor.next(this.vuelos);
+          
         }, err => {
           console.log('Error en GET vuelos');
           console.info(err);
           this.vuelos  = [];
         })    
+  }
+
+  limpiarFiltros(){
+    this.origenControl.setValue('');
+    this.destinoControl.setValue('');
+    this.aerolineaControl.setValue('');
+    this.filtros();
   }
 }
