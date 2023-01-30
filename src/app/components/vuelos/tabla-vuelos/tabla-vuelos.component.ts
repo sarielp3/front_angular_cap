@@ -32,21 +32,24 @@ export class TablaVuelosComponent {
   }
 
   ngOnInit(): void {
-    this.vueloService.getVuelos('')
-        .subscribe( vuelos => {
-          this.vuelos = vuelos;
-          console.log(this.vuelos);
-          this.dataSource = new MatTableDataSource<Vuelo>(this.vuelos);
-        }, err => {
-          console.log('Error en GET vuelos');
-          console.info(err);
-          this.vueloService.vuelos = [];
-        });        
+       this.listarTodosVuelos();
   }
   ngOnDestroy(): void {
     this.refreshTabla.unsubscribe();
   }
 
+  listarTodosVuelos(){
+    this.vueloService.getVuelos('')
+    .subscribe( vuelos => {
+      this.vuelos = vuelos;
+      console.log(this.vuelos);
+      this.dataSource = new MatTableDataSource<Vuelo>(this.vuelos);
+    }, err => {
+      console.log('Error en GET vuelos');
+      console.info(err);
+      this.vueloService.vuelos = [];
+    }); 
+  }
   modificar(elemento:Vuelo):void{
     console.log('Elemento =>', elemento);
     console.log('Clic en boton Modificar');
@@ -69,6 +72,13 @@ export class TablaVuelosComponent {
       console.log(respuesta);
       if(respuesta){
         console.log('Eliminamos Registro con Id',elemento.idVuelo );
+        this.vueloService.deleteVuelo(elemento.idVuelo).subscribe( respuestaApi =>{
+        alert(respuestaApi.mensajeRespuesta);
+        this.listarTodosVuelos();
+        }, err => {
+          console.log('Error en eliminar vuelos');
+          console.info(err);
+        });
       }
     })
   }
