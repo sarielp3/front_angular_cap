@@ -34,9 +34,7 @@ export class ModificaReservaComponent implements OnInit {
       }, error =>{
         console.log("Error => ", error);
       }
-    );
-    
-      
+    );          
   }
 
   origenChange(){

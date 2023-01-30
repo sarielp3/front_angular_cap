@@ -17,4 +17,8 @@ export class CiudadesService {
     public getCiudadesDestino():Observable<Ciudades[]>{
         return this.http.get<Ciudades[]>(environment.apiUrl + 'ciudades/destino');
     }
+
+    getCiudades(param: string): Observable<Ciudades[]>{
+      return this.http.get<Ciudades[]>( environment.apiUrl + 'ciudades/' + param);
+    }
 }

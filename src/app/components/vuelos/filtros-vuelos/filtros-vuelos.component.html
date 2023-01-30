@@ -1,0 +1,27 @@
+<div>
+    <form >
+        <mat-form-field appearance="fill">
+            <mat-label>Origen</mat-label>
+            <mat-select [formControl]="origenControl">
+              <mat-option *ngFor="let origen of origenes" [value]="origen.idCiudad">{{origen.nombreCiudad}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Destino</mat-label>
+            <mat-select [formControl]="destinoControl">
+              <mat-option *ngFor="let destino of destinos" [value]="destino.idCiudad">{{destino.nombreCiudad}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Aerolinea</mat-label>
+            <mat-select [formControl]="aerolineaControl">
+              <mat-option *ngFor="let aerolinea of aerolineas" [value]="aerolinea.idAerolinea">{{aerolinea.nombreAerolinea}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br>        
+        <button mat-button (click)="filtros()">Buscar</button>
+    </form>
+    
+</div>

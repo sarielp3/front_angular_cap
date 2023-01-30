@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule, NgModel } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +13,7 @@ import { TokenInterceptor } from './services/token.interceptor';
 import { MenuComponent } from './components/menu/menu.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { VuelosModule } from './components/vuelos/vuelos.module';
 import { GetHotelesComponent } from './components/get-hoteles/get-hoteles.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon'
@@ -38,6 +39,7 @@ import { RegistroCuartosComponent } from './components/registro-cuartos/registro
 import {MatGridListModule} from '@angular/material/grid-list';
 import { AltaHotelesComponent } from './components/get-hoteles/alta-hoteles/alta-hoteles.component';
 import { ModificarHotelesComponent } from './components/get-hoteles/modificar-hoteles/modificar-hoteles.component';
+
 
 
 
@@ -82,7 +84,8 @@ import { ModificarHotelesComponent } from './components/get-hoteles/modificar-ho
     MatSnackBarModule,
     MatProgressSpinnerModule,
     BrowserAnimationsModule,
-    MatGridListModule
+    MatGridListModule,
+    VuelosModule
     
     
   ],

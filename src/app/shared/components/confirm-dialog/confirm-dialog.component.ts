@@ -7,13 +7,14 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./confirm-dialog.component.css']
 })
 export class ConfirmDialogComponent implements OnInit {
+  eliminarOHabilitar:boolean = false;
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: boolean,
     private dialogRef: MatDialogRef<ConfirmDialogComponent>
   ){}
 
   ngOnInit(): void {
-      console.log('ngOnInit');
+      this.eliminarOHabilitar = this.data;
   }
 
   close(respuesta: boolean){

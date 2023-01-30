@@ -1,7 +1,16 @@
-<h1 mat-dialog-title>Eliminar Registro</h1>
-<div mat-dialog-content>
-  Estas seguro que deseas eliminar este registro?
+<div *ngIf="eliminarOHabilitar">
+  <h1 mat-dialog-title>Eliminar Registro</h1>
+  <div mat-dialog-content>
+    Estas seguro que deseas eliminar este registro?
+  </div>
 </div>
+<div *ngIf="!eliminarOHabilitar">
+  <h1 mat-dialog-title>Habilitar/Deshabilitar Registro</h1>
+  <div mat-dialog-content>
+    Estas seguro que deseas cambiar el estatus del  registro?
+  </div>
+</div>
+
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close (click)="close(false)">No</button>
   <button mat-button mat-dialog-close cdkFocusInitial (click)="close(true)">Aceptar</button>
