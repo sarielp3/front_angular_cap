@@ -52,7 +52,7 @@
             <td mat-cell *matCellDef="let element"> 
                 <mat-slide-toggle                  
                     [checked]="element.estatus === 1 ? true : false"
-                    (change)="onChange($event.checked,element)"
+                    (change)="onChange($event.checked,element,$event)"
                 >                    
                 </mat-slide-toggle>
             </td>

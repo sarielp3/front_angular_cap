@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Hoteles } from 'src/app/models/Identity/hoteles';
 import { Ciudades } from 'src/app/models/Identity/ciudades';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class HotelesServiceTsService {
 
   public getHoteles():Observable<Hoteles[]>{
     
-    return this.http.get<Hoteles[]>('http://127.0.0.1:8080/AgenciaViajeTD/hoteles');
+    return this.http.get<Hoteles[]>(environment.apiUrl + 'hoteles');
   }
 
   public getCiudades():Observable<Ciudades[]>{

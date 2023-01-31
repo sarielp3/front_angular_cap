@@ -42,9 +42,14 @@ export class ErrorInterceptor implements HttpInterceptor {
     ): Observable<HttpEvent<any>> {
         switch (err.status) {
             case 404:
-                this.snackBarService.openSnackBar(); 
+                this.snackBarService.openSnackBar('warning',err.error.message,'Elemento no Encontrado'); 
                 break;
-            case 500: break;
+            case 400:
+                this.snackBarService.openSnackBar('warning',err.error.message,'No se puede procesar la solicitud'); 
+                break;
+            case 500:
+                this.snackBarService.openSnackBar('error',err.error.message,'Error Aplicativo'); 
+                break;
             default:
                 // Redirect to the maintenance page
                 break;

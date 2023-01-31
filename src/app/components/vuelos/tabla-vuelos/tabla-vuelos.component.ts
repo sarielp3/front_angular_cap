@@ -7,6 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 import {ModificaVueloComponent} from '../modifica-vuelo/modifica-vuelo.component'
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { AltaVueloComponent } from '../alta-vuelo/alta-vuelo.component';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
+import { MatSlideToggle, MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-tabla-vuelos',
@@ -21,7 +23,8 @@ export class TablaVuelosComponent {
   
 
   constructor( private vueloService: VuelosService,
-    public dialog: MatDialog){
+    public dialog: MatDialog,
+    private snackBarService: SnackBarService){
     this.refreshTabla = this.vueloService.emisor.subscribe(
       ( vuelos: Vuelo[] ) =>{
         this.vuelos = vuelos;
@@ -93,28 +96,21 @@ export class TablaVuelosComponent {
     });
   }
 
-  onChange(enable: boolean,elemento : Vuelo){
-    console.log(enable);
+  onChange(enable: boolean,elemento : Vuelo, check:MatSlideToggleChange){    
     const dialogoRef = this.dialog.open(ConfirmDialogComponent,{
       disableClose:true
     });
-    dialogoRef.afterClosed().subscribe(respuesta =>{
-      console.log(respuesta);
+    dialogoRef.afterClosed().subscribe(respuesta =>{      
       if(respuesta){
-        this.vueloService.cambioEstatus(elemento.idVuelo).subscribe( respuestaApi =>{
-          alert(respuestaApi.mensajeRespuesta);
+        this.vueloService.cambioEstatus(elemento.idVuelo).subscribe( respuestaApi =>{          
+          this.snackBarService.openSnackBar('success',respuestaApi.mensajeRespuesta,'Operacion Exitosa');
           this.listarTodosVuelos();
           }, err => {
             console.log('Error en eliminar vuelos');
             console.info(err);
-          });
-        console.log('Se cambia valor');
+          });        
       }else{
-        if(enable){
-          elemento.estatus = '0';
-        }else{
-          elemento.estatus = '1';
-        }
+        check.source.checked = !enable;
       }
     })
   }

@@ -5,7 +5,7 @@ export interface Vuelo {
     origen:      Ciudad;
     destino:     Ciudad;
     aerolinea:   Aerolinea;
-    estatus:     string;
+    estatus:     number;
     horaSalida:  string;
     horaLlegada: string;
     codigoVuelo: string;
