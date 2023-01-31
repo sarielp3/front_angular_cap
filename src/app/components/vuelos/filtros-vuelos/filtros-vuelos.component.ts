@@ -94,6 +94,7 @@ export class FiltrosVuelosComponent {
           console.log('Error en GET vuelos');
           console.info(err);
           this.vuelos  = [];
+          this.vueloService.emisor.next(this.vuelos);
         })    
   }
 

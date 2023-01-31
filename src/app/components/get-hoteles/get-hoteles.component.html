@@ -67,9 +67,14 @@
                 </ng-container>
           
                 <ng-container matColumnDef="estatus">
-                  <th mat-header-cell *matHeaderCellDef> Estatus </th>
-                  <td mat-cell *matCellDef="let element" ><h5 *ngIf="element.estatus=='1'"> Activo</h5>
-                     <h5 *ngIf="element.estatus=='0'"> Deshabilitado</h5> </td>
+                  <th id="estatus" mat-header-cell *matHeaderCellDef> Estatus </th>
+                  <td id="estatus" mat-cell *matCellDef="let element" >
+                     <mat-slide-toggle [checked] = "element.estatus" (change) ="cambiarStatus($event.checked,element)" id="toggle">
+                     </mat-slide-toggle>
+                      <h5 *ngIf="element.estatus=='1'"> Activo</h5>
+                     <h5 *ngIf="element.estatus=='0'"> Deshabilitado</h5>
+                     
+                    </td>
                     
                 </ng-container>
           
@@ -85,12 +90,7 @@
                       <mat-icon>edit</mat-icon></button>
                   </td>
                 </ng-container>
-                <ng-container  matColumnDef="habilitar">
-                  <th mat-header-cell *matHeaderCellDef>Habilitar/Deshabilitar</th>
-                  <td mat-cell *matCellDef="let element"> 
-                    <button id="accion" mat-fab color="primary" type="button"><mat-icon>done</mat-icon></button>
-                  </td>
-                </ng-container>
+
                 <ng-container matColumnDef="eliminar">
                   <th mat-header-cell *matHeaderCellDef>Eliminar</th>
                   <td mat-cell *matCellDef="let element"> 

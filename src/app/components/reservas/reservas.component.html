@@ -24,41 +24,40 @@
             <mat-form-field appearance="fill">
               <mat-label>Selecciona una opción</mat-label>
               <mat-select [formControl]="selectedCiudadOrigen">
-                <mat-option *ngFor="let ciudadOrigen of ciudadesOrigen" [value]="ciudadOrigen.nombreCiudad">{{ciudadOrigen.nombreCiudad}}</mat-option>
+                <mat-option value=""> </mat-option>
+                <mat-option *ngFor="let ciudadOrigen of ciudadesOrigen" [value]="ciudadOrigen.idCiudad">{{ciudadOrigen.nombreCiudad}}</mat-option>
               </mat-select>
             </mat-form-field>
     
             <h4>Destino</h4>
             <mat-form-field appearance="fill">
               <mat-label>Selecciona una opción</mat-label>
-              <mat-select>
-                <mat-option value="option1">Option 1</mat-option>
-                <mat-option value="option2" disabled>Option 2 (disabled)</mat-option>
-                <mat-option value="option3">Option 3</mat-option>
+              <mat-select [formControl]="selectedCiudadDestino">
+                <mat-option value=""> </mat-option>
+                <mat-option *ngFor="let ciudadDestino of ciudadesDestino" [value]="ciudadDestino.idCiudad">{{ciudadDestino.nombreCiudad}}</mat-option>
               </mat-select>
             </mat-form-field>
     
             <h4>Aerolinea</h4>
             <mat-form-field appearance="fill">
               <mat-label>Selecciona una opción</mat-label>
-              <mat-select>
-                <mat-option value="option1">Option 1</mat-option>
-                <mat-option value="option2" disabled>Option 2 (disabled)</mat-option>
-                <mat-option value="option3">Option 3</mat-option>
+              <mat-select [formControl]="selectedAerolinea">
+                <mat-option value=""> </mat-option>
+                <mat-option *ngFor="let aerolinea of aerolinea" [value]="aerolinea.idAerolinea">{{aerolinea.nombreAerolinea}}</mat-option>
               </mat-select>
             </mat-form-field>
     
             <h4>Hotel</h4>
             <mat-form-field appearance="fill">
               <mat-label>Selecciona una opción</mat-label>
-              <mat-select>
-                <mat-option value="option1">Option 1</mat-option>
-                <mat-option value="option2" disabled>Option 2 (disabled)</mat-option>
-                <mat-option value="option3">Option 3</mat-option>
+              <mat-select [formControl]="selectedHotel">
+                <mat-option value=""> </mat-option>
+                <mat-option *ngFor="let hotel of hotel" [value]="hotel.idHotel">{{hotel.nombreHotel}}</mat-option>
               </mat-select>
             </mat-form-field>
             <br />
             <button mat-button (click)="buscar()">Buscar</button>
+            <button mat-button (click)="limpiarFiltros()">Limpiar Filtros</button>
           </form>
     
         </div>
@@ -88,7 +87,7 @@
     
             <ng-container matColumnDef="Fecha Creacion">
               <th mat-header-cell *matHeaderCellDef>Fecha Creacion</th>
-              <td mat-cell *matCellDef="let element"> {{element.fechaInicio}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.fechaCreacion}} </td>
             </ng-container>
     
             <ng-container matColumnDef="Modificar">
