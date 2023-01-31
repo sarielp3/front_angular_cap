@@ -55,6 +55,7 @@ export class AltaHotelesComponent implements OnInit {
     this.Hotel.estatus = "1";
     this.serviceHoteles.altaHotel(this.Hotel).subscribe();
     console.log("Exito, registro guardado");
+    this.dialogRef.close();
   }
 
   cancelar(){

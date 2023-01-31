@@ -3,9 +3,15 @@
 }
 .container{
   overflow-x: scroll;
+  max-height: 600px;
+  align-items: initial; 
 }
   td,th{
     width: 100px;
+  }
+
+  table{
+    align-items: start; 
   }
 
   th{

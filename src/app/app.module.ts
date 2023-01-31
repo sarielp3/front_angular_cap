@@ -39,8 +39,7 @@ import { RegistroCuartosComponent } from './components/registro-cuartos/registro
 import {MatGridListModule} from '@angular/material/grid-list';
 import { AltaHotelesComponent } from './components/get-hoteles/alta-hoteles/alta-hoteles.component';
 import { ModificarHotelesComponent } from './components/get-hoteles/modificar-hoteles/modificar-hoteles.component';
-
-
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 @NgModule({
@@ -85,7 +84,8 @@ import { ModificarHotelesComponent } from './components/get-hoteles/modificar-ho
     MatProgressSpinnerModule,
     BrowserAnimationsModule,
     MatGridListModule,
-    VuelosModule
+    VuelosModule,
+    MatSlideToggleModule
     
     
   ],
