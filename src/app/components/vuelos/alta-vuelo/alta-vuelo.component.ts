@@ -42,7 +42,7 @@ export class AltaVueloComponent {
 
   guardar(){
     console.log('Es formulario Valido', this.altaVuelo.valid);
-    this.snackBarService.openSnackBar();
+    this.snackBarService.openSnackBar('error','El formulario no es valido','Error');
     this.dialogRef.close();
   }
   cancelar(){
