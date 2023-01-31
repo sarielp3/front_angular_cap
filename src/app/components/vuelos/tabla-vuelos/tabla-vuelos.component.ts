@@ -23,28 +23,33 @@ export class TablaVuelosComponent {
   constructor( private vueloService: VuelosService,
     public dialog: MatDialog){
     this.refreshTabla = this.vueloService.emisor.subscribe(
-      ( vuelos ) =>{
+      ( vuelos: Vuelo[] ) =>{
         this.vuelos = vuelos;
+        this.dataSource = new MatTableDataSource<Vuelo>(this.vuelos);
+        console.log('vuelos tabla ' + this.vuelos);
       }
     )
   }
 
   ngOnInit(): void {
-    this.vueloService.getVuelos('')
-        .subscribe( vuelos => {
-          this.vuelos = vuelos;
-          console.log(this.vuelos);
-          this.dataSource = new MatTableDataSource<Vuelo>(this.vuelos);
-        }, err => {
-          console.log('Error en GET vuelos');
-          console.info(err);
-          this.vueloService.vuelos = [];
-        });        
+       this.listarTodosVuelos();
   }
   ngOnDestroy(): void {
     this.refreshTabla.unsubscribe();
   }
 
+  listarTodosVuelos(){
+    this.vueloService.getVuelos('')
+    .subscribe( vuelos => {
+      this.vuelos = vuelos;
+      console.log(this.vuelos);
+      this.dataSource = new MatTableDataSource<Vuelo>(this.vuelos);
+    }, err => {
+      console.log('Error en GET vuelos');
+      console.info(err);
+      this.vueloService.vuelos = [];
+    }); 
+  }
   modificar(elemento:Vuelo):void{
     console.log('Elemento =>', elemento);
     console.log('Clic en boton Modificar');
@@ -67,6 +72,13 @@ export class TablaVuelosComponent {
       console.log(respuesta);
       if(respuesta){
         console.log('Eliminamos Registro con Id',elemento.idVuelo );
+        this.vueloService.deleteVuelo(elemento.idVuelo).subscribe( respuestaApi =>{
+        alert(respuestaApi.mensajeRespuesta);
+        this.listarTodosVuelos();
+        }, err => {
+          console.log('Error en eliminar vuelos');
+          console.info(err);
+        });
       }
     })
   }
@@ -89,6 +101,13 @@ export class TablaVuelosComponent {
     dialogoRef.afterClosed().subscribe(respuesta =>{
       console.log(respuesta);
       if(respuesta){
+        this.vueloService.cambioEstatus(elemento.idVuelo).subscribe( respuestaApi =>{
+          alert(respuestaApi.mensajeRespuesta);
+          this.listarTodosVuelos();
+          }, err => {
+            console.log('Error en eliminar vuelos');
+            console.info(err);
+          });
         console.log('Se cambia valor');
       }else{
         if(enable){
