@@ -13,24 +13,24 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Destino</mat-label>
                     <mat-select>
-                        <mat-option *ngFor="let ciudad of ciudadesDestino"
-                            [value]="ciudad.idCiudad">{{ciudad.nombreCiudad}}</mat-option>
+                        <mat-option *ngFor="let ciudadDestino of ciudadesDestino"
+                            [value]="ciudadDestino.idCiudad">{{ciudadDestino.nombreCiudad}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <h4>Vuelos</h4>
                 <mat-form-field appearance="fill">
                     <mat-label>Selecciona una opción</mat-label>
                     <mat-select>
-                        <mat-option *ngFor="let ciudadOrigen of ciudadesOrigen"
-                            [value]="ciudadOrigen.idCiudad">{{ciudadOrigen.nombreCiudad}}</mat-option>
+                        <mat-option *ngFor="let vuelos of vuelos"
+                            [value]="vuelos.idVuelo">{{vuelos.codigoVuelo}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <h4>Hotel</h4>
                 <mat-form-field appearance="fill">
                     <mat-label>Selecciona una opción</mat-label>
                     <mat-select>
-                        <mat-option *ngFor="let ciudadOrigen of ciudadesOrigen"
-                            [value]="ciudadOrigen.idCiudad">{{ciudadOrigen.nombreCiudad}}</mat-option>
+                        <mat-option *ngFor="let hoteles of hoteles"
+                            [value]="hoteles.idHotel">{{hoteles.nombreHotel}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <table>
@@ -38,17 +38,17 @@
                         <h4>Tipo de Cuarto</h4>
                         <mat-form-field appearance="fill">
                             <mat-label>Selecciona una opción</mat-label>
-                            <mat-select>
-                                <mat-option *ngFor="let ciudadOrigen of ciudadesOrigen"
-                                    [value]="ciudadOrigen.idCiudad">{{ciudadOrigen.nombreCiudad}}</mat-option>
+                            <mat-select (selectionChange)="cuartoChange()" formControlName="cuartoSelect">
+                                <mat-option *ngFor="let cuartos of cuartos"
+                                    [value]="cuartos.idCuarto">{{cuartos.tipoCuarto}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </td>
                     <td>
                         <h4>Costo</h4>
                         <mat-form-field class="example-full-width">
-                            <mat-label>Postal Code</mat-label>
-                            <input matInput #postalCode maxlength="5" placeholder="Ex. 94105" value="94043">
+                            <mat-label>Costo por noche</mat-label>
+                            <input matInput #postalCode maxlength="5" placeholder="Ex. 94105" value="94043"  formControlName="costoCuarto">
                             <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
                           </mat-form-field>
                     </td>

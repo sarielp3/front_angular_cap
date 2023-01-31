@@ -16,6 +16,7 @@ import { AerolineaService } from 'src/app/services/aerolinea.service';
 import { Aerolineas } from 'src/app/models/Identity/aerolineasReservas';
 import { Hoteles } from 'src/app/models/Identity/hoteles';
 import { HotelesServiceTsService } from 'src/app/services/hoteles.service';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 @Component({
   selector: 'app-reservas',
@@ -49,7 +50,8 @@ export class ReservasComponent implements OnInit {
     private ciudadesService: CiudadesService,
     private aerolineaService: AerolineaService,
     private hotelesService: HotelesServiceTsService,
-    public dialog: MatDialog) { };
+    public dialog: MatDialog,
+    public snackbar : SnackBarService) { };
 
   public ngOnInit(): void {
     this.hotelesService.getHoteles().subscribe(
@@ -89,6 +91,8 @@ export class ReservasComponent implements OnInit {
       this.reservas = reservas;
       this.dataSource = new MatTableDataSource<Reservas>(this.reservas);
       this.loading = false;
+    },(error) => {
+      console.log(error);
     });
   }
 
@@ -183,6 +187,7 @@ export class ReservasComponent implements OnInit {
             console.log(data);
             this.reservas = data;
             this.dataSource = new MatTableDataSource<Reservas>(this.reservas);
+            this.snackbar.openSnackBar('success','El registro se ha eliminado con exito','Eliminacion exitosa');
           })
         })
       }

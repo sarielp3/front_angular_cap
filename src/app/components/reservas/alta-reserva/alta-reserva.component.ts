@@ -4,6 +4,12 @@ import { Ciudades } from 'src/app/models/Identity/ciudades';
 import { CiudadesService } from 'src/app/services/ciudades.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
+import { VuelosService } from 'src/app/services/vuelos.service';
+import { HotelesServiceTsService } from 'src/app/services/hoteles.service';
+import { Vuelo } from 'src/app/models/vuelo.interface';
+import { Hoteles } from 'src/app/models/Identity/hoteles';
+import { Cuarto } from 'src/app/models/cuarto';
+import { CuartoService } from 'src/app/services/cuarto.service';
 
 @Component({
   selector: 'app-alta-reserva',
@@ -16,10 +22,16 @@ export class AltaReservaComponent implements OnInit{
 
   ciudadesOrigen : Ciudades[];
   ciudadesDestino : Ciudades[];
+  vuelos : Vuelo[];
+  hoteles : Hoteles[];
+  cuartos : Cuarto[];
 
   constructor(
     private fb: FormBuilder,
     private ciudadesService : CiudadesService,
+    private vuelosService : VuelosService,
+    private hotelesServices : HotelesServiceTsService,
+    private cuartosService : CuartoService,
     private snackBarService: SnackBarService,
     public dialogRef: MatDialogRef<AltaReservaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,){}
@@ -27,7 +39,9 @@ export class AltaReservaComponent implements OnInit{
     ngOnInit(){
       this.altaReserva = this.fb.group({
         origenSelect:[[],Validators.required],
-        nombre:[[],Validators.required]
+        nombre:[[],Validators.required],
+        cuartoSelect: [[],Validators.required],
+        costoCuarto: [[],Validators.required]
       }); 
       this.ciudadesService.getCiudadesOrigen().subscribe(
         data => {
@@ -37,6 +51,34 @@ export class AltaReservaComponent implements OnInit{
           console.log("Error =>",error);
         }
       )
+      this.ciudadesService.getCiudadesDestino().subscribe(
+        data => {
+        console.log("Data =>", data);
+        this.ciudadesDestino = data;
+      },error =>{
+        console.log("Error =>", error);
+      });
+      this.vuelosService.getVuelos('').subscribe(
+        vuelo => {
+        console.log("Data =>", vuelo);
+        this.vuelos = vuelo;
+      },error =>{
+        console.log("Error =>", error);
+      });
+      this.hotelesServices.getHoteles().subscribe(
+        hotel => {
+          console.log("Data =>", hotel);
+          this.hoteles = hotel;
+        },error =>{
+          console.log("Error =>", error);
+        });
+      this.cuartosService.obtenerListaDeHabitaciones().subscribe(
+          cuarto =>{
+            console.log("Data =>", cuarto);
+            this.cuartos = cuarto;
+          },error =>{
+            console.log("Error =>", error);
+          });
     }
 
     guardar(){
@@ -60,5 +102,19 @@ export class AltaReservaComponent implements OnInit{
 
       )
     }
+
+    cuartoChange(){
+      const cuartoId = this.altaReserva.getRawValue().cuartoSelect;
+      console.log(cuartoId);
+      const cuarto = this.cuartos.filter(cuarto=>cuarto.idCuarto=cuartoId);
+      if (cuarto.length>1){
+        const cuarto1 = cuarto[0];
+        console.log(cuarto1);
+        this.altaReserva.controls['costoCuarto'].setValue(cuarto1.costoNoche);
+      }else{
+        console.log(cuarto);
+      }
+    }
+    
 
 }
