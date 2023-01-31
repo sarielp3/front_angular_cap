@@ -3,7 +3,7 @@ import { CuartosComponent } from './components/cuarto/cuartos.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { RegistroCuartosComponent } from './components/registro-cuartos/registro-cuartos.component';
+import { RegistroCuartosComponent } from './components/cuarto/alta-cuartos/alta-cuartos.component';
 import { AuthenticationGuard } from './services/authentication-guard';
 import { BuscarVuelosComponent } from './components/vuelos/buscar-vuelos/buscar-vuelos.component';
 import {MenuComponent} from './components/menu/menu.component';

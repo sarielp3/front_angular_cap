@@ -12,7 +12,7 @@ export class CuartoService {
 
   obtenerListaDeHabitaciones(): Observable<Cuarto[]> {
     return this.httpClient.get<Cuarto[]>(
-      environment.apiUrl + 'cuartos/lista-cuartos/'
+      '/cuartos/lista-cuartos/'
     );
   }
 
@@ -23,9 +23,26 @@ export class CuartoService {
     );
   }
 
+  modificarHabitaciones(
+    habitacion: Cuarto,
+    idCuarto: number
+  ): Observable<Object> {
+    return this.httpClient.put(
+      environment.apiUrl + `/cuartos/modificar/${idCuarto}`,
+      habitacion
+    );
+  }
+
   eliminarHabitacion(idHotel: number): Observable<Object> {
     return this.httpClient.delete(
       environment.apiUrl + `cuartos/eliminar-cuarto/${idHotel}`
+    );
+  }
+
+  estatusHabitacion(idCuarto: number): Observable<Object> {
+    return this.httpClient.post(
+      environment.apiUrl + `cuartos/status-cuarto/${idCuarto}`,
+      null
     );
   }
 }
