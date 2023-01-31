@@ -51,7 +51,7 @@
             <th mat-header-cell *matHeaderCellDef>Habilitar</th>
             <td mat-cell *matCellDef="let element"> 
                 <mat-slide-toggle                  
-                    [checked]=element.estatus
+                    [checked]="element.estatus === 1 ? true : false"
                     (change)="onChange($event.checked,element)"
                 >                    
                 </mat-slide-toggle>

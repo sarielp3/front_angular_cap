@@ -23,4 +23,8 @@ export class VuelosService {
   deleteVuelo(idVuelo: number){
     return this.http.delete<RespuestaString>( this.apiUrl + '/' + idVuelo);
   }
+
+  cambioEstatus(idVuelo: number){
+    return this.http.put<RespuestaString>( this.apiUrl + '/cambiar-estado/' + idVuelo, null);
+  }
 }

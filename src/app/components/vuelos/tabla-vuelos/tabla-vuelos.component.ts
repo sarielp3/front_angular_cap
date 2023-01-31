@@ -101,6 +101,13 @@ export class TablaVuelosComponent {
     dialogoRef.afterClosed().subscribe(respuesta =>{
       console.log(respuesta);
       if(respuesta){
+        this.vueloService.cambioEstatus(elemento.idVuelo).subscribe( respuestaApi =>{
+          alert(respuestaApi.mensajeRespuesta);
+          this.listarTodosVuelos();
+          }, err => {
+            console.log('Error en eliminar vuelos');
+            console.info(err);
+          });
         console.log('Se cambia valor');
       }else{
         if(enable){
