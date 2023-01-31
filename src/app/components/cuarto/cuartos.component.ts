@@ -4,7 +4,9 @@ import { CuartoService } from '../../services/cuarto.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
-import { RegistroCuartosComponent } from '../registro-cuartos/registro-cuartos.component';
+import { RegistroCuartosComponent } from './alta-cuartos/alta-cuartos.component';
+import { ModificarCuartosComponent } from './modificar-cuartos/modificar-cuartos.component';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-cuartos',
@@ -13,17 +15,14 @@ import { RegistroCuartosComponent } from '../registro-cuartos/registro-cuartos.c
 })
 export class CuartosComponent implements OnInit {
   displayedColumns: string[] = [
-    'Id del cuarto',
     'Nombre del cuarto',
     'Descripcion',
     'Numero de personas',
     'Codigo del cuarto',
     'Costo por noche',
-    'Tipo de cuarto',
-    'Id del hotel',
-    'Status del cuarto',
     'Modificar',
     'Eliminar',
+    'habilitar',
   ];
 
   titulo = 'Lista de cuartos';
@@ -59,6 +58,19 @@ export class CuartosComponent implements OnInit {
     });
   }
 
+  modificarCuartos(idCuarto: number) {
+    console.log('clic en boton de modificacion');
+    console.log(idCuarto);
+
+    const dialogoRef = this.dialog.open(ModificarCuartosComponent, {
+      data: idCuarto,
+      disableClose: true,
+    });
+    dialogoRef.afterClosed().subscribe((result) => {
+      console.log(result);
+    });
+  }
+
   eliminarHabitacion(idHotel: number) {
     this.cuartoService.eliminarHabitacion(idHotel).subscribe((dato) => {
       const dialogoRef = this.dialog.open(ConfirmDialogComponent, {
@@ -72,5 +84,21 @@ export class CuartosComponent implements OnInit {
         }
       });
     });
+  }
+
+  cambiarStatus(elemento) {
+    this.cuartoService
+      .estatusHabitacion(elemento.idCuarto)
+      .subscribe((dato) => {
+        const dialogoRef = this.dialog.open(ConfirmDialogComponent, {
+          disableClose: true,
+        });
+        dialogoRef.afterClosed().subscribe((respuesta) => {
+          console.log(respuesta);
+          if (respuesta) {
+            console.log(dato);
+          }
+        });
+      });
   }
 }

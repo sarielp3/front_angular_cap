@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Cuarto } from '../../models/cuarto';
-import { CuartoService } from '../../services/cuarto.service';
+import { Cuarto } from '../../../models/cuarto';
+import { CuartosComponent } from '../cuartos.component';
+import { CuartoService } from '../../../services/cuarto.service';
 import { Router } from '@angular/router';
 import {
   FormBuilder,
@@ -13,8 +14,8 @@ import {
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-registro-cuartos',
-  templateUrl: './registro-cuartos.component.html',
-  styleUrls: ['./registro-cuartos.component.css'],
+  templateUrl: './alta-cuartos.component.html',
+  styleUrls: ['./alta-cuartos.component.css'],
 })
 export class RegistroCuartosComponent implements OnInit {
   habitacion: Cuarto = new Cuarto();
@@ -72,9 +73,11 @@ export class RegistroCuartosComponent implements OnInit {
     this.habitacion.costoNoche = this.altaCuartos.controls['costoNoche'].value;
 
     this.habitacion.tipoCuarto = this.altaCuartos.controls['tipoCuarto'].value;
+    this.habitacion.status = 1;
 
     this.habitacionServicio.registraHabitaciones(this.habitacion).subscribe();
     console.log('Dato guardado con exito');
+
     console.log(this.habitacion);
   }
 

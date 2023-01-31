@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RegistroCuartosComponent } from './registro-cuartos.component';
+import { RegistroCuartosComponent } from './alta-cuartos.component';
 
 describe('RegistroCuartosComponent', () => {
   let component: RegistroCuartosComponent;
@@ -8,9 +8,8 @@ describe('RegistroCuartosComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RegistroCuartosComponent ]
-    })
-    .compileComponents();
+      declarations: [RegistroCuartosComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(RegistroCuartosComponent);
     component = fixture.componentInstance;

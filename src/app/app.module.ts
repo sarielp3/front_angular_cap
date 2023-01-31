@@ -35,11 +35,12 @@ import { ErrorInterceptor } from './helpers/error.interceptor';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CuartosComponent } from './components/cuarto/cuartos.component';
-import { RegistroCuartosComponent } from './components/registro-cuartos/registro-cuartos.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { AltaHotelesComponent } from './components/get-hoteles/alta-hoteles/alta-hoteles.component';
 import { ModificarHotelesComponent } from './components/get-hoteles/modificar-hoteles/modificar-hoteles.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { RegistroCuartosComponent } from './components/cuarto/alta-cuartos/alta-cuartos.component';
+import { ModificarCuartosComponent } from './components/cuarto/modificar-cuartos/modificar-cuartos.component';
 
 
 @NgModule({
@@ -56,10 +57,11 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     ConfirmDialogComponent,
     ModificaReservaComponent,
     SnackBarComponent,
-    CuartosComponent,
-    RegistroCuartosComponent,
+    CuartosComponent,    
     AltaHotelesComponent,
-    ModificarHotelesComponent
+    ModificarHotelesComponent,
+    RegistroCuartosComponent,
+    ModificarCuartosComponent
 
   ],
   imports: [
