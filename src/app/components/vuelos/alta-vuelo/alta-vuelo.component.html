@@ -6,22 +6,22 @@
         <mat-form-field appearance="fill" class="form-element">
             <mat-label>Origen</mat-label>
             <mat-select  formControlName="origenSelect">
-                <mat-option *ngFor="let ciudadOrigen of ciudadesOrigen"
+                <mat-option *ngFor="let ciudadOrigen of ciudades"
                     [value]="ciudadOrigen.idCiudad">{{ciudadOrigen.nombreCiudad}}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill" class="form-element">
             <mat-label>Destino</mat-label>
             <mat-select>
-                <mat-option *ngFor="let ciudad of ciudadesOrigen"
+                <mat-option *ngFor="let ciudad of ciudades"
                     [value]="ciudad.idCiudad">{{ciudad.nombreCiudad}}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill" class="form-element">
             <mat-label>Aerolinea</mat-label>
             <mat-select>
-                <mat-option *ngFor="let ciudadOrigen of ciudadesOrigen"
-                    [value]="ciudadOrigen.idCiudad">{{ciudadOrigen.nombreCiudad}}</mat-option>
+                <mat-option *ngFor="let aerolinea of aerolineas"
+                    [value]="aerolinea.idAerolinea">{{aerolinea.nombreAerolinea}}</mat-option>
             </mat-select>
         </mat-form-field>
        
@@ -41,6 +41,12 @@
             </td>
         </table>                
         <br />
+
+        <mat-form-field class="form-element">
+            <mat-label>Codigo</mat-label>
+            <input formControlName="codigo" matInput placeholder="Nombre" value="">
+        </mat-form-field>
+        
         <mat-form-field class="form-element">
             <mat-label>Costo</mat-label>
             <input formControlName="costo" matInput placeholder="Nombre" value="">
