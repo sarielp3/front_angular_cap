@@ -8,10 +8,14 @@ import { VuelosReservas } from 'src/app/models/Identity/vuelosReservas';
 import { CiudadesService } from 'src/app/services/ciudades.service';
 import { ReservasService } from 'src/app/services/reservas.service';
 import { FormControl } from '@angular/forms';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { AltaReservaComponent } from './alta-reserva/alta-reserva.component';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { ModificaReservaComponent } from './modifica-reserva/modifica-reserva.component';
+import { AerolineaService } from 'src/app/services/aerolinea.service';
+import { Aerolineas } from 'src/app/models/Identity/aerolineasReservas';
+import { Hoteles } from 'src/app/models/Identity/hoteles';
+import { HotelesServiceTsService } from 'src/app/services/hoteles.service';
 
 @Component({
   selector: 'app-reservas',
@@ -20,7 +24,7 @@ import { ModificaReservaComponent } from './modifica-reserva/modifica-reserva.co
 })
 export class ReservasComponent implements OnInit {
 
-  displayedColumns: string[] = ['Origen', 'Destino', 'Nombre del Cliente', 'Descripción de la reserva','Fecha Creacion','Modificar','Eliminar'];
+  displayedColumns: string[] = ['Origen', 'Destino', 'Nombre del Cliente', 'Descripción de la reserva', 'Fecha Creacion', 'Modificar', 'Eliminar'];
   titulo = 'Listado de Reservas';
   public reservas: Reservas[] = [];
   public hoteles: HotelesReservas[] = [];
@@ -28,23 +32,56 @@ export class ReservasComponent implements OnInit {
   public vuelos: VuelosReservas[] = [];
   dataSource = new MatTableDataSource<Reservas>(this.reservas);
 
-  ciudadesOrigen : Ciudades[];
+  ciudadesOrigen: Ciudades[];
+  ciudadesDestino: Ciudades[];
+  aerolinea: Aerolineas[];
+  hotel: Hoteles[];
   selectedCiudadOrigen = new FormControl();
+  selectedCiudadDestino = new FormControl();
+  selectedAerolinea = new FormControl();
+  selectedHotel = new FormControl();
+  selectedReserva = new FormControl();
   loading: boolean = true;
   value = 0;
   mode = 'indeterminate';
 
   constructor(private service: ReservasService,
-              private ciudadesService : CiudadesService,
-              public dialog: MatDialog) { };
+    private ciudadesService: CiudadesService,
+    private aerolineaService: AerolineaService,
+    private hotelesService: HotelesServiceTsService,
+    public dialog: MatDialog) { };
 
-  public ngOnInit(): void {    
+  public ngOnInit(): void {
+    this.hotelesService.getHoteles().subscribe(
+      data => {
+        console.log("Data =>", data);
+        this.hotel = data;
+      }, error => {
+        console.log("Error =>", error);
+      }
+    )
     this.ciudadesService.getCiudadesOrigen().subscribe(
       data => {
-        console.log("Data =>",data);
+        console.log("Data =>", data);
         this.ciudadesOrigen = data;
-      },error => {
-        console.log("Error =>",error);
+      }, error => {
+        console.log("Error =>", error);
+      }
+    )
+    this.ciudadesService.getCiudadesDestino().subscribe(
+      data => {
+        console.log("Data =>", data);
+        this.ciudadesDestino = data;
+      }, error => {
+        console.log("Error =>", error);
+      }
+    )
+    this.aerolineaService.getAerolineas().subscribe(
+      data => {
+        console.log("Data =>", data);
+        this.aerolinea = data;
+      }, error => {
+        console.log("Error =>", error);
       }
     )
     this.service.getReservas().subscribe(reservas => {
@@ -52,10 +89,10 @@ export class ReservasComponent implements OnInit {
       this.reservas = reservas;
       this.dataSource = new MatTableDataSource<Reservas>(this.reservas);
       this.loading = false;
-    });  
+    });
   }
-  
-   public getHoteles() {
+
+  public getHoteles() {
     this.service.getHotel().subscribe(hoteles => {
       this.hoteles = hoteles;
     });
@@ -75,43 +112,88 @@ export class ReservasComponent implements OnInit {
     });
   }
 
-  buscar(){
+  buscar() {
     console.log(this.selectedCiudadOrigen.value);
+    console.log(this.selectedCiudadDestino.value);
+    console.log(this.selectedAerolinea.value);
+    console.log(this.selectedHotel.value);
+    let idOrigen = this.selectedCiudadOrigen.value;
+    let idDestino = this.selectedCiudadDestino.value;
+    let idAerolinea = this.selectedAerolinea.value;
+    let idHotel = this.selectedHotel.value;
+    if (!idOrigen) {
+      idOrigen = '';
+    }
+    if (!idDestino) {
+      idDestino = '';
+    }
+    if (!idAerolinea) {
+      idAerolinea = '';
+    }
+    if (!idHotel) {
+      idHotel = '';
+    }
+    this.service.getReservasByFiltro(idOrigen, idDestino, idAerolinea, idHotel).subscribe(reservas => {
+      console.log(reservas);
+      this.reservas = reservas;
+      this.dataSource = new MatTableDataSource<Reservas>(this.reservas);
+      this.loading = false;
+    }, error => {
+      console.log("Error =>", error);
+      this.reservas = [];
+      this.dataSource = new MatTableDataSource<Reservas>(this.reservas);
+    }
+    );
   }
 
-  modificar(elemento){
+  modificar(elemento) {
     console.log('Elemento =>', elemento);
     console.log('Clic en boton Alta');
-    const dialogoRef = this.dialog.open(ModificaReservaComponent,{
+    const dialogoRef = this.dialog.open(ModificaReservaComponent, {
       data: elemento,
-      disableClose: true ,     
+      disableClose: true,
     });
-    dialogoRef.afterClosed().subscribe(result =>{
+    dialogoRef.afterClosed().subscribe(result => {
       console.log(result);
     });
   }
-  
-  altaReserva(){
+
+  altaReserva() {
     console.log('Clic en boton Alta');
-    const dialogoRef = this.dialog.open(AltaReservaComponent,{
-      disableClose: true ,     
+    const dialogoRef = this.dialog.open(AltaReservaComponent, {
+      disableClose: true,
     });
-    dialogoRef.afterClosed().subscribe(result =>{
+    dialogoRef.afterClosed().subscribe(result => {
       console.log(result);
     });
 
   }
 
-  eliminar(elemento:Reservas){
+  eliminar(elemento: Reservas): void {
     console.log('Clic en boton Eliminar', elemento);
-    const dialogoRef = this.dialog.open(ConfirmDialogComponent,{
-      disableClose:true
+    const dialogoRef = this.dialog.open(ConfirmDialogComponent, {
+      disableClose: true
     });
-    dialogoRef.afterClosed().subscribe(respuesta =>{
+    dialogoRef.afterClosed().subscribe(respuesta => {
       console.log(respuesta);
-      if(respuesta){
-        console.log('Eliminamos Registro con Id',elemento.idReserva );
+      if (respuesta) {
+        console.log('Eliminamos Registro con Id', elemento.idReserva);
+        this.service.deleteReserva(elemento.idReserva).subscribe(reservas => {
+          this.service.getReservas().subscribe(data => {
+            console.log(data);
+            this.reservas = data;
+            this.dataSource = new MatTableDataSource<Reservas>(this.reservas);
+          })
+        })
       }
     })
+  }
+
+  limpiarFiltros(){
+    this.selectedCiudadOrigen.setValue('');
+    this.selectedCiudadDestino.setValue('');
+    this.selectedAerolinea.setValue('');
+    this.selectedHotel.setValue('');
+    this.buscar();
   }
 }

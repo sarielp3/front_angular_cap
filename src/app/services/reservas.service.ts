@@ -18,6 +18,17 @@ export class ReservasService {
     return this.http.get<Reservas[]>(environment.apiUrl +'reservas');
   }
 
+  public getReservasByFiltro(ciudadOrigenId:number,
+    ciudadDestinoId:number,
+    aerolineaId:number,
+    hotelId:number): Observable<Reservas[]>{
+      return this.http.get<Reservas[]>(environment.apiUrl + 'reservas?origen=' +ciudadOrigenId +'&destino=' + ciudadDestinoId + '&aerolinea=' + aerolineaId +'&hotel=' + hotelId)
+    }
+
+    public deleteReserva(idReserva:number): Observable<void>{
+      return this.http.delete<void>(environment.apiUrl + 'reservas/eliminar/' + idReserva)
+    }
+
   public getHotel(): Observable<HotelesReservas[]>{
     return this.http.get<HotelesReservas[]>('AgenciaViajeTD/hoteles');
   }
