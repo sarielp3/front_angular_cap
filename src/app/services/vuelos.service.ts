@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Vuelo } from '../models/vuelo.interface';
 import { RespuestaString } from '../models/respuesta_string';
+import { AltaVuelo } from '../models/alta-vuelo.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,9 @@ export class VuelosService {
     return this.http.get<Vuelo[]>( this.apiUrl + '/' + filtros);
   }
 
+  createVuelo(vuelo: AltaVuelo){
+    return this.http.post<AltaVuelo>(this.apiUrl, vuelo);
+  }
 
   deleteVuelo(idVuelo: number){
     return this.http.delete<RespuestaString>( this.apiUrl + '/' + idVuelo);
