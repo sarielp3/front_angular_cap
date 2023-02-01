@@ -12,13 +12,13 @@ export class CuartoService {
 
   obtenerListaDeHabitaciones(): Observable<Cuarto[]> {
     return this.httpClient.get<Cuarto[]>(
-      '/cuartos/lista-cuartos/'
+      environment.apiUrl + 'cuartos/lista-cuartos/'
     );
   }
 
   registraHabitaciones(habitacion: Cuarto): Observable<Object> {
     return this.httpClient.post(
-      environment.apiUrl + '/cuartos/agregar/81',
+      environment.apiUrl + '/cuartos/agregar/202',
       habitacion
     );
   }

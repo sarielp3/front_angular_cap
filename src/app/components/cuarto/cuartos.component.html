@@ -82,12 +82,9 @@
         <th mat-header-cell *matHeaderCellDef>Habilitar</th>
         <td mat-cell *matCellDef="let element">
           <mat-slide-toggle
-            [(ngModel)]="element.status"
-            (click)="cambiarStatus(element)"
-            id="toggle"
+            [checked]="element.status === 1 ? true : false"
+            (change)="cambiarStatus($event.checked, element, $event)"
           >
-            <h5 *ngIf="element.status == 1">Habilitar</h5>
-            <h5 *ngIf="element.status == 0">Deshabilitar</h5>
           </mat-slide-toggle>
         </td>
       </ng-container>

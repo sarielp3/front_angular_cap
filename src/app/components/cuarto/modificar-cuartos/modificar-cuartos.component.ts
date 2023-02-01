@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 import {
   UntypedFormControl,
   UntypedFormGroup,
@@ -22,6 +23,7 @@ export class ModificarCuartosComponent implements OnInit {
   public modificarForm: UntypedFormGroup;
 
   constructor(
+    private snackBarService: SnackBarService,
     private habitacionServicio: CuartoService,
     public dialogRef: MatDialogRef<ModificarCuartosComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -81,7 +83,14 @@ export class ModificarCuartosComponent implements OnInit {
       .modificarHabitaciones(this.habitacion, this.data.idCuarto)
       .subscribe(
         (res) => {
-          console.log('exito, registro modificado y guardado');
+          console.log(res);
+
+          this.snackBarService.openSnackBar(
+            'success',
+            'exito, registro modificado y guardado',
+            'success'
+          );
+          this.dialogRef.close();
         },
         (err) => {
           console.log(err);
@@ -94,9 +103,12 @@ export class ModificarCuartosComponent implements OnInit {
   onSubmit() {
     if (this.modificarForm.valid) {
       this.cambiosHabitacion();
-      this.dialogRef.close();
     } else {
-      console.log('no valido');
+      this.snackBarService.openSnackBar(
+        'warning',
+        'Llena todos los campos',
+        'warning'
+      );
     }
   }
   cancelar() {
