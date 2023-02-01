@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   configuration: "DEVELOPMENT",
   applicationName: "Arquetipo Angular",
-  apiUrl: "http://localhost:44055/api"
+  apiUrl: "https://capbasanapptdd01.azurewebsites.net/AgenciaViajeTD/"
 };
 
 /*

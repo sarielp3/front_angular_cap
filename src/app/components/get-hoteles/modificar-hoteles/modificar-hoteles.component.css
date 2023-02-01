@@ -1,0 +1,13 @@
+.container{
+    text-align: center;
+    width: 300px;
+}
+
+button{
+    margin: 20px;
+}
+
+#imagen{
+    align-items: center;
+    text-align: center;
+}

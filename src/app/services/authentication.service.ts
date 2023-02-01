@@ -10,7 +10,7 @@ import { User } from '../Models/Identity/user';
 export class AuthenticationService {
 
   private StorageKey = 'token';
-  private userSubject: BehaviorSubject<User>;
+  public userSubject: BehaviorSubject<User>;
   private userObservable: Observable<User>;
 
   constructor(private http: HttpClient, private tokenService: JwtService) {
@@ -32,7 +32,7 @@ export class AuthenticationService {
   }
 
   public login(username: string, password: string): Observable<User> {
-    var url = `${environment.apiUrl}/Authentication/Login`;
+    var url = `${environment.apiUrl}Authentication/Login`;
     return this.http.post(url, { "userData": username, "password": password }, {responseType: 'text'})
     .pipe(map(result => {
 

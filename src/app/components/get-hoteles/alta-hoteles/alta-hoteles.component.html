@@ -1,0 +1,42 @@
+
+<div class="container">
+    <mat-grid-list cols="1" rowHeight="250px">
+        <mat-grid-tile colspan="1" rowspan="2" >
+            
+            <form [formGroup]="altaForm" (ngSubmit)="onSubmit()">
+                <h2>Alta Hotel</h2>
+                <mat-form-field>
+                    <mat-label>Ciudad</mat-label>
+                    <mat-select formControlName="ciudadHotel">
+                        <mat-option *ngFor="let ciudad of ciudades" [value]="ciudad.idCiudad">
+                            {{ciudad.nombreCiudad}}
+                        </mat-option >
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Nombre de Hotel</mat-label>
+                    <input formControlName="nombreHotel" matInput placeholder="Hotel Ibis">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Codigo de Hotel</mat-label>
+                    <input formControlName="codigoHotel" type="number" matInput placeholder="0000">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Direccion</mat-label>
+                    <input formControlName="direccion" matInput placeholder="Pirules 1849, Alamos 2">
+                </mat-form-field>
+
+                <br>
+                    <label>Logo:</label>
+                    <input formControlName="logo" (change) = "onFileChanged($event)" id="imagen" type="file">
+                    <img [src]="imgURL" height="30" *ngIf="imgURL">
+                    <button mat-raised-button color="primary" type="submit" [disabled]="!altaForm.valid">Guardar</button>
+                    <button mat-raised-button color="warn" (click)="cancelar()" type="button">Cancelar</button>
+                
+            </form>
+        </mat-grid-tile>
+         
+    </mat-grid-list>
+   
+</div>
