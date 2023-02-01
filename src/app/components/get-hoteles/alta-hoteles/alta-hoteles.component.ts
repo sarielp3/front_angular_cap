@@ -27,7 +27,7 @@ export class AltaHotelesComponent implements OnInit {
     codigoHotel:'',
     direccion:'',
     estatus:'',
-    logo:''
+    logo:null
   }
   public altaForm: UntypedFormGroup;
   public ciudades:Ciudades[] = [];
@@ -85,17 +85,14 @@ export class AltaHotelesComponent implements OnInit {
   onFileChanged(event){
     console.log(event);
     this.selectedFile = event.target.files[0];
-
+    
     let reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
     // this.Hotel.logo = 'data:image/jpge;base64,' + event.target.files[0];
-     console.log(this.Hotel.logo);
+ 
     reader.onload = (event2) =>{
       this.imgURL = reader.result;
-      let utf8Encode = new TextEncoder();
-      utf8Encode.encode(reader.result.toString());
-      this.Hotel.logo = utf8Encode;
-      console.log(this.Hotel.logo);
+      console.log(this.imgURL);
     };
 
 

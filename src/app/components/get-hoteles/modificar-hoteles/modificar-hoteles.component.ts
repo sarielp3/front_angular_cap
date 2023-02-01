@@ -22,7 +22,7 @@ export class ModificarHotelesComponent implements OnInit {
     codigoHotel:'',
     direccion:'',
     estatus:'',
-    logo:new Blob()
+    logo:null
   }
   public altaForm: UntypedFormGroup;
   public ciudades:Ciudades[] = [];
@@ -71,7 +71,7 @@ export class ModificarHotelesComponent implements OnInit {
     this.serviceHoteles.modificar(this.data.idHotel,this.Hotel).subscribe(
       (res)=>{
         console.log("Exito, registro modificado y guardado");
-
+        this.dialogRef.close();
       },err=> console.log(err)
     );
   }
