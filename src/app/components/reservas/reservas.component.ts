@@ -153,13 +153,17 @@ export class ReservasComponent implements OnInit {
 
   modificar(elemento) {
     console.log('Elemento =>', elemento);
-    console.log('Clic en boton Alta');
+    console.log('Clic en boton Modificar');
     const dialogoRef = this.dialog.open(ModificaReservaComponent, {
       data: elemento,
       disableClose: true,
     });
     dialogoRef.afterClosed().subscribe(result => {
       console.log(result);
+      this.reservaService.getReservas().subscribe(data=>{
+        this.reservas = data;
+        this.dataSource = new MatTableDataSource<Reservas>(this.reservas);
+      })
     });
   }
 
