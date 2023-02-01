@@ -77,18 +77,25 @@ export class AltaVueloComponent {
     this.vueloAlta.codigoVuelo = this.altaVuelo.controls['codigoControl'].value;
     this.vueloAlta.costo = Number(this.altaVuelo.controls['costoControl'].value);
 
+    
     if(this.altaVuelo.valid === true){
-      console.log(this.vueloAlta);
-      this.vueloService.createVuelo(this.vueloAlta).subscribe( data =>{
+      if( this.vueloAlta.origen === this.vueloAlta.destino){
+        this.snackBarService.openSnackBar('warning','La ciudad de origen debe ser diferente a la ciudad de destino','warning');
+      }else{
+        this.vueloService.createVuelo(this.vueloAlta).subscribe( data =>{
         this.vueloService.vuelos.push(data);
-      this.vueloService.emisor.next(this.vueloService.vuelos);
-      this.snackBarService.openSnackBar('success','El vuelo se guardo de manera exitosa','success');
-      }, error =>{}
-      );
+        this.vueloService.emisor.next(this.vueloService.vuelos);
+        this.snackBarService.openSnackBar('success','El vuelo se guardo de manera exitosa','success');
+        this.dialogRef.close();
+        }, error =>{}
+        );
+       
+      }
+      
     }else{
       this.snackBarService.openSnackBar('warning','El formulario no es valido','Warning');
     }    
-    this.dialogRef.close();
+    
   }
   cancelar(){
     this.dialogRef.close();
