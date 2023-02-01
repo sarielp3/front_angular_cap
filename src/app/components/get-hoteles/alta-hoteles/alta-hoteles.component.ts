@@ -11,6 +11,12 @@ import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms
   styleUrls: ['./alta-hoteles.component.css']
 })
 export class AltaHotelesComponent implements OnInit {
+  imgURL:any;
+  public selectedFile;
+  public event1;
+  receivedIMG:any;
+  base64Data:any;
+  convertedIMG:any;
   public Hotel:Hoteles = {
     idHotel:0,
     ciudad:{
@@ -21,7 +27,7 @@ export class AltaHotelesComponent implements OnInit {
     codigoHotel:'',
     direccion:'',
     estatus:'',
-    logo:new Blob()
+    logo:''
   }
   public altaForm: UntypedFormGroup;
   public ciudades:Ciudades[] = [];
@@ -30,7 +36,8 @@ export class AltaHotelesComponent implements OnInit {
       nombreHotel: new UntypedFormControl('', [Validators.required, Validators.minLength(1)]),
       codigoHotel: new UntypedFormControl('', [Validators.required, Validators.minLength(1)]),
       ciudadHotel: new UntypedFormControl('', [Validators.required, Validators.minLength(1)]),
-      direccion: new UntypedFormControl('', [Validators.required, Validators.minLength(1)])
+      direccion: new UntypedFormControl('', [Validators.required, Validators.minLength(1)]),
+      logo: new UntypedFormControl('')
     });
   }
 
@@ -51,11 +58,16 @@ export class AltaHotelesComponent implements OnInit {
     this.Hotel.nombreHotel = this.altaForm.controls['nombreHotel'].value;
     this.Hotel.codigoHotel = this.altaForm.controls['codigoHotel'].value;
     this.Hotel.direccion = this.altaForm.controls['direccion'].value;
+    //this.Hotel.logo = this.altaForm.controls['logo'].value;
     this.Hotel.logo = null;
     this.Hotel.estatus = "1";
-    this.serviceHoteles.altaHotel(this.Hotel).subscribe();
+    this.serviceHoteles.altaHotel(this.Hotel).subscribe(
+      (data)=>{
+        this.dialogRef.close();
+      }
+    );
     console.log("Exito, registro guardado");
-    this.dialogRef.close();
+    
   }
 
   cancelar(){
@@ -68,5 +80,22 @@ export class AltaHotelesComponent implements OnInit {
         this.ciudades=data;
       }
     )
+  }
+
+  onFileChanged(event){
+    console.log(event);
+    this.selectedFile = event.target.files[0];
+
+    let reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    // this.Hotel.logo = 'data:image/jpge;base64,' + event.target.files[0];
+     console.log(this.Hotel.logo);
+    reader.onload = (event2) =>{
+      this.imgURL = reader.result;
+      this.Hotel.logo = reader.result;
+      console.log(this.Hotel.logo);
+    };
+
+
   }
 }

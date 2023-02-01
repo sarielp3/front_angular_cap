@@ -29,7 +29,8 @@
 
                 <br>
                     <label>Logo:</label>
-                    <input id="imagen" type="file">
+                    <input formControlName="logo" (change) = "onFileChanged($event)" id="imagen" type="file">
+                    <img [src]="imgURL" height="100" *ngIf="imgURL">
                     <button mat-raised-button color="primary" type="submit" [disabled]="!altaForm.valid">Guardar</button>
                     <button mat-raised-button color="warn" (click)="cancelar()" type="button">Cancelar</button>
                 
