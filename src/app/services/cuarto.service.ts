@@ -12,7 +12,7 @@ export class CuartoService {
 
   obtenerListaDeHabitaciones(): Observable<Cuarto[]> {
     return this.httpClient.get<Cuarto[]>(
-      'http://localhost:8080/AgenciaViajeTD/cuartos/lista-cuartos/'
+      '/cuartos/lista-cuartos/'
     );
   }
 
