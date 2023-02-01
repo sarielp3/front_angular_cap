@@ -6,6 +6,7 @@ import { HotelesReservas } from '../models/Identity/hotelesReservas';
 import { CuartosReservas } from '../models/Identity/cuartosReservas';
 import { VuelosReservas } from '../models/Identity/vuelosReservas';
 import { environment } from 'src/environments/environment';
+import { AltaReserva } from '../models/Identity/altaReserva';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,10 @@ export class ReservasService {
       return this.http.get<Reservas[]>(environment.apiUrl + 'reservas?origen=' +ciudadOrigenId +'&destino=' + ciudadDestinoId + '&aerolinea=' + aerolineaId +'&hotel=' + hotelId)
     }
 
+    createReserva(reserva: AltaReserva){
+      return this.http.post<AltaReserva>(environment.apiUrl + 'reservas/creart', reserva);
+    }
+
     public deleteReserva(idReserva:number): Observable<void>{
       return this.http.delete<void>(environment.apiUrl + 'reservas/eliminar/' + idReserva)
     }
@@ -40,4 +45,5 @@ export class ReservasService {
   public getVuelo(): Observable<VuelosReservas[]>{
     return this.http.get<VuelosReservas[]>('AgenciaViajeTD/vuelos');
   }
+  
 }

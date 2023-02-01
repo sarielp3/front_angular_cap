@@ -50,6 +50,7 @@ export class ReservasComponent implements OnInit {
     private ciudadesService: CiudadesService,
     private aerolineaService: AerolineaService,
     private hotelesService: HotelesServiceTsService,
+    private reservaService: ReservasService,
     public dialog: MatDialog,
     public snackbar : SnackBarService) { };
 
@@ -169,6 +170,11 @@ export class ReservasComponent implements OnInit {
     });
     dialogoRef.afterClosed().subscribe(result => {
       console.log(result);
+      this.reservaService.getReservas().subscribe(data=>{
+        this.reservas = data;
+        this.dataSource = new MatTableDataSource<Reservas>(this.reservas);
+      })
+      
     });
 
   }
