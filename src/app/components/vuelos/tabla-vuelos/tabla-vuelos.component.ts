@@ -46,6 +46,7 @@ export class TablaVuelosComponent {
     .subscribe( vuelos => {
       this.vuelos = vuelos;
       console.log(this.vuelos);
+      this.vueloService.vuelos = this.vuelos
       this.dataSource = new MatTableDataSource<Vuelo>(this.vuelos);
     }, err => {
       console.log('Error en GET vuelos');
