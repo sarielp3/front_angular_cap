@@ -77,7 +77,7 @@ export class TablaVuelosComponent {
       if(respuesta){
         console.log('Eliminamos Registro con Id',elemento.idVuelo );
         this.vueloService.deleteVuelo(elemento.idVuelo).subscribe( respuestaApi =>{
-        alert(respuestaApi.mensajeRespuesta);
+        this.snackBarService.openSnackBar('success', respuestaApi.mensajeRespuesta,'success');
         this.listarTodosVuelos();
         }, err => {
           console.log('Error en eliminar vuelos');
