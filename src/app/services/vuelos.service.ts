@@ -24,6 +24,10 @@ export class VuelosService {
     return this.http.post<Vuelo>(this.apiUrl, vuelo);
   }
 
+  updateVuelo(vuelo: AltaVuelo, idVuelo: number){
+    return this.http.put<AltaVuelo>(this.apiUrl + '/' + idVuelo, vuelo);
+  }
+
   deleteVuelo(idVuelo: number){
     return this.http.delete<RespuestaString>( this.apiUrl + '/' + idVuelo);
   }
