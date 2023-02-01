@@ -40,7 +40,7 @@ export class GetHotelesComponent implements OnInit,AfterViewInit {
   ngOnInit() {
     this.getHoteles();
     this.getCiudades();
-    this.getNombreHoteles();
+    
     
     this.onSubmit();
     this.dataSource = new MatTableDataSource<Hoteles>(this.ListaHoteles);
@@ -52,7 +52,6 @@ export class GetHotelesComponent implements OnInit,AfterViewInit {
   }
   
   public onSubmit(){
-    if (this.filtroForm.controls['nombreHotel'].value || this.filtroForm.controls['codigoHotel'].value || this.filtroForm.controls['ciudadHotel'].value) {
       this.serviceHoteles.getFiltrosHoteles(this.filtroForm.controls['nombreHotel'].value,this.filtroForm.controls['codigoHotel'].value,this.filtroForm.controls['ciudadHotel'].value).subscribe(
         (data)=>{
           this.ListaHoteles=data;
@@ -61,10 +60,6 @@ export class GetHotelesComponent implements OnInit,AfterViewInit {
           this.ListaHoteles =[];
         }
       )
-      
-    }else{
-      return;
-    }
   }
 
   public getHoteles(){
@@ -72,19 +67,14 @@ export class GetHotelesComponent implements OnInit,AfterViewInit {
         this.serviceHoteles.getHoteles().subscribe(
           (data)=>{
             this.ListaHoteles=data; 
+            this.NombreHoteles=data; 
             this.loading = false;  
           }
         )
         
   }
 
-  public getNombreHoteles(){
-    this.serviceHoteles.getHoteles().subscribe(
-      (data)=>{
-        this.NombreHoteles=data;   
-      }
-    )
-}
+  
 
   public getCiudades(){
     this.serviceHoteles.getCiudades().subscribe(
@@ -101,9 +91,11 @@ export class GetHotelesComponent implements OnInit,AfterViewInit {
     });
     dialogoRef.afterClosed().subscribe(result =>{
       console.log(result);
-      
+      this.getHoteles();
+      this.dataSource = new MatTableDataSource<Hoteles>(this.ListaHoteles);
+      this.getHoteles();
     });
-    this.getHoteles();
+   
   }
 
   modificar(elemento){
@@ -153,6 +145,13 @@ export class GetHotelesComponent implements OnInit,AfterViewInit {
         )
       }
     })
+  }
+
+  public limpiarFiltros(){
+    this.filtroForm.controls['nombreHotel'].setValue(''); 
+    this.filtroForm.controls['codigoHotel'].setValue(''); 
+    this.filtroForm.controls['ciudadHotel'].setValue(''); 
+    this.getHoteles();
   }
   
 }

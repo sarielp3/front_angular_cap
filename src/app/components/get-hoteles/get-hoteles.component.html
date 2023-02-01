@@ -1,6 +1,6 @@
 <p>Lista Hoteles</p>
-    <mat-grid-list cols="4" rowHeight="200px">
-      <mat-grid-tile colspan="1" rowspan="2"><div class="campos">
+    <mat-grid-list cols="4" rowHeight="150px">
+      <mat-grid-tile colspan="1" rowspan="3"><div class="campos">
         <h3>Filtros</h3>
 
         <form [formGroup]="filtroForm" (ngSubmit)="onSubmit()"> 
@@ -30,12 +30,14 @@
             </mat-option>
           </mat-select>
         </mat-form-field><br>
-        <button mat-raised-button color="primary"  type="submit">Aplicar</button><br><br>
+        <button mat-raised-button color="primary"  type="submit">Aplicar</button>
+        <button mat-raised-button color="primary" id="filtro"  (click)="limpiarFiltros()" type="button">Limpiar Filtros</button>
+        <br><br>
         <button mat-stroked-button color="primary" (click)="altaHotel()">Alta Hotel</button>
           </form>
         </div>
       </mat-grid-tile>
-      <mat-grid-tile colspan="3" rowspan="3">
+      <mat-grid-tile colspan="3" rowspan="4">
         
         <div class="container">
           
