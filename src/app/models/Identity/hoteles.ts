@@ -6,5 +6,5 @@ export class Hoteles{
     codigoHotel!: String;
     direccion!:String;
     estatus!:String;
-    logo!:Blob;
+    logo!:any;
 }
