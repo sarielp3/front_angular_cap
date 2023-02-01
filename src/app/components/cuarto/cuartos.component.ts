@@ -7,7 +7,7 @@ import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog
 import { RegistroCuartosComponent } from './alta-cuartos/alta-cuartos.component';
 import { ModificarCuartosComponent } from './modificar-cuartos/modificar-cuartos.component';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
-
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 @Component({
   selector: 'app-cuartos',
   templateUrl: './cuartos.component.html',
@@ -27,9 +27,14 @@ export class CuartosComponent implements OnInit {
 
   titulo = 'Lista de cuartos';
   public habitaciones: Cuarto[] = [];
+
   dataSource = new MatTableDataSource<Cuarto>(this.habitaciones);
 
-  constructor(private cuartoService: CuartoService, public dialog: MatDialog) {}
+  constructor(
+    private snackBarService: SnackBarService,
+    private cuartoService: CuartoService,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.obtenerHabitaciones();
@@ -53,21 +58,22 @@ export class CuartosComponent implements OnInit {
     const dialogoRef = this.dialog.open(RegistroCuartosComponent, {
       disableClose: true,
     });
-    dialogoRef.afterClosed().subscribe((result) => {
-      console.log(result);
+    dialogoRef.afterClosed().subscribe((respuesta) => {
+      this.obtenerHabitaciones();
+      console.log(respuesta);
     });
   }
 
   modificarCuartos(idCuarto: number) {
     console.log('clic en boton de modificacion');
     console.log(idCuarto);
-
     const dialogoRef = this.dialog.open(ModificarCuartosComponent, {
       data: idCuarto,
       disableClose: true,
     });
-    dialogoRef.afterClosed().subscribe((result) => {
-      console.log(result);
+    dialogoRef.afterClosed().subscribe((respuesta) => {
+      this.obtenerHabitaciones();
+      console.log(respuesta);
     });
   }
 
@@ -79,6 +85,11 @@ export class CuartosComponent implements OnInit {
       dialogoRef.afterClosed().subscribe((respuesta) => {
         console.log(respuesta);
         if (respuesta) {
+          this.snackBarService.openSnackBar(
+            'success',
+            'Registro eliminado',
+            'success'
+          );
           console.log(dato);
           this.obtenerHabitaciones();
         }
@@ -86,19 +97,30 @@ export class CuartosComponent implements OnInit {
     });
   }
 
-  cambiarStatus(elemento) {
-    this.cuartoService
-      .estatusHabitacion(elemento.idCuarto)
-      .subscribe((dato) => {
-        const dialogoRef = this.dialog.open(ConfirmDialogComponent, {
-          disableClose: true,
-        });
-        dialogoRef.afterClosed().subscribe((respuesta) => {
-          console.log(respuesta);
-          if (respuesta) {
-            console.log(dato);
-          }
-        });
-      });
+  cambiarStatus(enable: boolean, elemento, check: MatSlideToggleChange) {
+    const dialogoRef = this.dialog.open(ConfirmDialogComponent, {
+      disableClose: true,
+    });
+    dialogoRef.afterClosed().subscribe((respuesta) => {
+      if (respuesta) {
+        this.cuartoService
+          .estatusHabitacion(elemento.idCuarto)
+          .subscribe((respuesta) => {
+            this.snackBarService.openSnackBar(
+              'success',
+              'Estatus cambiado correctamente',
+              'success'
+            );
+            this.obtenerHabitaciones();
+          });
+      } else {
+        check.source.checked = !enable;
+        this.snackBarService.openSnackBar(
+          'warning',
+          'solicitud de estatus cancelada',
+          'warning'
+        );
+      }
+    });
   }
 }

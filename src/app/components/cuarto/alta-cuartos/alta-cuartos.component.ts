@@ -1,12 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Cuarto } from '../../../models/cuarto';
-import { CuartosComponent } from '../cuartos.component';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 import { CuartoService } from '../../../services/cuarto.service';
 import { Router } from '@angular/router';
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
   UntypedFormControl,
   UntypedFormGroup,
   Validators,
@@ -23,6 +20,7 @@ export class RegistroCuartosComponent implements OnInit {
 
   constructor(
     private habitacionServicio: CuartoService,
+    private snackBarService: SnackBarService,
     private router: Router,
     public dialogRef: MatDialogRef<RegistroCuartosComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -75,8 +73,18 @@ export class RegistroCuartosComponent implements OnInit {
     this.habitacion.tipoCuarto = this.altaCuartos.controls['tipoCuarto'].value;
     this.habitacion.status = 1;
 
-    this.habitacionServicio.registraHabitaciones(this.habitacion).subscribe();
-    console.log('Dato guardado con exito');
+    this.habitacionServicio
+      .registraHabitaciones(this.habitacion)
+      .subscribe((data) => {
+        console.log(data);
+
+        this.snackBarService.openSnackBar(
+          'success',
+          'Datos guardados correctamente',
+          'success'
+        );
+        this.dialogRef.close();
+      });
 
     console.log(this.habitacion);
   }
@@ -88,9 +96,12 @@ export class RegistroCuartosComponent implements OnInit {
   onSubmit() {
     if (this.altaCuartos.valid) {
       this.guardarHabitacion();
-      this.dialogRef.close();
     } else {
-      console.log('non valido');
+      this.snackBarService.openSnackBar(
+        'warning',
+        'Llena todos los campos',
+        'warning'
+      );
     }
   }
 }
