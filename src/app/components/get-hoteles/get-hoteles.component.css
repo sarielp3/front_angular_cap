@@ -1,18 +1,19 @@
 .campos{
   text-align: center;
+  background-color: rgb(255, 255, 255);
+  padding: 20px;
+  box-shadow: 5px 2px 2px rgb(95, 95, 95);
+  border-radius: 30px;
+  margin: 10px;
 }
 .container{
   overflow-x: scroll;
-  max-height: 600px;
-  align-items: initial; 
+  max-height: 1000px;
 }
   td,th{
     width: 100px;
   }
 
-  table{
-    align-items: start; 
-  }
 
   th{
     font-size: 14px;
@@ -39,3 +40,6 @@
     font-weight: bold;
   }
 
+#filtro{
+  margin-left: 7px;
+}
