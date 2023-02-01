@@ -13,8 +13,8 @@ export class Reservas{
 	hotel!: HotelesReservas;
 	cuarto!: CuartosReservas;
 	vuelo!: VuelosReservas;
-	/*idHotel!: number;
-	idCuarto!: number;
+	idHotel!: number;
+	/*idCuarto!: number;
 	 idVuelo!: number;*/
 
 }

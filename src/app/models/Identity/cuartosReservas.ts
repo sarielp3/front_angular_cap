@@ -8,5 +8,6 @@ export class CuartosReservas{
     codigoCuartos!: String;
     costoNoche!: number;
     tipoCuarto!: String;
-    hotel!: HotelesReservas
+    hotel!: HotelesReservas;
+    idHotel!: number;
 }
