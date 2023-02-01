@@ -61,9 +61,13 @@ export class AltaHotelesComponent implements OnInit {
     //this.Hotel.logo = this.altaForm.controls['logo'].value;
     this.Hotel.logo = null;
     this.Hotel.estatus = "1";
-    this.serviceHoteles.altaHotel(this.Hotel).subscribe();
+    this.serviceHoteles.altaHotel(this.Hotel).subscribe(
+      (data)=>{
+        this.dialogRef.close();
+      }
+    );
     console.log("Exito, registro guardado");
-    this.dialogRef.close();
+    
   }
 
   cancelar(){

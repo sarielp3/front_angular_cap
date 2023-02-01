@@ -91,8 +91,7 @@ export class GetHotelesComponent implements OnInit,AfterViewInit {
     });
     dialogoRef.afterClosed().subscribe(result =>{
       console.log(result);
-      this.getHoteles();
-      this.dataSource = new MatTableDataSource<Hoteles>(this.ListaHoteles);
+     
       this.getHoteles();
     });
    
