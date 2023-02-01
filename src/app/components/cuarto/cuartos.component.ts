@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Cuarto } from '../../models/cuarto';
 import { CuartoService } from '../../services/cuarto.service';
 import { MatTableDataSource } from '@angular/material/table';
@@ -14,6 +14,7 @@ import { SnackBarService } from 'src/app/services/snack-bar.service';
   styleUrls: ['./cuartos.component.css'],
 })
 export class CuartosComponent implements OnInit {
+  @Input() idHotel: number;
   displayedColumns: string[] = [
     'Nombre del cuarto',
     'Descripcion',
@@ -38,10 +39,24 @@ export class CuartosComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerHabitaciones();
+    console.log(this.idHotel);
   }
 
   public obtenerHabitaciones() {
     this.cuartoService.obtenerListaDeHabitaciones().subscribe(
+      (habitaciones) => {
+        console.log(habitaciones);
+        this.habitaciones = habitaciones;
+        this.dataSource = new MatTableDataSource<Cuarto>(this.habitaciones);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  public obtenerHabitacionesFiltro(){
+    this.cuartoService.obtenerListaFiltro(this.idHotel).subscribe(
       (habitaciones) => {
         console.log(habitaciones);
         this.habitaciones = habitaciones;

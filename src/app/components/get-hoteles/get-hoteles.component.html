@@ -71,10 +71,10 @@
                 <ng-container matColumnDef="estatus">
                   <th id="estatus" mat-header-cell *matHeaderCellDef> Estatus </th>
                   <td id="estatus" mat-cell *matCellDef="let element" >
-                     <mat-slide-toggle [checked] = "element.estatus" (change) ="cambiarStatus($event.checked,element)" id="toggle">
+                     <mat-slide-toggle  [checked]="element.estatus === 1 ? true : false" (change) = "cambiarStatus($event.checked,element,$event)" id="toggle">
                      </mat-slide-toggle>
-                      <h5 *ngIf="element.estatus=='1'"> Activo</h5>
-                     <h5 *ngIf="element.estatus=='0'"> Deshabilitado</h5>
+                      <h5 *ngIf="element.estatus=='1'"> Habilitado</h5>
+                     <h5  *ngIf="element.estatus=='0'"> Deshabilitado</h5>
                      
                     </td>
                     
