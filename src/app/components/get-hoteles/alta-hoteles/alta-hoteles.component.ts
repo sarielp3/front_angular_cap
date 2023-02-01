@@ -92,7 +92,9 @@ export class AltaHotelesComponent implements OnInit {
      console.log(this.Hotel.logo);
     reader.onload = (event2) =>{
       this.imgURL = reader.result;
-      this.Hotel.logo = reader.result;
+      let utf8Encode = new TextEncoder();
+      utf8Encode.encode(reader.result.toString());
+      this.Hotel.logo = utf8Encode;
       console.log(this.Hotel.logo);
     };
 
