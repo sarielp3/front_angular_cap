@@ -21,7 +21,7 @@ export class VuelosService {
   }
 
   createVuelo(vuelo: AltaVuelo){
-    return this.http.post<AltaVuelo>(this.apiUrl, vuelo);
+    return this.http.post<Vuelo>(this.apiUrl, vuelo);
   }
 
   deleteVuelo(idVuelo: number){

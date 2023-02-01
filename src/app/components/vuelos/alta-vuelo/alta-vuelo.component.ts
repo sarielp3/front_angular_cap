@@ -9,6 +9,7 @@ import { CiudadesService } from 'src/app/services/ciudades.service';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
 import { VuelosService } from 'src/app/services/vuelos.service';
 import { Aerolinea } from '../../../models/aerolinea.interface';
+import { Vuelo } from '../../../models/vuelo.interface';
 
 @Component({
   selector: 'app-alta-vuelo',
@@ -79,7 +80,8 @@ export class AltaVueloComponent {
     if(this.altaVuelo.valid === true){
       console.log(this.vueloAlta);
       this.vueloService.createVuelo(this.vueloAlta).subscribe( data =>{
-      this.vueloAlta.idVuelo = data.idVuelo;
+        this.vueloService.vuelos.push(data);
+      this.vueloService.emisor.next(this.vueloService.vuelos);
       this.snackBarService.openSnackBar('success','El vuelo se guardo de manera exitosa','success');
       }, error =>{}
       );
