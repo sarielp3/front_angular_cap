@@ -1,18 +1,16 @@
 <mat-toolbar color="primary">
     <span class="fill-remaining-space">Modificar Hotel</span>
 </mat-toolbar>
-<div class="container"  style="display: flex;">
-<div style="flex: 2; text-align: left;" >
-    <mat-grid-list cols="1" rowHeight="250px">
-        <mat-grid-tile colspan="1" rowspan="2" >
-            
-            <form [formGroup]="altaForm" (ngSubmit)="onSubmit()">
+<diV class="contenedor-flex">
+    <div>
+        <form [formGroup]="altaForm" (ngSubmit)="onSubmit()">
+            <div class="form-flex">
                 <mat-form-field>
                     <mat-label>Ciudad</mat-label>
                     <mat-select formControlName="ciudadHotel">
                         <mat-option *ngFor="let ciudad of ciudades" [value]="ciudad.idCiudad">
                             {{ciudad.nombreCiudad}}
-                        </mat-option >
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field>
@@ -30,21 +28,16 @@
                 </mat-form-field>
 
                 <br>
-                    <label>Logo:</label>
-                    <input id="imagen" type="file">
-                    <button mat-raised-button color="primary" type="submit" [disabled]="!altaForm.valid">Guardar</button>
-                    <button mat-raised-button color="warn" (click)="cancelar()" type="button">Cancelar</button>
-                
-            </form>
-        </mat-grid-tile>
-         
-    </mat-grid-list>
- </div>
-   
-    <div style="flex: 2; text-align: right;">
-    <app-cuartos [idHotel] = data.idHotel></app-cuartos>
+                <label>Logo:</label>
+                <input id="imagen" type="file">
+            </div>
+                <button mat-raised-button color="primary" type="submit" [disabled]="!altaForm.valid">Guardar</button>
+                <button mat-raised-button color="warn" (click)="cancelar()" type="button">Cancelar</button>
+            
+        </form>
     </div>
- 
+    <div class="cuarto-class">
+        <app-cuartos [idHotel]=data.idHotel></app-cuartos>
+    </div>
 
-         
-</div>
+</diV>
