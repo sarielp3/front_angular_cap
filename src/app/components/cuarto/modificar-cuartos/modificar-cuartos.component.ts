@@ -79,6 +79,8 @@ export class ModificarCuartosComponent implements OnInit {
 
     this.habitacion.idHotel = this.data.idHotel;
 
+    this.habitacion.status = this.data.status;
+
     this.habitacionServicio
       .modificarHabitaciones(this.habitacion, this.data.idCuarto)
       .subscribe(

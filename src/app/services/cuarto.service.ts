@@ -20,9 +20,9 @@ export class CuartoService {
     return this.httpClient.get<Cuarto[]>(environment.apiUrl + 'cuartos/filter-cuartos/' + id);
   }
 
-  registraHabitaciones(habitacion: Cuarto): Observable<Object> {
+  registraHabitaciones(habitacion: Cuarto,id:number): Observable<Object> {
     return this.httpClient.post(
-      environment.apiUrl + '/cuartos/agregar/202',
+      environment.apiUrl + 'cuartos/agregar/'+id,
       habitacion
     );
   }
@@ -32,7 +32,7 @@ export class CuartoService {
     idCuarto: number
   ): Observable<Object> {
     return this.httpClient.put(
-      environment.apiUrl + `/cuartos/modificar/${idCuarto}`,
+      environment.apiUrl + `cuartos/modificar/${idCuarto}`,
       habitacion
     );
   }

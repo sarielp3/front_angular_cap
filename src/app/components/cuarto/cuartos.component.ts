@@ -8,6 +8,7 @@ import { RegistroCuartosComponent } from './alta-cuartos/alta-cuartos.component'
 import { ModificarCuartosComponent } from './modificar-cuartos/modificar-cuartos.component';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
+import { BoundElementProperty } from '@angular/compiler';
 @Component({
   selector: 'app-cuartos',
   templateUrl: './cuartos.component.html',
@@ -15,6 +16,7 @@ import { SnackBarService } from 'src/app/services/snack-bar.service';
 })
 export class CuartosComponent implements OnInit {
   @Input() idHotel: number;
+  hotelID:any;
   displayedColumns: string[] = [
     'Nombre del cuarto',
     'Descripcion',
@@ -38,8 +40,10 @@ export class CuartosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.obtenerHabitaciones();
-    console.log(this.idHotel);
+    //this.obtenerHabitaciones();
+    console.log("modificar" + this.idHotel);
+    this.hotelID = this.idHotel;
+    this.obtenerHabitacionesFiltro();
   }
 
   public obtenerHabitaciones() {
@@ -71,10 +75,11 @@ export class CuartosComponent implements OnInit {
   altaCuartos() {
     console.log('Clic en boton Alta');
     const dialogoRef = this.dialog.open(RegistroCuartosComponent, {
+      data: this.hotelID,
       disableClose: true,
     });
     dialogoRef.afterClosed().subscribe((respuesta) => {
-      this.obtenerHabitaciones();
+      this.obtenerHabitacionesFiltro();
       console.log(respuesta);
     });
   }
@@ -87,7 +92,7 @@ export class CuartosComponent implements OnInit {
       disableClose: true,
     });
     dialogoRef.afterClosed().subscribe((respuesta) => {
-      this.obtenerHabitaciones();
+      this.obtenerHabitacionesFiltro();
       console.log(respuesta);
     });
   }
@@ -106,7 +111,7 @@ export class CuartosComponent implements OnInit {
             'success'
           );
           console.log(dato);
-          this.obtenerHabitaciones();
+          this.obtenerHabitacionesFiltro();
         }
       });
     });
@@ -126,7 +131,7 @@ export class CuartosComponent implements OnInit {
               'Estatus cambiado correctamente',
               'success'
             );
-            this.obtenerHabitaciones();
+            this.obtenerHabitacionesFiltro();
           });
       } else {
         check.source.checked = !enable;

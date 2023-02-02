@@ -1,72 +1,78 @@
-<div class="col-md-6 offset-md-3">
-  <h3 class="text-center">Modificar habitaciones</h3>
 
+  <mat-toolbar color="primary">
+    <span class="fill-remaining-space">Modificar habitaciones</span>
+</mat-toolbar>
+<br>
+ <div class="container">
   <form [formGroup]="modificarForm" (ngSubmit)="onSubmit()">
-    <mat-form-field class="example-full-width">
+    <mat-form-field appearance="fill" class="form-element">
       <mat-label>Nombre del cuarto</mat-label>
       <input
-        [value]="data.nombreCuarto"
         matInput
         formControlName="nombreCuarto"
         placeholder="Nombre del cuarto"
+        value=""
       />
     </mat-form-field>
 
-    <mat-form-field class="example-full-width">
+    <mat-form-field  appearance="fill" class="form-element">
       <mat-label>Descripcion</mat-label>
       <textarea
-        [value]="data.descripcion"
         matInput
         formControlName="descripcion"
         placeholder="Este es un cuarto..."
       ></textarea>
     </mat-form-field>
-
-    <mat-form-field class="example-full-width">
+<table class="form-element">
+  <td>
+    <mat-form-field appearance="fill" class="form-element">
       <mat-label>Numero de personas</mat-label>
       <input
-        [value]="data.numeroPersonas"
         matInput
         maxlength="5"
         formControlName="numeroPersonas"
         placeholder="Ex. 94105"
+        value="94043"
       />
     </mat-form-field>
-
-    <mat-form-field class="example-full-width">
+  </td>
+  <td>
+    <mat-form-field appearance="fill" class="form-element">
       <mat-label>Codigo Cuarto</mat-label>
       <input
-        [value]="data.codigoCuartos"
         matInput
         formControlName="codigoCuarto"
         placeholder="Nombre del cuarto"
+        value=""
       />
     </mat-form-field>
+  </td>
+</table>
 
-    <mat-form-field class="example-full-width">
+    <mat-form-field appearance="fill" class="form-element">
       <mat-label>Costo por noche</mat-label>
       <input
-        [value]="data.costoNoche"
         matInput
         formControlName="costoNoche"
         maxlength="5"
         placeholder="Ex. 94105"
+        value="94043"
       />
     </mat-form-field>
 
-    <mat-form-field class="example-full-width">
+    <mat-form-field appearance="fill" class="form-element">
       <mat-label>Tipo del cuarto</mat-label>
       <input
-        [value]="data.tipoCuarto"
         matInput
         formControlName="tipoCuarto"
         placeholder="Nombre del cuarto"
+        value=""
       />
     </mat-form-field>
 
     <br />
-    <button class="btn btn-primary" type="submit">Guardar</button>
-    <button class="btn btn-primary" type="button" (click)="cancelar()">
+    <button mat-raised-button color="primary" type="submit">Guardar</button>
+    <button id="centrarboton" mat-raised-button color="primary" type="button" (click)="cancelar()">
       Cancelar
     </button>
   </form>

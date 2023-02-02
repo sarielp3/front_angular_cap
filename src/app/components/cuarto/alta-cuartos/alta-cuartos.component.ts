@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject,Input } from '@angular/core';
 import { Cuarto } from '../../../models/cuarto';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
 import { CuartoService } from '../../../services/cuarto.service';
@@ -9,6 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Hoteles } from 'src/app/models/Identity/hoteles';
 @Component({
   selector: 'app-registro-cuartos',
   templateUrl: './alta-cuartos.component.html',
@@ -53,7 +54,9 @@ export class RegistroCuartosComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+   console.log(this.data);
+  }
 
   guardarHabitacion() {
     this.habitacion.nombreCuarto =
@@ -74,7 +77,7 @@ export class RegistroCuartosComponent implements OnInit {
     this.habitacion.status = 1;
 
     this.habitacionServicio
-      .registraHabitaciones(this.habitacion)
+      .registraHabitaciones(this.habitacion,this.data)
       .subscribe((data) => {
         console.log(data);
 
