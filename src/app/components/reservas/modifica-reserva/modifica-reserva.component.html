@@ -5,9 +5,9 @@
     <form [formGroup]='modificacionReserva'>
         <mat-form-field appearance="fill" class="form-element">
             <mat-label>Vuelos</mat-label>
-            <mat-select>
-                <mat-option *ngFor="let ciudadOrigen of ciudadesOrigen"
-                    [value]="ciudadOrigen.idCiudad">{{ciudadOrigen.nombreCiudad}}</mat-option>
+            <mat-select formControlName="vueloSelect">
+                <mat-option *ngFor="let vuelos of vuelos"
+                    [value]="vuelos.idVuelo">{{vuelos.codigoVuelo}}</mat-option>
             </mat-select>
         </mat-form-field>
         <table class="form-element">
@@ -33,25 +33,25 @@
         </table>
         <mat-form-field appearance="fill" class="form-element">
             <mat-label>Hotel</mat-label>
-            <mat-select>
-                <mat-option *ngFor="let ciudadOrigen of ciudadesOrigen"
-                    [value]="ciudadOrigen.idCiudad">{{ciudadOrigen.nombreCiudad}}</mat-option>
+            <mat-select formControlName="hotelSelect">
+                <mat-option *ngFor="let hoteles of hoteles"
+                    [value]="hoteles.idHotel">{{hoteles.nombreHotel}}</mat-option>
             </mat-select>
         </mat-form-field>
         <table class="form-element">
             <td>
                 <mat-form-field appearance="fill" class="form-element">
                     <mat-label>Tipo de Cuarto</mat-label>
-                    <mat-select>
-                        <mat-option *ngFor="let ciudadOrigen of ciudadesOrigen"
-                            [value]="ciudadOrigen.idCiudad">{{ciudadOrigen.nombreCiudad}}</mat-option>
+                    <mat-select formControlName="cuartoSelect">
+                        <mat-option *ngFor="let cuartos of cuartos"
+                            [value]="cuartos.idCuarto">{{cuartos.tipoCuarto}}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </td>
             <td>
                 <mat-form-field appearance="fill" class="form-element">
                     <mat-label>Costo</mat-label>
-                    <input matInput #postalCode maxlength="5">
+                    <input matInput #postalCode maxlength="5" formControlName="costoCuarto">
                 </mat-form-field>
             </td>
         </table>
@@ -59,7 +59,7 @@
             <td>
                 <mat-form-field style="width: 241px;">
                     <mat-label>Fecha Inicio</mat-label>
-                    <input matInput [matDatepicker]="datepicker">
+                    <input matInput [matDatepicker]="datepicker" formControlName="fechaInicioSelect" >
                     <mat-hint>MM/DD/YYYY</mat-hint>
                     <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
                     <mat-datepicker #datepicker>
@@ -73,8 +73,8 @@
             <td>
                 <mat-form-field style="width: 240px;">
                     <mat-label>Fecha Fin</mat-label>
-                    <input matInput [matDatepicker]="datepickerFin">
-                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <input matInput [matDatepicker]="datepickerFin" formControlName="fechaFinSelect" >
+                    <mat-hint>YYYY-MM-DD</mat-hint>
                     <mat-datepicker-toggle matIconSuffix [for]="datepickerFin"></mat-datepicker-toggle>
                     <mat-datepicker #datepickerFin>
                         <mat-datepicker-actions>
@@ -88,19 +88,19 @@
         <br />
         <mat-form-field class="form-element">
             <mat-label>Nombre</mat-label>
-            <input formControlName="nombre" matInput placeholder="Nombre" value="">
+            <input formControlName="nombreSelect" matInput placeholder="Nombre" value="">
         </mat-form-field>
        <table class="form-element">
        <td>
         <mat-form-field class="form-element">
             <mat-label>Apellido Paterno</mat-label>
-            <input matInput placeholder="Apellido Paterno" value="">
+            <input formControlName="apellidoPaternoSelect" matInput placeholder="Apellido Paterno" value="">
         </mat-form-field>
         </td>
         <td>
         <mat-form-field class="form-element">
             <mat-label>Apellido Materno</mat-label>
-            <input matInput placeholder="Apellido Paterno" value="">
+            <input formControlName="apellidoMaternoSelect" matInput placeholder="Apellido Paterno" value="">
         </mat-form-field>
         </td>
     </table>

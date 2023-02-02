@@ -30,6 +30,9 @@ export class ReservasService {
       return this.http.post<AltaReserva>(environment.apiUrl + 'reservas/creart', reserva);
     }
 
+    public updateReserva(idReserva:number, reserva: AltaReserva){
+      return this.http.put<AltaReserva>(environment.apiUrl + 'reservas/actualizar/' + idReserva, reserva)
+    }
     public deleteReserva(idReserva:number): Observable<void>{
       return this.http.delete<void>(environment.apiUrl + 'reservas/eliminar/' + idReserva)
     }

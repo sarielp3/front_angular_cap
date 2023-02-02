@@ -139,16 +139,13 @@ export class AltaReservaComponent implements OnInit {
   }
 
   cuartoChange() {
+ //   this.altaReserva.controls['cuartoSelect'].value;
     const cuartoId = this.altaReserva.getRawValue().cuartoSelect;
-    console.log(cuartoId);
+    console.log("cuarto: " + this.altaReserva.controls['cuartoSelect'].value);
     const cuarto = this.cuartos.filter(cuarto => cuarto.idCuarto = cuartoId);
-    if (cuarto.length > 1) {
-      const cuarto1 = cuarto[0];
-      console.log(cuarto1);
-      this.altaReserva.controls['costoCuarto'].setValue(cuarto1.costoNoche);
-    } else {
-      console.log(cuarto);
-    }
+    console.log(cuarto);
+      this.altaReserva.controls['costoCuarto'].setValue(cuarto[0].costoNoche);
+  
   }
 
 
