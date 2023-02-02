@@ -2,7 +2,7 @@
   text-align: center;
   background-color: rgb(255, 255, 255);
   padding: 20px;
-  box-shadow: 5px 2px 2px rgb(95, 95, 95);
+  box-shadow: 2px 2px 2px rgb(95, 95, 95);
   border-radius: 30px;
   margin: 10px;
 }
@@ -10,25 +10,30 @@
   overflow-x: scroll;
   max-height: 1000px;
 }
-  td,th{
-    width: 100px;
-  }
+td,
+th {
+  text-align: center;
+  width: 100px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+}
 
+th {
+  font-size: medium;
+}
 
-  th{
-    font-size: 14px;
-
-  }
-
+#centrarboton{
+  align-items: left;
+  justify-content: left;
+}
 
   #direccion{
     width: 150px;
   }
 
   #accion{
-    text-align: center;
-    margin: 8px 8px 8px 0;
-    display: flex;
+    align-items: center;
     justify-content: center;
   
   }

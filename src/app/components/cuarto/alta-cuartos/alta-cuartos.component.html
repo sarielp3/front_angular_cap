@@ -1,8 +1,11 @@
-<div class="col-md-6 offset-md-3">
-  <h3 class="text-center">Registro de habitaciones</h3>
 
+  <mat-toolbar color="primary">
+    <span class="fill-remaining-space">Registro de habitaciones</span>
+</mat-toolbar>
+<br>
+ <div class="container">
   <form [formGroup]="altaCuartos" (ngSubmit)="onSubmit()">
-    <mat-form-field class="example-full-width">
+    <mat-form-field appearance="fill" class="form-element">
       <mat-label>Nombre del cuarto</mat-label>
       <input
         matInput
@@ -12,7 +15,7 @@
       />
     </mat-form-field>
 
-    <mat-form-field class="example-full-width">
+    <mat-form-field  appearance="fill" class="form-element">
       <mat-label>Descripcion</mat-label>
       <textarea
         matInput
@@ -20,8 +23,9 @@
         placeholder="Este es un cuarto..."
       ></textarea>
     </mat-form-field>
-
-    <mat-form-field class="example-full-width">
+<table class="form-element">
+  <td>
+    <mat-form-field appearance="fill" class="form-element">
       <mat-label>Numero de personas</mat-label>
       <input
         matInput
@@ -31,8 +35,9 @@
         value="94043"
       />
     </mat-form-field>
-
-    <mat-form-field class="example-full-width">
+  </td>
+  <td>
+    <mat-form-field appearance="fill" class="form-element">
       <mat-label>Codigo Cuarto</mat-label>
       <input
         matInput
@@ -41,8 +46,10 @@
         value=""
       />
     </mat-form-field>
+  </td>
+</table>
 
-    <mat-form-field class="example-full-width">
+    <mat-form-field appearance="fill" class="form-element">
       <mat-label>Costo por noche</mat-label>
       <input
         matInput
@@ -53,7 +60,7 @@
       />
     </mat-form-field>
 
-    <mat-form-field class="example-full-width">
+    <mat-form-field appearance="fill" class="form-element">
       <mat-label>Tipo del cuarto</mat-label>
       <input
         matInput
@@ -64,9 +71,10 @@
     </mat-form-field>
 
     <br />
-    <button class="btn btn-primary" type="submit">Guardar</button>
-    <button class="btn btn-primary" type="button" (click)="cancelar()">
+    <button mat-raised-button color="primary" type="submit">Guardar</button>
+    <button id="centrarboton" mat-raised-button color="primary" type="button" (click)="cancelar()">
       Cancelar
     </button>
   </form>
+  
 </div>

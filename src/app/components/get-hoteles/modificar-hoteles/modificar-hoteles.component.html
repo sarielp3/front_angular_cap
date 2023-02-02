@@ -1,9 +1,12 @@
-<div class="container">
+<mat-toolbar color="primary">
+    <span class="fill-remaining-space">Modificar Hotel</span>
+</mat-toolbar>
+<div class="container"  style="display: flex;">
+<div style="flex: 2; text-align: left;" >
     <mat-grid-list cols="1" rowHeight="250px">
         <mat-grid-tile colspan="1" rowspan="2" >
             
             <form [formGroup]="altaForm" (ngSubmit)="onSubmit()">
-                <h2>Modificar Hotel</h2>
                 <mat-form-field>
                     <mat-label>Ciudad</mat-label>
                     <mat-select formControlName="ciudadHotel">
@@ -36,7 +39,12 @@
         </mat-grid-tile>
          
     </mat-grid-list>
-   <div >
-<app-cuartos [idHotel] = data.idHotel></app-cuartos>
-   </div>
+ </div>
+   
+    <div style="flex: 2; text-align: right;">
+    <app-cuartos [idHotel] = data.idHotel></app-cuartos>
+    </div>
+ 
+
+         
 </div>

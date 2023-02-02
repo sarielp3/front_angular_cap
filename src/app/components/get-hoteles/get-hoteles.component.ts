@@ -20,7 +20,7 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
   styleUrls: ['./get-hoteles.component.css']
 })
 export class GetHotelesComponent implements OnInit,AfterViewInit {
-  displayedColumns = ['id','ciudad','nombre','codigo','direccion','estatus','logo','modificar','eliminar'];
+  displayedColumns = ['ciudad','nombre','codigo','direccion','logo','modificar','eliminar','estatus'];
   codigoHotel = '';
   nombreHotel = '';
   public ListaHoteles: Hoteles[] = [];
