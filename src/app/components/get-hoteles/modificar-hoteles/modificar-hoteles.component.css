@@ -11,3 +11,21 @@ button{
     align-items: center;
     text-align: center;
 }
+
+.contenedor-flex{
+    display: flex;
+}
+
+.form-element {
+    padding: 5px 0px 3px 2px;
+    width: 90%;
+  }
+.form-flex{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+.cuarto-class{
+    max-height: 500px;
+    overflow-y: scroll;
+}
