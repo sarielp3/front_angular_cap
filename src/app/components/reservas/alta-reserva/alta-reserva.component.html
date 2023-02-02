@@ -3,13 +3,6 @@
 </mat-toolbar>
 <div class="container">
     <form [formGroup]='altaReserva'>
-        <mat-form-field appearance="fill" class="form-element">
-            <mat-label>Vuelos</mat-label>
-            <mat-select>
-                <mat-option *ngFor="let ciudadOrigen of ciudadesOrigen"
-                    [value]="ciudadOrigen.idCiudad">{{ciudadOrigen.nombreCiudad}}</mat-option>
-            </mat-select>
-        </mat-form-field>
         <table class="form-element">
             <td>
                 <mat-form-field appearance="fill" class="form-element">
@@ -24,18 +17,25 @@
             <td>
                 <mat-form-field appearance="fill" class="form-element">
                     <mat-label>Destino</mat-label>
-                    <mat-select>
-                        <mat-option *ngFor="let ciudad of ciudadesOrigen"
+                    <mat-select (selectionChange)="destinoChange()" formControlName="destinoSelect">
+                        <mat-option *ngFor="let ciudad of ciudadesDestino"
                             [value]="ciudad.idCiudad">{{ciudad.nombreCiudad}}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </td>
         </table>
         <mat-form-field appearance="fill" class="form-element">
+            <mat-label>Vuelos</mat-label>
+            <mat-select formControlName="vueloSelect">
+                <mat-option *ngFor="let vuelo of vuelos"
+                    [value]="vuelo.idVuelo">{{vuelo.codigoVuelo}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="form-element">
             <mat-label>Hotel</mat-label>
-            <mat-select>
-                <mat-option *ngFor="let ciudadOrigen of ciudadesOrigen"
-                    [value]="ciudadOrigen.idCiudad">{{ciudadOrigen.nombreCiudad}}</mat-option>
+            <mat-select formControlName="hotelSelect">
+                <mat-option *ngFor="let hotel of hoteles"
+                    [value]="hotel.idHotel">{{hotel.nombreHotel}}</mat-option>
             </mat-select>
         </mat-form-field>
         <table class="form-element">

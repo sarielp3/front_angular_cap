@@ -15,7 +15,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
 import { AltaVueloComponent } from './alta-vuelo/alta-vuelo.component';
 import {MatGridListModule} from '@angular/material/grid-list';
-
+import {MatIconModule} from '@angular/material/icon'
 
 
 @NgModule({
@@ -44,7 +44,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     ReactiveFormsModule,
     MatToolbarModule,
     MatInputModule,
-    MatGridListModule
+    MatGridListModule,
+    MatIconModule
     
   ]
 })

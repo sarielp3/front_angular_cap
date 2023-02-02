@@ -72,13 +72,13 @@ export class AltaReservaComponent implements OnInit {
       }, error => {
         console.log("Error =>", error);
       });
-    this.vuelosService.getVuelos('').subscribe(
+ /*   this.vuelosService.getVuelos('').subscribe(
       vuelo => {
         console.log("Data =>", vuelo);
         this.vuelos = vuelo;
       }, error => {
         console.log("Error =>", error);
-      });
+      });*/
     this.hotelesServices.getHoteles().subscribe(
       hotel => {
         console.log("Data =>", hotel);
@@ -125,17 +125,77 @@ export class AltaReservaComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  origenChange() {
-    const origenId = this.altaReserva.getRawValue().origenSelect;
-    // Llamamos a cargar Destino
-    this.ciudadesService.getCiudadesDestino().subscribe(
-      data => {
-        this.ciudadesDestino = data;
-      }, error => {
-        console.log('Error =>', error);
+  origenChange() { 
+     const origenId = this.altaReserva.getRawValue().origenSelect;
+     const destinoId = this.altaReserva.getRawValue().destinoSelect;
+      console.log(origenId);    // Llamamos a cargar Destino  
+      let ciudadesDestinoAux = [];
+      let vuelosAuxiliar = [];
+      let ciudadesId = [];
+      this.vuelosService.getVuelos('?origen=' + origenId).subscribe(respuesta => {
+      const vuelos = respuesta;
+      vuelos.forEach(vuelo =>{
+          if(!ciudadesId.includes(vuelo.destino.idCiudad)){
+            ciudadesId.push(vuelo.destino.idCiudad)
+            ciudadesDestinoAux.push(vuelo.destino);}
+            vuelosAuxiliar.push({idVuelo : vuelo.idVuelo,codigoVuelo:vuelo.codigoVuelo});
+          });
+      console.log(ciudadesDestinoAux);
+      console.log(vuelosAuxiliar);
+      this.ciudadesDestino = ciudadesDestinoAux;
+      this.vuelos = vuelosAuxiliar;
+      if(destinoId != '' && origenId != ''){
+        this.vuelos = [];
+        console.log("2 combo box con valor");
+        let vuelosAuxiliar = [];
+        this.vuelosService.getVuelos('?origen=' + origenId + '&destino=' + destinoId).subscribe(respuesta =>{
+          const vuelos = respuesta;
+          vuelos.forEach(vuelo=>{
+              vuelosAuxiliar.push({idVuelo : vuelo.idVuelo,codigoVuelo:vuelo.codigoVuelo});
+          });
+          this.vuelos = vuelosAuxiliar;
+        });
       }
+    },
+      error =>{}
+      );
+      
+    }
 
-    )
+  destinoChange(){
+    const destinoId = this.altaReserva.getRawValue().destinoSelect; 
+    const origenId = this.altaReserva.getRawValue().origenSelect; 
+    let ciudadesOrigenAux = [];
+    let vuelosAuxiliar = [];
+    let ciudadesId = [];
+    this.vuelosService.getVuelos('?destino=' + destinoId).subscribe(respuesta => {
+      const vuelos = respuesta;
+      vuelos.forEach(vuelo =>{
+          if(!ciudadesId.includes(vuelo.origen.idCiudad)){
+            ciudadesId.push(vuelo.origen.idCiudad)
+            ciudadesOrigenAux.push(vuelo.origen);}
+            vuelosAuxiliar.push({idVuelo : vuelo.idVuelo,codigoVuelo:vuelo.codigoVuelo});
+          });
+      console.log(ciudadesOrigenAux);
+      console.log(vuelosAuxiliar);
+      this.ciudadesOrigen = ciudadesOrigenAux;
+      this.vuelos = vuelosAuxiliar;
+      if(destinoId != '' && origenId != ''){
+        console.log("2 combo box con valor");
+        this.vuelos = [];
+        let vuelosAuxiliar = [];
+        this.vuelosService.getVuelos('?origen=' + origenId + '&destino=' + destinoId).subscribe(respuesta =>{
+          const vuelos = respuesta;
+          vuelos.forEach(vuelo=>{
+              vuelosAuxiliar.push({idVuelo : vuelo.idVuelo,codigoVuelo:vuelo.codigoVuelo});
+          });
+          this.vuelos = vuelosAuxiliar;
+        });
+      }
+    },
+      error =>{}
+      );
+    
   }
 
   cuartoChange() {

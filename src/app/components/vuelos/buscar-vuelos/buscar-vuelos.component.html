@@ -1,12 +1,13 @@
-
-<div class="row container">
-    <div class="col-2">
-        <h2>Filtros</h2>
+     <p>Lista de Vuelos</p>
+<mat-grid-list cols="4" rowHeight="150px">
+    <mat-grid-tile colspan="1" rowspan="3">
+        <div class="campos">
+   <h2>Filtros</h2>
         <hr>
-        <app-filtros-vuelos></app-filtros-vuelos>
-    </div>
-    <div class="col">
+        <app-filtros-vuelos></app-filtros-vuelos></div>
+    </mat-grid-tile>
+    <mat-grid-tile id="tabla" colspan="3" rowspan="4">
         <app-tabla-vuelos></app-tabla-vuelos>
-    </div>
-</div>
+    </mat-grid-tile>
+</mat-grid-list>
 
