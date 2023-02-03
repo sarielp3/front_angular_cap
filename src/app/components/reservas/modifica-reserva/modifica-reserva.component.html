@@ -43,7 +43,7 @@
             <td>
                 <mat-form-field appearance="fill" class="form-element">
                     <mat-label>Tipo de Cuarto</mat-label>
-                    <mat-select (selectionChange)="cuartoChange()"  formControlName="cuartoSelect">
+                    <mat-select required (selectionChange)="cuartoChange()"  formControlName="cuartoSelect">
                         <mat-option *ngFor="let cuartos of cuartos"
                             [value]="cuartos.idCuarto">{{cuartos.tipoCuarto}}</mat-option>
                     </mat-select>
@@ -111,9 +111,9 @@
     </mat-form-field>
         <br />
         
-                <button id="centrarboton" mat-raised-button color="primary"  type="submit" (click)="guardar()">Guardar</button>
+                <button id="centrarboton" mat-raised-button color="primary" [disabled]="!modificacionReserva.valid" type="submit" (click)="guardar()">Guardar</button>
             
-                <button id="centrarboton" mat-raised-button color="primary"  type="submit" (click)="cancelar()">Cancelar</button>
+                <button id="centrarboton" mat-raised-button color="primary"  type="button" (click)="cancelar()">Cancelar</button>
                                                     
     </form>
 </div>

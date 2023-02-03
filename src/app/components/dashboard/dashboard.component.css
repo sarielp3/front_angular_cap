@@ -73,3 +73,8 @@
 .bottom-content {
   display: inline-block;
 }
+ #logo{
+  align-items: center;
+     justify-content: center;
+     text-align: center;
+ }
