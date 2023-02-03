@@ -209,6 +209,9 @@ export class AltaReservaComponent implements OnInit {
 
       console.log(cuartosAuxiliar);
       this.cuartos = cuartosAuxiliar;
+      if(this.cuartos.length === 0){
+        this.snackBarService.openSnackBar('warning','Este Hotel no cuenta con cuartos','Reserva incorrecta');
+      }
     },
       error => { }
     );

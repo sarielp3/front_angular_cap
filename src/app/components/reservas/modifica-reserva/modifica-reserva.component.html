@@ -43,7 +43,7 @@
             <td>
                 <mat-form-field appearance="fill" class="form-element">
                     <mat-label>Tipo de Cuarto</mat-label>
-                    <mat-select (selectionChange)="cuartoChange()"  formControlName="cuartoSelect">
+                    <mat-select required (selectionChange)="cuartoChange()"  formControlName="cuartoSelect">
                         <mat-option *ngFor="let cuartos of cuartos"
                             [value]="cuartos.idCuarto">{{cuartos.tipoCuarto}}</mat-option>
                     </mat-select>
