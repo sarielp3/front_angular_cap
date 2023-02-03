@@ -18,7 +18,7 @@ export class AltaHotelesComponent implements OnInit {
   base64Data:any;
   convertedIMG:any;
   public Hotel:Hoteles = {
-    idHotel:0,
+    idHotel:null,
     ciudad:{
       idCiudad:0,
       nombreCiudad:''
@@ -63,6 +63,7 @@ export class AltaHotelesComponent implements OnInit {
     this.Hotel.estatus = "1";
     this.serviceHoteles.altaHotel(this.Hotel).subscribe(
       (data)=>{
+        console.log(data.idHotel);
         this.dialogRef.close();
       }
     );

@@ -97,24 +97,27 @@ export class CuartosComponent implements OnInit {
     });
   }
 
-  eliminarHabitacion(idHotel: number) {
-    this.cuartoService.eliminarHabitacion(idHotel).subscribe((dato) => {
+  eliminarHabitacion(elemento: number): void {
+    console.log(elemento);
       const dialogoRef = this.dialog.open(ConfirmDialogComponent, {
         disableClose: true,
+        data: true
       });
       dialogoRef.afterClosed().subscribe((respuesta) => {
         console.log(respuesta);
         if (respuesta) {
-          this.snackBarService.openSnackBar(
+          this.cuartoService.eliminarHabitacion(elemento).subscribe((dato) => {
+            this.snackBarService.openSnackBar(
             'success',
-            'Registro eliminado',
+            'registro eliminado',
             'success'
           );
-          console.log(dato);
           this.obtenerHabitacionesFiltro();
+          });
+          
         }
       });
-    });
+   
   }
 
   cambiarStatus(enable: boolean, elemento, check: MatSlideToggleChange) {

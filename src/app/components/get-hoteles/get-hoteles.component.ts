@@ -31,9 +31,9 @@ export class GetHotelesComponent implements OnInit,AfterViewInit {
   dataSource!:MatTableDataSource<Hoteles>;
   constructor(private serviceHoteles:HotelesServiceTsService, public dialog: MatDialog,private snackBarService: SnackBarService){
     this.filtroForm = new UntypedFormGroup({
-      nombreHotel: new UntypedFormControl('', [Validators.required, Validators.minLength(1)]),
-      codigoHotel: new UntypedFormControl('', [Validators.required, Validators.minLength(1)]),
-      ciudadHotel: new UntypedFormControl('', [Validators.required, Validators.minLength(1)])
+      nombreHotel: new UntypedFormControl(''),
+      codigoHotel: new UntypedFormControl(''),
+      ciudadHotel: new UntypedFormControl('')
     });
     
   }
@@ -145,7 +145,8 @@ export class GetHotelesComponent implements OnInit,AfterViewInit {
 
   eliminar(elemento:Hoteles){
     const dialogoRef = this.dialog.open(ConfirmDialogComponent,{
-      disableClose:true
+      disableClose:true,
+      data:true
     });
     dialogoRef.afterClosed().subscribe(respuesta =>{
       console.log(respuesta);
@@ -154,6 +155,7 @@ export class GetHotelesComponent implements OnInit,AfterViewInit {
         this.serviceHoteles.eliminar(elemento.idHotel).subscribe(
           (data)=>{
             console.log('Eliminamos Registro con Id',elemento.idHotel );
+            this.snackBarService.openSnackBar('success', 'registro eliminado con exito','success');
             this.getHoteles();
           }
         )

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Cuarto } from '../models/cuarto';
 import { environment } from 'src/environments/environment';
+import { RespuestaString } from '../models/respuesta_string';
 
 @Injectable({
   providedIn: 'root',
@@ -37,8 +38,8 @@ export class CuartoService {
     );
   }
 
-  eliminarHabitacion(idHotel: number): Observable<Object> {
-    return this.httpClient.delete(
+  eliminarHabitacion(idHotel: number) {
+    return this.httpClient.delete<RespuestaString>(
       environment.apiUrl + `cuartos/eliminar-cuarto/${idHotel}`
     );
   }
