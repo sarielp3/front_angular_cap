@@ -9,10 +9,12 @@ import { AltaVuelo } from '../models/alta-vuelo.interface';
   providedIn: 'root'
 })
 export class VuelosService {
+  public spiner: boolean = false;
   private apiUrl: string = 'https://capbasanapptdd01.azurewebsites.net/AgenciaViajeTD/vuelos';
 
   vuelos: Vuelo[] = [];
   emisor = new EventEmitter<Vuelo[]>();
+  spinerEmmisor = new EventEmitter<boolean>();
 
   constructor( private http: HttpClient) { }
 

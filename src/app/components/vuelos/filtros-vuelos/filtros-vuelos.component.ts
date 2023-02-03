@@ -16,6 +16,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 
 export class FiltrosVuelosComponent {
+  disableButtons: boolean = false;
   form: FormGroup;
 
   aerolineas: Aerolinea[] = [];
@@ -76,7 +77,8 @@ export class FiltrosVuelosComponent {
   }
 
   filtros(){
-      
+    this.disableButtons =  true;
+    this.vueloService.spinerEmmisor.next(true); 
     this.filtrosBusqueda = '?origen=' 
     + this.origenControl.value 
     + '&destino=' 
@@ -89,12 +91,15 @@ export class FiltrosVuelosComponent {
         .subscribe( vuelos => {
           this.vuelos  = vuelos;
           this.vueloService.emisor.next(this.vuelos);
-          
+          this.vueloService.spinerEmmisor.next(false);
+          this.disableButtons =  false; 
         }, err => {
           console.log('Error en GET vuelos');
           console.info(err);
           this.vuelos  = [];
           this.vueloService.emisor.next(this.vuelos);
+          this.vueloService.spinerEmmisor.next(false); 
+          this.disableButtons =  false;
         })    
   }
 
@@ -104,4 +109,5 @@ export class FiltrosVuelosComponent {
     this.aerolineaControl.setValue('');
     this.filtros();
   }
+
 }

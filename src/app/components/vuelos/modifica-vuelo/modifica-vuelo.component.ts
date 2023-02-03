@@ -16,6 +16,8 @@ import { SnackBarService } from 'src/app/services/snack-bar.service';
   styleUrls: ['./modifica-vuelo.component.css']
 })
 export class ModificaVueloComponent implements OnInit {
+  loading:boolean = false;
+  disableButon: boolean = false;
   modificacionVuelo:FormGroup;
   ciudadesOrigen: Ciudades[];
   ciudadesDestino: Ciudades[];
@@ -32,7 +34,7 @@ export class ModificaVueloComponent implements OnInit {
   ){}
 
   ngOnInit(): void {
-    console.log(this.data);
+    
     this.modificacionVuelo = this.fb.group({
       origenControl:[[],Validators.required],
       destinoControl:[[],Validators.required],
@@ -42,30 +44,35 @@ export class ModificaVueloComponent implements OnInit {
       horaSalidaContol:[[this.data.horaSalida],Validators.required],
       horaLlegadaControl:[[this.data.horaLlegada],Validators.required],
     });
+    this.loading = true;
     this.ciudadesService.getCiudadesOrigen().subscribe(
-      data => {
+      data => {        
         this.ciudadesOrigen = data;
         this.modificacionVuelo.controls['origenControl'].setValue(this.data.origen.idCiudad);
+        this.ciudadesService.getCiudadesDestino().subscribe(
+          data => {            
+            this.ciudadesDestino = data;
+            this.modificacionVuelo.controls['destinoControl'].setValue(this.data.destino.idCiudad);
+            this.aerolineaService.getAerolineas().subscribe(
+              data => {                
+                this.aerolineas = data;
+                this.modificacionVuelo.controls['aerolineaControl'].setValue(this.data.aerolinea.idAerolinea);
+                this.loading = false;
+              }, error =>{
+                this.loading = false;
+                console.log("Error => ", error);
+              }
+            );
+          }, error =>{
+            this.loading = false;
+            console.log("Error => ", error);
+          }
+        );
       }, error =>{
+        this.loading = false;
         console.log("Error => ", error);
       }
-    );
-    this.ciudadesService.getCiudadesDestino().subscribe(
-      data => {
-        this.ciudadesDestino = data;
-        this.modificacionVuelo.controls['destinoControl'].setValue(this.data.destino.idCiudad);
-      }, error =>{
-        console.log("Error => ", error);
-      }
-    );
-    this.aerolineaService.getAerolineas().subscribe(
-      data => {
-        this.aerolineas = data;
-        this.modificacionVuelo.controls['aerolineaControl'].setValue(this.data.aerolinea.idAerolinea);
-      }, error =>{
-        console.log("Error => ", error);
-      }
-    );
+    );        
   }
 
   origenChange(){
@@ -77,6 +84,7 @@ export class ModificaVueloComponent implements OnInit {
   }
 
   guardar(){
+    
     let vueloPUT: AltaVuelo = {
       "idVuelo": null,
       "origen":  null,
@@ -108,14 +116,16 @@ export class ModificaVueloComponent implements OnInit {
       if( vueloPUT.origen === vueloPUT.destino){
         this.snackBarService.openSnackBar('warning','La ciudad de origen debe ser diferente a la ciudad de destino','warning');
       }else{
+        this.loading = true;
         this.vueloService.updateVuelo(vueloPUT, this.data.idVuelo).subscribe( data => {
         this.vueloService.getVuelos('').subscribe(vuelos =>{
           this.vueloService.vuelos = vuelos;
-          this.vueloService.emisor.next(this.vueloService.vuelos);
+          this.vueloService.emisor.next(this.vueloService.vuelos);          
           this.dialogRef.close();
         }, err => {
         });
         this.snackBarService.openSnackBar('success','El vuelo se guardo de manera exitosa','success');
+        this.loading = false;
       }, error => {
       });
       }
