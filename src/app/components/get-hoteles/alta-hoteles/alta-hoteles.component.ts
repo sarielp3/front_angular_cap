@@ -15,14 +15,14 @@ export class AltaHotelesComponent implements OnInit {
   imgURL: any;
   public selectedFile;
   public event1;
-  receivedIMG: any;
-  base64Data: any;
-  convertedIMG: any;
-  public Hotel = {
-    idHotel: null,
-    ciudad: {
-      idCiudad: 0,
-      nombreCiudad: ''
+  receivedIMG:any;
+  base64Data:any;
+  convertedIMG:any;
+  public Hotel:Hoteles = {
+    idHotel:null,
+    ciudad:{
+      idCiudad:0,
+      nombreCiudad:''
     },
     nombreHotel: '',
     codigoHotel: '',
@@ -66,7 +66,8 @@ export class AltaHotelesComponent implements OnInit {
     this.Hotel.logo = this.imgURL.split(",")[1];
     this.Hotel.estatus = "1";
     this.serviceHoteles.altaHotel(this.Hotel).subscribe(
-      (data) => {
+      (data)=>{
+        console.log(data.idHotel);
         this.dialogRef.close();
       }
     );

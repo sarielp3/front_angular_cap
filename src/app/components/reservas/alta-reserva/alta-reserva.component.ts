@@ -44,18 +44,18 @@ export class AltaReservaComponent implements OnInit {
 
   ngOnInit() {
     this.altaReserva = this.fb.group({
-      origenSelect: [[], Validators.required],
-      nombreSelect: [[], Validators.required],
-      apellidoPaternoSelect: [[], Validators.required],
-      apellidoMaternoSelect: [[], Validators.required],
-      descripcionSelect: [[], Validators.required],
-      cuartoSelect: [[], Validators.required],
-      destinoSelect: [[], Validators.required],
-      vueloSelect: [[], Validators.required],
-      hotelSelect: [[], Validators.required],
-      costoCuarto: [[], Validators.required],
-      fechaInicioSelect: [[], Validators.required],
-      fechaFinSelect: [[], Validators.required]
+      origenSelect: ['', Validators.required],
+      nombreSelect: ['', Validators.required],
+      apellidoPaternoSelect: ['', Validators.required],
+      apellidoMaternoSelect: ['', Validators.required],
+      cuartoSelect: ['', Validators.required],
+      destinoSelect: ['', Validators.required],
+      vueloSelect: ['', Validators.required],
+      hotelSelect: ['', Validators.required],
+      costoCuarto: ['', Validators.required],
+      fechaInicioSelect: ['', Validators.required],
+      fechaFinSelect: ['', Validators.required],
+       descripcionSelect: ['', Validators.required]
     });
     this.ciudadesService.getCiudadesOrigen().subscribe(
       data => {
@@ -72,20 +72,20 @@ export class AltaReservaComponent implements OnInit {
       }, error => {
         console.log("Error =>", error);
       });
- /*   this.vuelosService.getVuelos('').subscribe(
-      vuelo => {
-        console.log("Data =>", vuelo);
-        this.vuelos = vuelo;
-      }, error => {
-        console.log("Error =>", error);
-      });*/
+    /*   this.vuelosService.getVuelos('').subscribe(
+         vuelo => {
+           console.log("Data =>", vuelo);
+           this.vuelos = vuelo;
+         }, error => {
+           console.log("Error =>", error);
+         });
     this.hotelesServices.getHoteles().subscribe(
       hotel => {
         console.log("Data =>", hotel);
         this.hoteles = hotel;
       }, error => {
         console.log("Error =>", error);
-      });
+      });*/
     this.cuartosService.obtenerListaDeHabitaciones().subscribe(
       cuarto => {
         console.log("Data =>", cuarto);
@@ -93,6 +93,10 @@ export class AltaReservaComponent implements OnInit {
       }, error => {
         console.log("Error =>", error);
       });
+    this.altaReserva.get('vueloSelect').disable();
+    this.altaReserva.get('hotelSelect').disable();
+    this.altaReserva.get('cuartoSelect').disable();
+    this.altaReserva.get('costoCuarto').disable();
   }
 
   guardar() {
@@ -101,112 +105,124 @@ export class AltaReservaComponent implements OnInit {
     this.reservaAlta.apellidoMaternoCliente = this.altaReserva.controls['apellidoMaternoSelect'].value;
     this.reservaAlta.fechaInicio = this.altaReserva.controls['fechaInicioSelect'].value;
     this.reservaAlta.fechaFin = this.altaReserva.controls['fechaFinSelect'].value;
-    console.log(this.altaReserva.controls['fechaInicioSelect'].value);
-    console.log(this.altaReserva.controls['fechaFinSelect'].value.instanceof);
-    this.reservaAlta.descripcion = this.altaReserva.controls['descripcionSelect'].value;
     this.reservaAlta.idVuelo = this.altaReserva.controls['vueloSelect'].value;
     this.reservaAlta.idHotel = this.altaReserva.controls['hotelSelect'].value;
     this.reservaAlta.idCuarto = this.altaReserva.controls['cuartoSelect'].value;
-    console.log(this.reservaAlta);
+    this.reservaAlta.descripcion = this.altaReserva.controls['descripcionSelect'].value
 
-    if(this.altaReserva.valid === true){
-      console.log(this.reservaAlta);
-      this.reservaService.createReserva(this.reservaAlta).subscribe( data =>{
-      this.reservaAlta.idReserva = data.idReserva;
-      this.snackBarService.openSnackBar('success','La reserva fue creada exitosamente','Reserva Registrada');
-      this.dialogRef.close();
-      }, error =>{}
+    if (this.altaReserva.valid === true) {
+      this.reservaService.createReserva(this.reservaAlta).subscribe(data => {
+        this.reservaAlta.idReserva = data.idReserva;
+        this.snackBarService.openSnackBar('success', 'La reserva fue creada exitosamente', 'Reserva Registrada');
+        this.dialogRef.close();
+      }, error => { }
       );
-    }else{
-      this.snackBarService.openSnackBar('warning','El formulario no es valido','Reserva incorrecta');
-    }    
+    } else {
+      this.snackBarService.openSnackBar('warning', 'El formulario no es valido', 'Reserva incorrecta');
+    }
   }
   cancelar() {
     this.dialogRef.close();
   }
 
-  origenChange() { 
-     const origenId = this.altaReserva.getRawValue().origenSelect;
-     const destinoId = this.altaReserva.getRawValue().destinoSelect;
-      console.log(origenId);    // Llamamos a cargar Destino  
-      let ciudadesDestinoAux = [];
-      let vuelosAuxiliar = [];
-      let ciudadesId = [];
-      this.vuelosService.getVuelos('?origen=' + origenId).subscribe(respuesta => {
+  origenChange() {
+    this.altaReserva.get('vueloSelect').enable();
+    const origenId = this.altaReserva.getRawValue().origenSelect;
+    const destinoId = this.altaReserva.getRawValue().destinoSelect;
+    console.log(origenId); // Llamamos a cargar Destino  
+    let ciudadesDestinoAux = [];
+    let vuelosAuxiliar = [];
+    let ciudadesId = [];
+    this.vuelosService.getVuelos('?origen=' + origenId).subscribe(respuesta => {
       const vuelos = respuesta;
-      vuelos.forEach(vuelo =>{
-          if(!ciudadesId.includes(vuelo.destino.idCiudad)){
-            ciudadesId.push(vuelo.destino.idCiudad)
-            ciudadesDestinoAux.push(vuelo.destino);}
-            vuelosAuxiliar.push({idVuelo : vuelo.idVuelo,codigoVuelo:vuelo.codigoVuelo});
-          });
+      vuelos.forEach(vuelo => {
+        if (!ciudadesId.includes(vuelo.destino.idCiudad)) {
+          ciudadesId.push(vuelo.destino.idCiudad)
+          ciudadesDestinoAux.push(vuelo.destino);
+        }
+        vuelosAuxiliar.push({ idVuelo: vuelo.idVuelo, codigoVuelo: vuelo.codigoVuelo });
+      });
       console.log(ciudadesDestinoAux);
       console.log(vuelosAuxiliar);
       this.ciudadesDestino = ciudadesDestinoAux;
       this.vuelos = vuelosAuxiliar;
-      if(destinoId != '' && origenId != ''){
-        this.vuelos = [];
-        console.log("2 combo box con valor");
-        let vuelosAuxiliar = [];
-        this.vuelosService.getVuelos('?origen=' + origenId + '&destino=' + destinoId).subscribe(respuesta =>{
-          const vuelos = respuesta;
-          vuelos.forEach(vuelo=>{
-              vuelosAuxiliar.push({idVuelo : vuelo.idVuelo,codigoVuelo:vuelo.codigoVuelo});
-          });
-          this.vuelos = vuelosAuxiliar;
-        });
-      }
-    },
-      error =>{}
-      );
       
-    }
+    },
+      error => { }
+    );
 
-  destinoChange(){
-    const destinoId = this.altaReserva.getRawValue().destinoSelect; 
-    const origenId = this.altaReserva.getRawValue().origenSelect; 
+  }
+
+  destinoChange() {
+    this.altaReserva.get('hotelSelect').enable();
+    this.altaReserva.get('vueloSelect').enable();
+    const destinoId = this.altaReserva.getRawValue().destinoSelect;
+    const origenId = this.altaReserva.getRawValue().origenSelect;
     let ciudadesOrigenAux = [];
     let vuelosAuxiliar = [];
     let ciudadesId = [];
     this.vuelosService.getVuelos('?destino=' + destinoId).subscribe(respuesta => {
       const vuelos = respuesta;
-      vuelos.forEach(vuelo =>{
-          if(!ciudadesId.includes(vuelo.origen.idCiudad)){
-            ciudadesId.push(vuelo.origen.idCiudad)
-            ciudadesOrigenAux.push(vuelo.origen);}
-            vuelosAuxiliar.push({idVuelo : vuelo.idVuelo,codigoVuelo:vuelo.codigoVuelo});
-          });
+      vuelos.forEach(vuelo => {
+        if (!ciudadesId.includes(vuelo.origen.idCiudad)) {
+          ciudadesId.push(vuelo.origen.idCiudad)
+          ciudadesOrigenAux.push(vuelo.origen);
+          this.altaReserva.controls['origenSelect'].setValue(ciudadesId[0]);
+        }
+        vuelosAuxiliar.push({ idVuelo: vuelo.idVuelo, codigoVuelo: vuelo.codigoVuelo });
+      });
       console.log(ciudadesOrigenAux);
       console.log(vuelosAuxiliar);
-      this.ciudadesOrigen = ciudadesOrigenAux;
+      //this.ciudadesOrigen = ciudadesOrigenAux;
       this.vuelos = vuelosAuxiliar;
-      if(destinoId != '' && origenId != ''){
-        console.log("2 combo box con valor");
-        this.vuelos = [];
-        let vuelosAuxiliar = [];
-        this.vuelosService.getVuelos('?origen=' + origenId + '&destino=' + destinoId).subscribe(respuesta =>{
-          const vuelos = respuesta;
-          vuelos.forEach(vuelo=>{
-              vuelosAuxiliar.push({idVuelo : vuelo.idVuelo,codigoVuelo:vuelo.codigoVuelo});
-          });
-          this.vuelos = vuelosAuxiliar;
-        });
-      }
+     
     },
-      error =>{}
-      );
-    
+      error => { }
+    );
+    let hotelesAux = [];
+    if(destinoId != ''){
+      this.hotelesServices.getFiltrosHoteles('','',destinoId).subscribe(respuesta => {
+          const hoteles = respuesta;
+          hoteles.forEach(hotel => {
+            hotelesAux.push({idHotel:hotel.idHotel, nombreHotel:hotel.nombreHotel})
+          });
+          this.hoteles = hotelesAux;
+      });
+    }
+
+  }
+
+  vueloChange() {
+    this.altaReserva.get('hotelSelect').enable();
+  }
+
+  hotelChange() {
+    this.altaReserva.get('cuartoSelect').enable();
+    const hotelId = this.altaReserva.getRawValue().hotelSelect;
+    let cuartosAuxiliar = [];
+    this.cuartosService.obtenerListaFiltro(hotelId).subscribe(respuesta => {
+      const cuartos = respuesta;
+      cuartos.forEach(cuarto => {
+
+        cuartosAuxiliar.push({ idCuarto: cuarto.idCuarto, tipoCuarto: cuarto.tipoCuarto,costoNoche:cuarto.costoNoche });
+      });
+
+      console.log(cuartosAuxiliar);
+      this.cuartos = cuartosAuxiliar;
+    },
+      error => { }
+    );
   }
 
   cuartoChange() {
- //   this.altaReserva.controls['cuartoSelect'].value;
     const cuartoId = this.altaReserva.getRawValue().cuartoSelect;
-    console.log("cuarto: " + this.altaReserva.controls['cuartoSelect'].value);
-    const cuarto = this.cuartos.filter(cuarto => cuarto.idCuarto = cuartoId);
-    console.log(cuarto);
-      this.altaReserva.controls['costoCuarto'].setValue(cuarto[0].costoNoche);
-  
+    console.log('cuarto: ' + this.altaReserva.controls['cuartoSelect'].value);
+    const cuarto = this.cuartos.filter((cuarto) => cuarto.idCuarto === cuartoId); 
+    if (cuarto.length > 0) {
+       console.log(cuarto);
+      this.altaReserva.controls['costoCuarto'].setValue(cuarto[0].costoNoche); 
+    }
+
+
   }
-
-
 }
