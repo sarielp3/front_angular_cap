@@ -145,7 +145,7 @@ export class GetHotelesComponent implements OnInit,AfterViewInit {
 
   eliminar(elemento:Hoteles){
     const dialogoRef = this.dialog.open(ConfirmDialogComponent,{
-      disableClose:true
+      disableClose:true,
     });
     dialogoRef.afterClosed().subscribe(respuesta =>{
       console.log(respuesta);
