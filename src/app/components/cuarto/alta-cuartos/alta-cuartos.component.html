@@ -12,6 +12,7 @@
         formControlName="nombreCuarto"
         placeholder="Nombre del cuarto"
         value=""
+        onkeypress="return (event.charCode == 32 || event.charCode == 209 || event.charCode == 241 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
       />
     </mat-form-field>
 
@@ -21,6 +22,7 @@
         matInput
         formControlName="descripcion"
         placeholder="Este es un cuarto..."
+        onkeypress="return (event.charCode == 32 || event.charCode == 209 || event.charCode == 241 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
       ></textarea>
     </mat-form-field>
 <table class="form-element">
@@ -29,10 +31,11 @@
       <mat-label>Numero de personas</mat-label>
       <input
         matInput
-        maxlength="5"
+        maxlength="2"
         formControlName="numeroPersonas"
-        placeholder="Ex. 94105"
-        value="94043"
+        placeholder="Ex. 3"
+        value="99"
+        onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
       />
     </mat-form-field>
   </td>
@@ -44,6 +47,7 @@
         formControlName="codigoCuarto"
         placeholder="Nombre del cuarto"
         value=""
+        onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
       />
     </mat-form-field>
   </td>
@@ -55,8 +59,9 @@
         matInput
         formControlName="costoNoche"
         maxlength="5"
-        placeholder="Ex. 94105"
-        value="94043"
+        placeholder="Ex. 400"
+        value="3000"
+        onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
       />
     </mat-form-field>
 
@@ -67,6 +72,7 @@
         formControlName="tipoCuarto"
         placeholder="Nombre del cuarto"
         value=""
+        onkeypress="return (event.charCode == 32 || event.charCode == 209 || event.charCode == 241 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
       />
     </mat-form-field>
 
