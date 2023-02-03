@@ -104,7 +104,8 @@ export class ModificaReservaComponent implements OnInit {
       }, error =>{
         console.log("Error => ", error);
       }
-    );      
+    );   
+    this.modificacionReserva.get('costoCuarto').disable();   
   }
 
   cancelar(){
@@ -159,18 +160,7 @@ export class ModificaReservaComponent implements OnInit {
       console.log(vuelosAuxiliar);
       this.ciudadesDestino = ciudadesDestinoAux;
       this.vuelos = vuelosAuxiliar;
-      if (origenId != '') {
-        this.vuelos = [];
-        console.log("2 combo box con valor");
-        let vuelosAuxiliar = [];
-        this.vueloService.getVuelos('?origen=' + origenId).subscribe(respuesta => {
-          const vuelos = respuesta;
-          vuelos.forEach(vuelo => {
-            vuelosAuxiliar.push({ idVuelo: vuelo.idVuelo, codigoVuelo: vuelo.codigoVuelo });
-          });
-          this.vuelos = vuelosAuxiliar;
-        });
-      }
+      
     },
       error => { }
     );
@@ -185,6 +175,7 @@ export class ModificaReservaComponent implements OnInit {
     let ciudadesOrigenAux = [];
     let vuelosAuxiliar = [];
     let ciudadesId = [];
+    this.cuartos = [];
     this.vueloService.getVuelos('?destino=' + destinoId).subscribe(respuesta => {
       const vuelos = respuesta;
       vuelos.forEach(vuelo => {
@@ -199,18 +190,7 @@ export class ModificaReservaComponent implements OnInit {
       console.log(vuelosAuxiliar);
       //this.ciudadesOrigen = ciudadesOrigenAux;
       this.vuelos = vuelosAuxiliar;
-      if (destinoId != '') {
-        console.log("2 combo box con valor");
-        this.vuelos = [];
-        let vuelosAuxiliar = [];
-        this.vueloService.getVuelos('?destino=' + destinoId).subscribe(respuesta => {
-          const vuelos = respuesta;
-          vuelos.forEach(vuelo => {
-            vuelosAuxiliar.push({ idVuelo: vuelo.idVuelo, codigoVuelo: vuelo.codigoVuelo });
-          });
-          this.vuelos = vuelosAuxiliar;
-        });
-      }
+      
     },
       error => { }
     );

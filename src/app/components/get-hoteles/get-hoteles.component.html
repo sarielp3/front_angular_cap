@@ -37,12 +37,12 @@
           </form>
         </div>
       </mat-grid-tile>
-      <mat-grid-tile colspan="3" rowspan="3">
+      <mat-grid-tile id="tabla" colspan="3" rowspan="3">
         
         <div class="container">
           <div class="col text-end">
             <button id="centrarboton" mat-stroked-button color="primary" (click)="altaHotel()"><i class="fa fa-plus"> Alta Hotel</i></button>
-          </div><br>
+          </div>
           <table mat-table [dataSource]="ListaHoteles" class="mat-elevation-z8">
             
               <ng-container matColumnDef="ciudad">

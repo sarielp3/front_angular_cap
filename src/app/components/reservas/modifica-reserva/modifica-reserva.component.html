@@ -111,9 +111,9 @@
     </mat-form-field>
         <br />
         
-                <button id="centrarboton" mat-raised-button color="primary"  type="submit" (click)="guardar()">Guardar</button>
+                <button id="centrarboton" mat-raised-button color="primary" [disabled]="!modificacionReserva.valid" type="submit" (click)="guardar()">Guardar</button>
             
-                <button id="centrarboton" mat-raised-button color="primary"  type="submit" (click)="cancelar()">Cancelar</button>
+                <button id="centrarboton" mat-raised-button color="primary"  type="button" (click)="cancelar()">Cancelar</button>
                                                     
     </form>
 </div>

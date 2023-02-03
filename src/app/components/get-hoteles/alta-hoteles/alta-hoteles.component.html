@@ -32,7 +32,7 @@
                     <input formControlName="logo" (change) = "onFileChanged($event)" id="imagen" accept="image/*" type="file">
                     <img [src]="imgURL" height="30" *ngIf="imgURL"><br>
                     <button mat-raised-button color="primary" type="submit" [disabled]="!altaForm.valid">Guardar</button>
-                    <button mat-raised-button color="warn" (click)="cancelar()" type="button">Cancelar</button>
+                    <button mat-raised-button color="primary" (click)="cancelar()" type="button">Cancelar</button>
                 
             </form>
         </mat-grid-tile>
