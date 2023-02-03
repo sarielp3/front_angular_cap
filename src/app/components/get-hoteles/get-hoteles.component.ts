@@ -9,6 +9,10 @@ import {MatDialog} from '@angular/material/dialog';
 import { AltaHotelesComponent } from '../../components/get-hoteles/alta-hoteles/alta-hoteles.component';
 import { ModificarHotelesComponent } from '../../components/get-hoteles/modificar-hoteles/modificar-hoteles.component';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+
+
 
 @Component({
   selector: 'app-get-hoteles',
@@ -16,7 +20,7 @@ import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog
   styleUrls: ['./get-hoteles.component.css']
 })
 export class GetHotelesComponent implements OnInit,AfterViewInit {
-  displayedColumns = ['id','ciudad','nombre','codigo','direccion','estatus','logo','modificar','eliminar'];
+  displayedColumns = ['ciudad','nombre','codigo','direccion','logo','modificar','eliminar','estatus'];
   codigoHotel = '';
   nombreHotel = '';
   public ListaHoteles: Hoteles[] = [];
@@ -24,9 +28,8 @@ export class GetHotelesComponent implements OnInit,AfterViewInit {
   public ciudades:Ciudades[] = [];
   public loading!: boolean;
   public filtroForm: UntypedFormGroup;
-  checked = false;
   dataSource!:MatTableDataSource<Hoteles>;
-  constructor(private serviceHoteles:HotelesServiceTsService, public dialog: MatDialog){
+  constructor(private serviceHoteles:HotelesServiceTsService, public dialog: MatDialog,private snackBarService: SnackBarService){
     this.filtroForm = new UntypedFormGroup({
       nombreHotel: new UntypedFormControl('', [Validators.required, Validators.minLength(1)]),
       codigoHotel: new UntypedFormControl('', [Validators.required, Validators.minLength(1)]),
@@ -42,7 +45,7 @@ export class GetHotelesComponent implements OnInit,AfterViewInit {
     this.getCiudades();
     
     
-    this.onSubmit();
+    //this.onSubmit();
     this.dataSource = new MatTableDataSource<Hoteles>(this.ListaHoteles);
   }
 
@@ -106,23 +109,35 @@ export class GetHotelesComponent implements OnInit,AfterViewInit {
     });
     dialogoRef.afterClosed().subscribe(result =>{
       console.log(result);
+      this.getHoteles();
     });
   }
 
-  cambiarStatus(enable: boolean,elemento){
+  cambiarStatus(enable: boolean,elemento,check:MatSlideToggleChange){
     const dialogoRef = this.dialog.open(ConfirmDialogComponent,{
       disableClose:true
     });
     dialogoRef.afterClosed().subscribe(respuesta =>{
       console.log(respuesta);
       if(respuesta){
-        this.serviceHoteles.cambiarEstatus(elemento.idHotel).subscribe();
-      }else{
-        if(enable){
-          elemento.estatus = '0';
-        }else{
-          elemento.estatus = '1';
-        }
+        this.serviceHoteles.cambiarEstatus(elemento.idHotel).subscribe(
+          (respuesta) =>{
+            this.snackBarService.openSnackBar(
+              'success',
+              'Estatus cambiado correctamente',
+              'success'
+            );
+            this.getHoteles();
+          }
+        );
+      }
+      else{
+        check.source.checked = !enable;
+        this.snackBarService.openSnackBar(
+          'warning',
+          'Solicitud de estatus cancelada',
+          'warning'
+        );
       }
     })
       

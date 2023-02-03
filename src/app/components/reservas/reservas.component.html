@@ -1,67 +1,54 @@
 
-<div *ngIf="loading; else content">
-  <mat-spinner></mat-spinner>
-</div>
-
-<ng-template #content>
-  <div class="">
-    <p>{{titulo}}</p>
-    <div>
-      <div class="row">
-        <div class="col-11">
-    
-        </div>
-        <div class="col-1">
-          <button mat-stroked-button color="primary" (click)="altaReserva()">Alta Reserva</button>
-          <br/>
-        </div>    
-      </div>
-      <div></div>
-      <div class="row">
-        <div class="col-2">
+ <p>{{titulo}}</p>
+  <mat-grid-list cols="4" rowHeight="120px">
+    <mat-grid-tile colspan="1" rowspan="4">
+<div class="campos">
+  <h3>Filtros</h3>
+ 
           <form>
-            <h4>Origen</h4>
+            
             <mat-form-field appearance="fill">
-              <mat-label>Selecciona una opción</mat-label>
+              <mat-label>Selecciona un Origen</mat-label>
               <mat-select [formControl]="selectedCiudadOrigen">
-                <mat-option value=""> </mat-option>
                 <mat-option *ngFor="let ciudadOrigen of ciudadesOrigen" [value]="ciudadOrigen.idCiudad">{{ciudadOrigen.nombreCiudad}}</mat-option>
               </mat-select>
             </mat-form-field>
     
-            <h4>Destino</h4>
+            
             <mat-form-field appearance="fill">
-              <mat-label>Selecciona una opción</mat-label>
+              <mat-label>Selecciona un Destino</mat-label>
               <mat-select [formControl]="selectedCiudadDestino">
-                <mat-option value=""> </mat-option>
                 <mat-option *ngFor="let ciudadDestino of ciudadesDestino" [value]="ciudadDestino.idCiudad">{{ciudadDestino.nombreCiudad}}</mat-option>
               </mat-select>
             </mat-form-field>
     
-            <h4>Aerolinea</h4>
+            
             <mat-form-field appearance="fill">
-              <mat-label>Selecciona una opción</mat-label>
+              <mat-label>Selecciona una Aerolinea</mat-label>
               <mat-select [formControl]="selectedAerolinea">
-                <mat-option value=""> </mat-option>
                 <mat-option *ngFor="let aerolinea of aerolinea" [value]="aerolinea.idAerolinea">{{aerolinea.nombreAerolinea}}</mat-option>
               </mat-select>
             </mat-form-field>
     
-            <h4>Hotel</h4>
+            
             <mat-form-field appearance="fill">
-              <mat-label>Selecciona una opción</mat-label>
+              <mat-label>Selecciona un Hotel</mat-label>
               <mat-select [formControl]="selectedHotel">
-                <mat-option value=""> </mat-option>
                 <mat-option *ngFor="let hotel of hotel" [value]="hotel.idHotel">{{hotel.nombreHotel}}</mat-option>
               </mat-select>
             </mat-form-field>
             <br />
-            <button mat-button (click)="buscar()">Buscar</button>
-            <button mat-button (click)="limpiarFiltros()">Limpiar Filtros</button>
+            <button mat-raised-button color="primary" (click)="buscar()">Buscar</button>
+            <button mat-raised-button color="primary" id="filtro" (click)="limpiarFiltros()">Limpiar Filtros</button>
           </form>
-    
         </div>
-        <div class="col-10">
+        </mat-grid-tile>
+       <mat-grid-tile colspan="3" rowspan="4">
+        <div class="container">
+<div class="col text-end">
+  <button mat-stroked-button color="primary" (click)="altaReserva()"><i class="fa fa-plus">Alta Reserva</i></button>
+</div><br>
+        
           <table mat-table [dataSource]="dataSource">
             <!-- Position Column -->
             <ng-container matColumnDef="Origen">
@@ -92,23 +79,21 @@
     
             <ng-container matColumnDef="Modificar">
               <th mat-header-cell *matHeaderCellDef>Modificar</th>
-              <td mat-cell *matCellDef="let element"> <button mat-stroked-button color="accent" (click)="modificar(element)">Modificar</button> </td>
+              <td mat-cell *matCellDef="let element"> <button style="width: 30px;height: 30px;" id="accion" mat-fab color="accent" (click)="modificar(element)"><mat-icon>edit</mat-icon></button> </td>
             </ng-container>
     
             <ng-container matColumnDef="Eliminar">
               <th mat-header-cell *matHeaderCellDef>Eliminar</th>
               <td mat-cell *matCellDef="let element">
-                <button mat-button color="warn" (click)="eliminar(element)">Eliminar</button> 
+                <button style="width: 30px;height: 30px;" id="accion" mat-fab color="warn" (click)="eliminar(element)"><mat-icon>delete_forever</mat-icon></button> 
               </td>
             </ng-container>
     
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
+
         </div>
-      </div>
-    
-    </div>
-  </div>
-  
-</ng-template>
+        </mat-grid-tile>
+        </mat-grid-list>
+

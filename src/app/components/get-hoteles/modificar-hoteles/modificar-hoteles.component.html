@@ -1,15 +1,16 @@
-<div class="container">
-    <mat-grid-list cols="1" rowHeight="250px">
-        <mat-grid-tile colspan="1" rowspan="2" >
-            
-            <form [formGroup]="altaForm" (ngSubmit)="onSubmit()">
-                <h2>Modificar Hotel</h2>
+<mat-toolbar color="primary">
+    <span class="fill-remaining-space">Modificar Hotel</span>
+</mat-toolbar>
+<diV class="contenedor-flex">
+    <div>
+        <form [formGroup]="altaForm" (ngSubmit)="onSubmit()">
+            <div class="form-flex">
                 <mat-form-field>
                     <mat-label>Ciudad</mat-label>
                     <mat-select formControlName="ciudadHotel">
                         <mat-option *ngFor="let ciudad of ciudades" [value]="ciudad.idCiudad">
                             {{ciudad.nombreCiudad}}
-                        </mat-option >
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field>
@@ -27,14 +28,17 @@
                 </mat-form-field>
 
                 <br>
-                    <label>Logo:</label>
-                    <input id="imagen" type="file">
-                    <button mat-raised-button color="primary" type="submit" [disabled]="!altaForm.valid">Guardar</button>
-                    <button mat-raised-button color="warn" (click)="cancelar()" type="button">Cancelar</button>
-                
-            </form>
-        </mat-grid-tile>
-         
-    </mat-grid-list>
-   
-</div>
+                <label>Logo:</label>
+                <input id="imagen" type="file" (change) = "onFileChanged($event)">
+                <img [src]="imgURL" height="30" width="30" *ngIf="imgURL"><br>
+            </div>
+                <button mat-raised-button color="primary" type="submit" [disabled]="!altaForm.valid">Guardar</button>
+                <button mat-raised-button color="warn" (click)="cancelar()" type="button">Cancelar</button>
+            
+        </form>
+    </div>
+    <div class="cuarto-class">
+        <app-cuartos [idHotel]=data.idHotel></app-cuartos>
+    </div>
+
+</diV>

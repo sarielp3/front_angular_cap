@@ -5,23 +5,23 @@
     <form [formGroup]='modificacionVuelo'>
         <mat-form-field appearance="fill" class="form-element">
             <mat-label>Origen</mat-label>
-            <mat-select (selectionChange)="origenChange()" formControlName="origenSelect">
+            <mat-select (selectionChange)="origenChange()" formControlName="origenControl">
                 <mat-option *ngFor="let ciudadOrigen of ciudadesOrigen"
                     [value]="ciudadOrigen.idCiudad">{{ciudadOrigen.nombreCiudad}}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill" class="form-element">
             <mat-label>Destino</mat-label>
-            <mat-select>
-                <mat-option *ngFor="let ciudad of ciudadesOrigen"
-                    [value]="ciudad.idCiudad">{{ciudad.nombreCiudad}}</mat-option>
+            <mat-select formControlName="destinoControl">
+                <mat-option *ngFor="let ciudadDestino of ciudadesDestino"
+                    [value]="ciudadDestino.idCiudad">{{ciudadDestino.nombreCiudad}}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill" class="form-element">
             <mat-label>Aerolinea</mat-label>
-            <mat-select>
-                <mat-option *ngFor="let ciudadOrigen of ciudadesOrigen"
-                    [value]="ciudadOrigen.idCiudad">{{ciudadOrigen.nombreCiudad}}</mat-option>
+            <mat-select formControlName="aerolineaControl">
+                <mat-option *ngFor="let aerolinea of aerolineas"
+                    [value]="aerolinea.idAerolinea">{{aerolinea.nombreAerolinea}}</mat-option>
             </mat-select>
         </mat-form-field>
        
@@ -30,27 +30,31 @@
             <td>
                 <mat-form-field class="form-element">
                     <mat-label>Hora Salida</mat-label>
-                    <input formControlName="horaSalida" matInput placeholder="Hora Salida" value="">
+                    <input type="time" formControlName="horaSalidaContol" matInput placeholder="Hora Salida" value="">
                 </mat-form-field> 
             </td>
             <td>
                 <mat-form-field class="form-element">
                     <mat-label>Hora Llegada</mat-label>
-                    <input formControlName="horaLlegada" matInput placeholder="Hora Llegada" value="">
+                    <input type="time" formControlName="horaLlegadaControl" matInput placeholder="Hora Llegada" value="">
                 </mat-form-field> 
             </td>
         </table>                
         <br />
         <mat-form-field class="form-element">
-            <mat-label>Costo</mat-label>
-            <input formControlName="consto" matInput placeholder="Nombre" value="">
+            <mat-label>Codigo del vuelo</mat-label>
+            <input formControlName="codigoControl" matInput placeholder="Codigo del vuelo" value="">
+        </mat-form-field>
+        <mat-form-field class="form-element">
+            <mat-label>Costo del vuelo</mat-label>
+            <input type="number" formControlName="costoControl" matInput placeholder="Costo del vuelo" value="">
         </mat-form-field>       
         <table class="form-element">
             <td>
-                <button class="btn btn-primary form-element" type="submit" (click)="guardar()">Guardar</button>
+                <button mat-raised-button color="primary" class="form-element" type="submit" (click)="guardar()">Guardar</button>
             </td>
             <td>
-                <button class="btn btn-primary form-element" type="submit" (click)="cancelar()">Cancelar</button>
+                <button mat-raised-button color="primary" class="form-element" type="submit" (click)="cancelar()">Cancelar</button>
             </td>
         </table>                                        
     </form>

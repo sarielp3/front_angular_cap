@@ -1,0 +1,15 @@
+td,
+th {
+  text-align: center;
+
+  align-items: center;
+  justify-content: center;
+}
+
+th {
+  font-size: medium;
+}
+
+#alta{
+    margin-top: 20px;
+}

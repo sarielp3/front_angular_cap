@@ -55,37 +55,28 @@
       <ng-container matColumnDef="Modificar">
         <th mat-header-cell *matHeaderCellDef>Modificar</th>
         <td mat-cell *matCellDef="let element">
-          <button
-            mat-stroked-button
-            color="accent"
-            (click)="modificarCuartos(element)"
-          >
-            Modificar
-          </button>
+          <button style="width: 30px;height: 30px;" id="accion" mat-fab color="accent" type="button" (click)="modificarCuartos(element)" >
+            <mat-icon>edit</mat-icon></button>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="Eliminar">
         <th mat-header-cell *matHeaderCellDef>Eliminar</th>
         <td mat-cell *matCellDef="let element">
-          <button
-            mat-stroked-button
-            color="warn"
-            (click)="eliminarHabitacion(element.idCuarto)"
-          >
-            Eliminar
-          </button>
+          <button style="width: 30px;height: 30px;" id="accion" mat-fab color="warn" type="button" (click)="eliminarHabitacion(element.idCuarto)"><mat-icon>delete_forever</mat-icon></button>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="habilitar">
-        <th mat-header-cell *matHeaderCellDef>Habilitar</th>
+        <th mat-header-cell *matHeaderCellDef>Estatus</th>
         <td mat-cell *matCellDef="let element">
           <mat-slide-toggle
             [checked]="element.status === 1 ? true : false"
             (change)="cambiarStatus($event.checked, element, $event)"
           >
           </mat-slide-toggle>
+          <h5 *ngIf="element.status=='1'"> Habilitado</h5>
+          <h5  *ngIf="element.status=='0'"> Deshabilitado</h5>
         </td>
       </ng-container>
 

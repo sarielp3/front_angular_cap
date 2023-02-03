@@ -1,8 +1,7 @@
-
-<h1>Lista de Vuelos</h1>
+<br><br>
 <div>
-  <div>
-    <button mat-stroked-button color="primary" (click)="altaReserva()">Alta de Vuelo</button>
+  <div id="alta" class="col text-end">
+    <button mat-stroked-button color="primary" (click)="altaReserva()"><i class="fa fa-plus"> Alta de Vuelo</i></button>
     <br/>
   </div>
     <table mat-table [dataSource]="dataSource">
@@ -44,7 +43,8 @@
 
         <ng-container matColumnDef="Modificar">
           <th mat-header-cell *matHeaderCellDef>Modificar</th>
-          <td mat-cell *matCellDef="let element"> <button mat-stroked-button color="accent" (click)="modificar(element)">Modificar</button> </td>
+          <td mat-cell *matCellDef="let element"> <button style="width: 30px;height: 30px;" id="accion" mat-fab color="accent" type="button" (click)="modificar(element)" >
+            <mat-icon>edit</mat-icon></button>
         </ng-container>
 
         <ng-container matColumnDef="Habilitar">
@@ -61,7 +61,7 @@
         <ng-container matColumnDef="Eliminar">
           <th mat-header-cell *matHeaderCellDef>Eliminar</th>
           <td mat-cell *matCellDef="let element">
-            <button mat-button color="warn" (click)="eliminar(element)">Eliminar</button> 
+            <button style="width: 30px;height: 30px;" id="accion" mat-fab color="warn" type="button" (click)="eliminar(element)"><mat-icon>delete_forever</mat-icon></button>
           </td>
         </ng-container>
 

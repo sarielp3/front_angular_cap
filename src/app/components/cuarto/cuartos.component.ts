@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Cuarto } from '../../models/cuarto';
 import { CuartoService } from '../../services/cuarto.service';
 import { MatTableDataSource } from '@angular/material/table';
@@ -8,12 +8,15 @@ import { RegistroCuartosComponent } from './alta-cuartos/alta-cuartos.component'
 import { ModificarCuartosComponent } from './modificar-cuartos/modificar-cuartos.component';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
+import { BoundElementProperty } from '@angular/compiler';
 @Component({
   selector: 'app-cuartos',
   templateUrl: './cuartos.component.html',
   styleUrls: ['./cuartos.component.css'],
 })
 export class CuartosComponent implements OnInit {
+  @Input() idHotel: number;
+  hotelID:any;
   displayedColumns: string[] = [
     'Nombre del cuarto',
     'Descripcion',
@@ -37,7 +40,10 @@ export class CuartosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.obtenerHabitaciones();
+    //this.obtenerHabitaciones();
+    console.log("modificar" + this.idHotel);
+    this.hotelID = this.idHotel;
+    this.obtenerHabitacionesFiltro();
   }
 
   public obtenerHabitaciones() {
@@ -53,13 +59,27 @@ export class CuartosComponent implements OnInit {
     );
   }
 
+  public obtenerHabitacionesFiltro(){
+    this.cuartoService.obtenerListaFiltro(this.idHotel).subscribe(
+      (habitaciones) => {
+        console.log(habitaciones);
+        this.habitaciones = habitaciones;
+        this.dataSource = new MatTableDataSource<Cuarto>(this.habitaciones);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
   altaCuartos() {
     console.log('Clic en boton Alta');
     const dialogoRef = this.dialog.open(RegistroCuartosComponent, {
+      data: this.hotelID,
       disableClose: true,
     });
     dialogoRef.afterClosed().subscribe((respuesta) => {
-      this.obtenerHabitaciones();
+      this.obtenerHabitacionesFiltro();
       console.log(respuesta);
     });
   }
@@ -72,7 +92,7 @@ export class CuartosComponent implements OnInit {
       disableClose: true,
     });
     dialogoRef.afterClosed().subscribe((respuesta) => {
-      this.obtenerHabitaciones();
+      this.obtenerHabitacionesFiltro();
       console.log(respuesta);
     });
   }
@@ -91,7 +111,7 @@ export class CuartosComponent implements OnInit {
             'success'
           );
           console.log(dato);
-          this.obtenerHabitaciones();
+          this.obtenerHabitacionesFiltro();
         }
       });
     });
@@ -111,7 +131,7 @@ export class CuartosComponent implements OnInit {
               'Estatus cambiado correctamente',
               'success'
             );
-            this.obtenerHabitaciones();
+            this.obtenerHabitacionesFiltro();
           });
       } else {
         check.source.checked = !enable;

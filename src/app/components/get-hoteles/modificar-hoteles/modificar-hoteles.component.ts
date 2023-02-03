@@ -22,8 +22,10 @@ export class ModificarHotelesComponent implements OnInit {
     codigoHotel:'',
     direccion:'',
     estatus:'',
-    logo:new Blob()
+    logo:null
   }
+  imgURL:any;
+  public selectedFile;
   public altaForm: UntypedFormGroup;
   public ciudades:Ciudades[] = [];
   constructor(@Inject(MAT_DIALOG_DATA) public data:Hoteles,private serviceHoteles:HotelesServiceTsService,
@@ -41,7 +43,8 @@ export class ModificarHotelesComponent implements OnInit {
     this.altaForm.controls['nombreHotel'].setValue(this.data.nombreHotel);
     this.altaForm.controls['codigoHotel'].setValue(this.data.codigoHotel);
     this.altaForm.controls['direccion'].setValue(this.data.direccion);
-    this.Hotel.logo = this.data.logo;
+    this.imgURL = "data:image/png;base64," + this.data.logo;
+    this.Hotel.logo =this.imgURL.split(",")[1];
     this.Hotel.estatus = this.data.estatus;
     this.getCiudades();
   }
@@ -68,15 +71,30 @@ export class ModificarHotelesComponent implements OnInit {
     this.Hotel.nombreHotel = this.altaForm.controls['nombreHotel'].value;
     this.Hotel.codigoHotel = this.altaForm.controls['codigoHotel'].value;
     this.Hotel.direccion = this.altaForm.controls['direccion'].value;
+    this.Hotel.logo =this.imgURL.split(",")[1];
     this.serviceHoteles.modificar(this.data.idHotel,this.Hotel).subscribe(
       (res)=>{
         console.log("Exito, registro modificado y guardado");
-
+        this.dialogRef.close();
       },err=> console.log(err)
     );
   }
 
   cancelar(){
     this.dialogRef.close();
+  }
+
+  onFileChanged(event){
+   
+    this.selectedFile = event.target.files[0];
+    
+    let reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = (event2) =>{
+      this.imgURL = reader.result;
+     
+    };
+
+
   }
 }

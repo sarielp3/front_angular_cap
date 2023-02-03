@@ -14,8 +14,8 @@ import { ModificaVueloComponent } from './modifica-vuelo/modifica-vuelo.componen
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
 import { AltaVueloComponent } from './alta-vuelo/alta-vuelo.component';
-
-
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatIconModule} from '@angular/material/icon'
 
 
 @NgModule({
@@ -43,7 +43,9 @@ import { AltaVueloComponent } from './alta-vuelo/alta-vuelo.component';
     MatSelectModule,
     ReactiveFormsModule,
     MatToolbarModule,
-    MatInputModule
+    MatInputModule,
+    MatGridListModule,
+    MatIconModule
     
   ]
 })
