@@ -21,8 +21,8 @@
             </mat-select>
         </mat-form-field>
         <br>        
-        <button mat-raised-button color="primary" (click)="filtros()">Buscar</button>
-        <button mat-raised-button color="primary" id="filtro" (click)="limpiarFiltros()">Limpiar Filtros</button>
+        <button mat-raised-button color="primary" (click)="filtros()" [disabled]="disableButtons">Buscar</button>
+        <button mat-raised-button color="primary" id="filtro" (click)="limpiarFiltros()" [disabled]="disableButtons">Limpiar Filtros</button>
     </form>
     
 </div>

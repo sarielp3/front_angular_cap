@@ -24,7 +24,7 @@ import { SnackBarService } from 'src/app/services/snack-bar.service';
   styleUrls: ['./reservas.component.css']
 })
 export class ReservasComponent implements OnInit {
-
+  loading:boolean = false;
   displayedColumns: string[] = ['Origen', 'Destino', 'Nombre del Cliente', 'Descripción de la reserva', 'Fecha Creacion', 'Modificar', 'Eliminar'];
   titulo = 'Listado de Reservas';
   public reservas: Reservas[] = [];
@@ -41,8 +41,7 @@ export class ReservasComponent implements OnInit {
   selectedCiudadDestino = new FormControl();
   selectedAerolinea = new FormControl();
   selectedHotel = new FormControl();
-  selectedReserva = new FormControl();
-  loading: boolean = true;
+  selectedReserva = new FormControl();  
   value = 0;
   mode = 'indeterminate';
 
@@ -55,6 +54,7 @@ export class ReservasComponent implements OnInit {
     public snackbar : SnackBarService) { };
 
   public ngOnInit(): void {
+    this.loading = true;
     this.hotelesService.getHoteles().subscribe(
       data => {
         console.log("Data =>", data);
@@ -93,6 +93,7 @@ export class ReservasComponent implements OnInit {
       this.dataSource = new MatTableDataSource<Reservas>(this.reservas);
       this.loading = false;
     },(error) => {
+      this.loading = false;
       console.log(error);
     });
   }
@@ -118,6 +119,7 @@ export class ReservasComponent implements OnInit {
   }
 
   buscar() {
+    this.loading = true;
     console.log(this.selectedCiudadOrigen.value);
     console.log(this.selectedCiudadDestino.value);
     console.log(this.selectedAerolinea.value);
@@ -147,6 +149,7 @@ export class ReservasComponent implements OnInit {
       console.log("Error =>", error);
       this.reservas = [];
       this.dataSource = new MatTableDataSource<Reservas>(this.reservas);
+      this.loading = false;
     }
     );
   }

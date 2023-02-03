@@ -17,6 +17,8 @@ import { Vuelo } from '../../../models/vuelo.interface';
   styleUrls: ['./alta-vuelo.component.css']
 })
 export class AltaVueloComponent {
+  loading:boolean = false;
+  disableButon: boolean = false;
   altaVuelo:FormGroup;
   ciudades: Ciudades[];
   aerolineas: Aerolinea[];
@@ -41,8 +43,8 @@ export class AltaVueloComponent {
     private vueloService: VuelosService
   ){}
 
-  ngOnInit(): void {
-    console.log(this.data);
+  ngOnInit(): void { 
+    this.loading = true;   
     this.altaVuelo = this.fb.group({
       origenControl:[[],Validators.required],
       destinoControl:[[],Validators.required],
@@ -54,21 +56,26 @@ export class AltaVueloComponent {
     });
     this.ciudadesService.getCiudades('').subscribe(
       data => {
-        this.ciudades = data;        
+        this.ciudades = data;
+        this.aerolineaService.getAerolineas().subscribe(
+          data =>{
+            this.aerolineas = data;
+            this.loading = false; 
+          }, error =>{
+            console.log("Error => ", error);
+            this.loading = false; 
+          }
+        );        
       }, error =>{
+        this.loading = false; 
         console.log("Error => ", error);
       }
     );
-    this.aerolineaService.getAerolineas().subscribe(
-      data =>{
-        this.aerolineas = data;
-      }, error =>{
-        console.log("Error => ", error);
-      }
-    );
+   
   }
 
-  guardar(){
+  guardar(){        
+    this.disableButon = true;
     this.vueloAlta.origen = this.altaVuelo.controls['origenControl'].value;
     this.vueloAlta.destino = this.altaVuelo.controls['destinoControl'].value;
     this.vueloAlta.aerolinea = this.altaVuelo.controls['aerolieaControl'].value;
@@ -81,19 +88,27 @@ export class AltaVueloComponent {
     if(this.altaVuelo.valid === true){
       if( this.vueloAlta.origen === this.vueloAlta.destino){
         this.snackBarService.openSnackBar('warning','La ciudad de origen debe ser diferente a la ciudad de destino','warning');
+        this.disableButon = false;
       }else{
+        this.loading = true;
         this.vueloService.createVuelo(this.vueloAlta).subscribe( data =>{
-        this.vueloService.vuelos.push(data);
-        this.vueloService.emisor.next(this.vueloService.vuelos);
-        this.snackBarService.openSnackBar('success','El vuelo se guardo de manera exitosa','success');
-        this.dialogRef.close();
-        }, error =>{}
+          this.vueloService.vuelos.push(data);
+          this.vueloService.emisor.next(this.vueloService.vuelos);
+          this.snackBarService.openSnackBar('success','El vuelo se guardo de manera exitosa','success');
+          this.loading = false;
+          this.disableButon = false;
+          this.dialogRef.close();          
+        }, error =>{
+          this.loading = false;
+        }
+        
         );
        
       }
       
     }else{
       this.snackBarService.openSnackBar('warning','El formulario no es valido','Warning');
+      this.disableButon = false;
     }    
     
   }

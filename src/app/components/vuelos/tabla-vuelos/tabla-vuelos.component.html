@@ -4,7 +4,7 @@
     <button mat-stroked-button color="primary" (click)="altaReserva()"><i class="fa fa-plus"> Alta de Vuelo</i></button>
     <br/>
   </div>
-    <table mat-table [dataSource]="dataSource">
+    <table mat-table [dataSource]="dataSource" *ngIf="!loading">
         <!-- Position Column -->
         <ng-container matColumnDef="Origen">
           <th mat-header-cell *matHeaderCellDef>Origen</th>
@@ -68,5 +68,10 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
+      <div class="d-flex justify-content-center">
+        <div *ngIf="loading" class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
 
 </div>

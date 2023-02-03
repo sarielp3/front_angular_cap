@@ -15,6 +15,7 @@ import { BoundElementProperty } from '@angular/compiler';
   styleUrls: ['./cuartos.component.css'],
 })
 export class CuartosComponent implements OnInit {
+  loading:boolean = false;
   @Input() idHotel: number;
   hotelID:any;
   displayedColumns: string[] = [
@@ -40,6 +41,7 @@ export class CuartosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    
     //this.obtenerHabitaciones();
     console.log("modificar" + this.idHotel);
     this.hotelID = this.idHotel;
@@ -47,14 +49,17 @@ export class CuartosComponent implements OnInit {
   }
 
   public obtenerHabitaciones() {
+    this.loading = true;
     this.cuartoService.obtenerListaDeHabitaciones().subscribe(
       (habitaciones) => {
         console.log(habitaciones);
         this.habitaciones = habitaciones;
         this.dataSource = new MatTableDataSource<Cuarto>(this.habitaciones);
+        this.loading = false;
       },
       (error) => {
         console.log(error);
+        this.loading = false;
       }
     );
   }

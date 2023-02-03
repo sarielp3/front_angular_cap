@@ -16,9 +16,11 @@ import { MatSlideToggle, MatSlideToggleChange } from '@angular/material/slide-to
   styleUrls: ['./tabla-vuelos.component.css']
 })
 export class TablaVuelosComponent {
+  public loading!: boolean;
   displayedColumns: string[] = ['Origen', 'Destino', 'Aerolinea', 'Estatus','Hora de llegada','Hora de salida','Codigo del vuelo','Modificar','Habilitar','Eliminar'];
   vuelos: Vuelo[] = [];
   refreshTabla: Subscription;
+  spinnerSub : Subscription;
   dataSource = new MatTableDataSource<Vuelo>(this.vuelos);
   
 
@@ -32,9 +34,16 @@ export class TablaVuelosComponent {
         console.log('vuelos tabla ' + this.vuelos);
       }
     )
+
+    this.spinnerSub = this.vueloService.spinerEmmisor.subscribe( 
+      (data : boolean) => {
+        this.loading = data;
+      }
+    )
   }
 
   ngOnInit(): void {
+       this.loading = true;
        this.listarTodosVuelos();
   }
   ngOnDestroy(): void {
@@ -48,10 +57,12 @@ export class TablaVuelosComponent {
       console.log(this.vuelos);
       this.vueloService.vuelos = this.vuelos
       this.dataSource = new MatTableDataSource<Vuelo>(this.vuelos);
+      this.loading = false;
     }, err => {
       console.log('Error en GET vuelos');
       console.info(err);
       this.vueloService.vuelos = [];
+      this.loading = false;
     }); 
   }
   modificar(elemento:Vuelo):void{
@@ -66,22 +77,21 @@ export class TablaVuelosComponent {
     });
   }
 
-  eliminar(elemento:Vuelo):void{
-    console.log('Clic en boton Eliminar', elemento);
+  eliminar(elemento:Vuelo):void{    
     const dialogoRef = this.dialog.open(ConfirmDialogComponent,{
       disableClose:true,
       data:true
     });
-    dialogoRef.afterClosed().subscribe(respuesta =>{
-      console.log(respuesta);
+    dialogoRef.afterClosed().subscribe(respuesta =>{      
       if(respuesta){
         console.log('Eliminamos Registro con Id',elemento.idVuelo );
+        this.loading = true;
         this.vueloService.deleteVuelo(elemento.idVuelo).subscribe( respuestaApi =>{
-        this.snackBarService.openSnackBar('success', respuestaApi.mensajeRespuesta,'success');
-        this.listarTodosVuelos();
-        }, err => {
-          console.log('Error en eliminar vuelos');
+          this.snackBarService.openSnackBar('success', respuestaApi.mensajeRespuesta,'success');
+          this.listarTodosVuelos();
+        }, err => {          
           console.info(err);
+          this.loading = false;
         });
       }
     })
@@ -101,14 +111,15 @@ export class TablaVuelosComponent {
     const dialogoRef = this.dialog.open(ConfirmDialogComponent,{
       disableClose:true
     });
-    dialogoRef.afterClosed().subscribe(respuesta =>{      
+    dialogoRef.afterClosed().subscribe(respuesta =>{            
       if(respuesta){
+        this.loading = true;
         this.vueloService.cambioEstatus(elemento.idVuelo).subscribe( respuestaApi =>{          
           this.snackBarService.openSnackBar('success',respuestaApi.mensajeRespuesta,'Operacion Exitosa');
           this.listarTodosVuelos();
-          }, err => {
-            console.log('Error en eliminar vuelos');
+          }, err => {            
             console.info(err);
+            this.loading = false;
           });        
       }else{
         check.source.checked = !enable;

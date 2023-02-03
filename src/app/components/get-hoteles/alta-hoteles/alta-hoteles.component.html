@@ -1,6 +1,6 @@
 
 <div class="container">
-    <mat-grid-list cols="1" rowHeight="250px">
+    <mat-grid-list cols="1" rowHeight="300px">
         <mat-grid-tile colspan="1" rowspan="2" >
             
             <form [formGroup]="altaForm" (ngSubmit)="onSubmit()">
@@ -33,6 +33,8 @@
                     <img [src]="imgURL" height="30" *ngIf="imgURL"><br>
                     <button mat-raised-button color="primary" type="submit" [disabled]="!altaForm.valid">Guardar</button>
                     <button mat-raised-button color="warn" (click)="cancelar()" type="button">Cancelar</button>
+                    <button mat-raised-button color="warn" (click)="cuarto()" type="button" [disabled]="!altaForm.valid">Agregar Cuarto</button>
+                    
                 
             </form>
         </mat-grid-tile>

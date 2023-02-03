@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialogRef} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { HotelesServiceTsService } from 'src/app/services/hoteles.service';
 import { Hoteles } from 'src/app/models/Identity/hoteles';
 import { Ciudades } from 'src/app/models/Identity/ciudades';
 import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
+import { RegistroCuartosComponent } from '../../cuarto/alta-cuartos/alta-cuartos.component';
 
 @Component({
   selector: 'app-alta-hoteles',
@@ -11,7 +12,7 @@ import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms
   styleUrls: ['./alta-hoteles.component.css']
 })
 export class AltaHotelesComponent implements OnInit {
-  imgURL:any;
+  imgURL: any;
   public selectedFile;
   public event1;
   receivedIMG:any;
@@ -23,15 +24,18 @@ export class AltaHotelesComponent implements OnInit {
       idCiudad:0,
       nombreCiudad:''
     },
-    nombreHotel:'',
-    codigoHotel:'',
-    direccion:'',
-    estatus:'',
-    logo:null
+    nombreHotel: '',
+    codigoHotel: '',
+    direccion: '',
+    estatus: '',
+    logo: null
   }
   public altaForm: UntypedFormGroup;
-  public ciudades:Ciudades[] = [];
-  constructor(public dialogRef: MatDialogRef<AltaHotelesComponent>,private serviceHoteles:HotelesServiceTsService){
+  public ciudades: Ciudades[] = [];
+  constructor(
+    public dialog: MatDialog,
+    public dialogRef: MatDialogRef<AltaHotelesComponent>,
+    private serviceHoteles: HotelesServiceTsService) {
     this.altaForm = new UntypedFormGroup({
       nombreHotel: new UntypedFormControl('', [Validators.required, Validators.minLength(1)]),
       codigoHotel: new UntypedFormControl('', [Validators.required, Validators.minLength(1)]),
@@ -45,15 +49,15 @@ export class AltaHotelesComponent implements OnInit {
     this.getCiudades();
   }
 
-  onSubmit(){
-    if (this.altaForm.valid){
+  onSubmit() {
+    if (this.altaForm.valid) {
       this.guardar();
-    }else{
+    } else {
       console.log("no valido")
     }
-    
+
   }
-  guardar(){
+  guardar() {
     this.Hotel.ciudad.idCiudad = this.altaForm.controls['ciudadHotel'].value;
     this.Hotel.nombreHotel = this.altaForm.controls['nombreHotel'].value;
     this.Hotel.codigoHotel = this.altaForm.controls['codigoHotel'].value;
@@ -68,32 +72,53 @@ export class AltaHotelesComponent implements OnInit {
       }
     );
     console.log("Exito, registro guardado");
-    
+
   }
 
-  cancelar(){
+  cancelar() {
     this.dialogRef.close();
   }
 
-  public getCiudades(){
+  public getCiudades() {
     this.serviceHoteles.getCiudades().subscribe(
-      (data)=>{
-        this.ciudades=data;
+      (data) => {
+        this.ciudades = data;
       }
     )
   }
 
-  onFileChanged(event){
-   
+  onFileChanged(event) {
+
     this.selectedFile = event.target.files[0];
-    
+
     let reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
-    reader.onload = (event2) =>{
+    reader.onload = (event2) => {
       this.imgURL = reader.result;
-     
-    };
 
+    };
+  }
+
+  cuarto() {
+    this.Hotel.ciudad.idCiudad = this.altaForm.controls['ciudadHotel'].value;
+    this.Hotel.nombreHotel = this.altaForm.controls['nombreHotel'].value;
+    this.Hotel.codigoHotel = this.altaForm.controls['codigoHotel'].value;
+    this.Hotel.direccion = this.altaForm.controls['direccion'].value;    
+    this.Hotel.logo = this.imgURL.split(",")[1];
+    this.Hotel.estatus = "1";
+    this.serviceHoteles.altaHotel(this.Hotel).subscribe(
+      (data) => { 
+        console.log(data);       
+        const dialogoRef = this.dialog.open(RegistroCuartosComponent, {
+          data: data.idHotel,
+          disableClose: true,
+        });
+        dialogoRef.afterClosed().subscribe((respuesta) => {
+          console.log(respuesta);
+        });
+        this.dialogRef.close();
+      }
+    );
 
   }
 }
