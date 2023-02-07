@@ -6,9 +6,9 @@ export const environment = {
   production: false,
   configuration: "DEVELOPMENT",
   applicationName: "Arquetipo Angular",
-  apiUrl: "https://capbasanapptdd01.azurewebsites.net/AgenciaViajeTD/"
+//  apiUrl: "https://capbasanapptdd01.azurewebsites.net/AgenciaViajeTD/"
+  apiUrl: "http://127.0.0.1:8080/AgenciaViajeTD/"
 };
-
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
