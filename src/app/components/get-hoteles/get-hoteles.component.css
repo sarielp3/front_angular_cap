@@ -6,10 +6,7 @@
   border-radius: 30px;
   margin: 10px;
 }
-.container{
-  overflow-x: scroll;
-  overflow-y: scroll;
-}
+
 td,
 th {
   text-align: center;
@@ -24,10 +21,7 @@ th {
 }
 
 #centrarboton{
-  align-items: left;
-  justify-content: left;
-  margin-top: 70px;
-  margin-bottom: 10px;
+
 }
 
   #direccion{
@@ -52,7 +46,10 @@ th {
 }
 
 #tabla{
-  overflow-y: scroll;
   justify-content: flex-start !important ;
-   align-items: flex-start !important;
+  align-items: flex-start !important;
+}
+
+.overflowy{
+  overflow-y: scroll;
 }

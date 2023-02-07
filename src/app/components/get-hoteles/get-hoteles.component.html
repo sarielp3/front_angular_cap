@@ -37,13 +37,15 @@
           </form>
         </div>
       </mat-grid-tile>
-      <mat-grid-tile id="tabla" colspan="3" rowspan="3">
+      <div class="overflowy">
+      <mat-grid-tile id="tabla" colspan="3" rowspan="4">
         
         <div class="container">
           <div class="col text-end">
             <button id="centrarboton" mat-stroked-button color="primary" (click)="altaHotel()"><i class="fa fa-plus"> Alta Hotel</i></button>
           </div>
-          <table mat-table [dataSource]="ListaHoteles" class="mat-elevation-z8">
+          
+          <table mat-table [dataSource]="ListaHoteles" *ngIf="!loading">
             
               <ng-container matColumnDef="ciudad">
                 <th mat-header-cell *matHeaderCellDef> Ciudad </th>
@@ -102,7 +104,7 @@
               <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
           
             </table>
-            
+          
             <div class="d-flex justify-content-center">
               <div *ngIf="loading" class="spinner-border" role="status">
                 <span class="sr-only">Loading...</span>
@@ -114,7 +116,7 @@
             
 
       </mat-grid-tile>
-
+    </div>
     </mat-grid-list>
 
   
