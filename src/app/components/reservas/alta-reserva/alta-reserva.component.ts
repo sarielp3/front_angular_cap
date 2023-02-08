@@ -110,6 +110,8 @@ export class AltaReservaComponent implements OnInit {
     this.reservaAlta.idCuarto = this.altaReserva.controls['cuartoSelect'].value;
     this.reservaAlta.descripcion = this.altaReserva.controls['descripcionSelect'].value
 
+    this.reservaAlta.fechaInicio.setHours(18);
+    this.reservaAlta.fechaFin.setHours(12);
     if (this.altaReserva.valid === true) {
       this.reservaService.createReserva(this.reservaAlta).subscribe(data => {
         this.reservaAlta.idReserva = data.idReserva;

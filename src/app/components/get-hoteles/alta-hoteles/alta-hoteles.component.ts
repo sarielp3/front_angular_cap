@@ -41,7 +41,7 @@ export class AltaHotelesComponent implements OnInit {
       codigoHotel: new UntypedFormControl('', [Validators.required, Validators.minLength(1)]),
       ciudadHotel: new UntypedFormControl('', [Validators.required, Validators.minLength(1)]),
       direccion: new UntypedFormControl('', [Validators.required, Validators.minLength(1)]),
-      logo: new UntypedFormControl('')
+      logo: new UntypedFormControl('',[Validators.required])
     });
   }
 

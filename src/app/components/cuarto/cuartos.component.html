@@ -28,8 +28,8 @@
       </ng-container>
 
       <ng-container matColumnDef="Descripcion">
-        <th mat-header-cell *matHeaderCellDef>Descripcion</th>
-        <td mat-cell *matCellDef="let element">
+          <th  mat-header-cell *matHeaderCellDef>Descripcion</th>
+        <td style="max-width: 10px;overflow: hidden" mat-cell *matCellDef="let element" title="{{ element.descripcion }}">
           {{ element.descripcion }}
         </td>
       </ng-container>

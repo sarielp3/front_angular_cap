@@ -10,7 +10,7 @@
 td,
 th {
   text-align: center;
-  width: 100px;
+  width: 110px;
   height: 50px;
   align-items: center;
   justify-content: center;
@@ -26,6 +26,8 @@ th {
 
   #direccion{
     width: 150px;
+    max-width: 160px;
+    overflow: hidden;
   }
 
   #accion{
