@@ -135,9 +135,9 @@ export class AltaReservaComponent implements OnInit {
         (data) => {
           this.reservaAlta.idReserva = data.idReserva;
           this.snackBarService.openSnackBar(
-            'success',
+            'Éxito',
             'La reserva fue creada exitosamente',
-            'Reserva Registrada'
+            'Éxito'
           );
           this.dialogRef.close();
         },
@@ -145,9 +145,9 @@ export class AltaReservaComponent implements OnInit {
       );
     } else {
       this.snackBarService.openSnackBar(
-        'warning',
-        'El formulario no es valido',
-        'Reserva incorrecta'
+        'error',
+        'El formulario no es válido',
+        'error'
       );
     }
   }
@@ -254,9 +254,9 @@ export class AltaReservaComponent implements OnInit {
         this.cuartos = cuartosAuxiliar;
         if (this.cuartos.length === 0) {
           this.snackBarService.openSnackBar(
-            'warning',
+            'error',
             'Este Hotel no cuenta con cuartos',
-            'Reserva incorrecta'
+            'error'
           );
         }
       },

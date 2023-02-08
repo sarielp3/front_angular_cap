@@ -13,125 +13,154 @@ import { SnackBarService } from 'src/app/services/snack-bar.service';
 @Component({
   selector: 'app-modifica-vuelo',
   templateUrl: './modifica-vuelo.component.html',
-  styleUrls: ['./modifica-vuelo.component.css']
+  styleUrls: ['./modifica-vuelo.component.css'],
 })
 export class ModificaVueloComponent implements OnInit {
-  loading:boolean = false;
+  loading: boolean = false;
   disableButon: boolean = false;
-  modificacionVuelo:FormGroup;
+  modificacionVuelo: FormGroup;
   ciudadesOrigen: Ciudades[];
   ciudadesDestino: Ciudades[];
   aerolineas: Aerolinea[];
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data:VuelosReservas ,
+    @Inject(MAT_DIALOG_DATA) public data: VuelosReservas,
     public dialogRef: MatDialogRef<ModificaVueloComponent>,
     private fb: FormBuilder,
-    private ciudadesService : CiudadesService,
+    private ciudadesService: CiudadesService,
     private aerolineaService: AerolineaService,
     private snackBarService: SnackBarService,
     private vueloService: VuelosService
-  ){}
+  ) {}
 
   ngOnInit(): void {
-    
     this.modificacionVuelo = this.fb.group({
-      origenControl:[[],Validators.required],
-      destinoControl:[[],Validators.required],
-      aerolineaControl:[[],Validators.required],
-      costoControl:[[this.data.costo],Validators.required],
-      codigoControl:[[this.data.codigoVuelo],Validators.required],
-      horaSalidaContol:[[this.data.horaSalida],Validators.required],
-      horaLlegadaControl:[[this.data.horaLlegada],Validators.required],
+      origenControl: [[], Validators.required],
+      destinoControl: [[], Validators.required],
+      aerolineaControl: [[], Validators.required],
+      costoControl: [[this.data.costo], Validators.required],
+      codigoControl: [[this.data.codigoVuelo], Validators.required],
+      horaSalidaContol: [[this.data.horaSalida], Validators.required],
+      horaLlegadaControl: [[this.data.horaLlegada], Validators.required],
     });
     this.loading = true;
     this.ciudadesService.getCiudadesOrigen().subscribe(
-      data => {        
+      (data) => {
         this.ciudadesOrigen = data;
-        this.modificacionVuelo.controls['origenControl'].setValue(this.data.origen.idCiudad);
+        this.modificacionVuelo.controls['origenControl'].setValue(
+          this.data.origen.idCiudad
+        );
         this.ciudadesService.getCiudadesDestino().subscribe(
-          data => {            
+          (data) => {
             this.ciudadesDestino = data;
-            this.modificacionVuelo.controls['destinoControl'].setValue(this.data.destino.idCiudad);
+            this.modificacionVuelo.controls['destinoControl'].setValue(
+              this.data.destino.idCiudad
+            );
             this.aerolineaService.getAerolineas().subscribe(
-              data => {                
+              (data) => {
                 this.aerolineas = data;
-                this.modificacionVuelo.controls['aerolineaControl'].setValue(this.data.aerolinea.idAerolinea);
+                this.modificacionVuelo.controls['aerolineaControl'].setValue(
+                  this.data.aerolinea.idAerolinea
+                );
                 this.loading = false;
-              }, error =>{
+              },
+              (error) => {
                 this.loading = false;
-                console.log("Error => ", error);
+                console.log('Error => ', error);
               }
             );
-          }, error =>{
+          },
+          (error) => {
             this.loading = false;
-            console.log("Error => ", error);
+            console.log('Error => ', error);
           }
         );
-      }, error =>{
+      },
+      (error) => {
         this.loading = false;
-        console.log("Error => ", error);
+        console.log('Error => ', error);
       }
-    );        
+    );
   }
 
-  origenChange(){
+  origenChange() {}
 
-  }
-
-  cancelar(){
+  cancelar() {
     this.dialogRef.close();
   }
 
-  guardar(){
-    
+  guardar() {
     let vueloPUT: AltaVuelo = {
-      "idVuelo": null,
-      "origen":  null,
-      "destino": null,
-      "aerolinea":   null,
-      "horaSalida":  null,
-      "horaLlegada": null,
-      "codigoVuelo": null,
-      "costo":       null
+      idVuelo: null,
+      origen: null,
+      destino: null,
+      aerolinea: null,
+      horaSalida: null,
+      horaLlegada: null,
+      codigoVuelo: null,
+      costo: null,
     };
     vueloPUT.idVuelo = this.data.idVuelo;
 
     vueloPUT.origen = this.modificacionVuelo.controls['origenControl'].value;
     vueloPUT.destino = this.modificacionVuelo.controls['destinoControl'].value;
-    vueloPUT.aerolinea = this.modificacionVuelo.controls['aerolineaControl'].value;
-    vueloPUT.horaSalida = String(this.modificacionVuelo.controls['horaSalidaContol'].value);
-    vueloPUT.horaLlegada = String(this.modificacionVuelo.controls['horaLlegadaControl'].value);
-    vueloPUT.codigoVuelo = String(this.modificacionVuelo.controls['codigoControl'].value);
-    vueloPUT.costo = Number(this.modificacionVuelo.controls['costoControl'].value);
+    vueloPUT.aerolinea =
+      this.modificacionVuelo.controls['aerolineaControl'].value;
+    vueloPUT.horaSalida = String(
+      this.modificacionVuelo.controls['horaSalidaContol'].value
+    );
+    vueloPUT.horaLlegada = String(
+      this.modificacionVuelo.controls['horaLlegadaControl'].value
+    );
+    vueloPUT.codigoVuelo = String(
+      this.modificacionVuelo.controls['codigoControl'].value
+    );
+    vueloPUT.costo = Number(
+      this.modificacionVuelo.controls['costoControl'].value
+    );
 
-    if(vueloPUT.horaLlegada != String(this.data.horaLlegada)){
+    if (vueloPUT.horaLlegada != String(this.data.horaLlegada)) {
       vueloPUT.horaLlegada += ':00';
     }
-    if(vueloPUT.horaSalida != String(this.data.horaSalida)){
+    if (vueloPUT.horaSalida != String(this.data.horaSalida)) {
       vueloPUT.horaSalida += ':00';
     }
     console.log(vueloPUT);
-    if(this.modificacionVuelo.valid === true){
-      if( vueloPUT.origen === vueloPUT.destino){
-        this.snackBarService.openSnackBar('warning','La ciudad de origen debe ser diferente a la ciudad de destino','warning');
-      }else{
+    if (this.modificacionVuelo.valid === true) {
+      if (vueloPUT.origen === vueloPUT.destino) {
+        this.snackBarService.openSnackBar(
+          'Advertencia',
+          'La ciudad de origen debe ser diferente a la ciudad de destino',
+          'Advertencia'
+        );
+      } else {
         this.loading = true;
-        this.vueloService.updateVuelo(vueloPUT, this.data.idVuelo).subscribe( data => {
-        this.vueloService.getVuelos('').subscribe(vuelos =>{
-          this.vueloService.vuelos = vuelos;
-          this.vueloService.emisor.next(this.vueloService.vuelos);          
-          this.dialogRef.close();
-        }, err => {
-        });
-        this.snackBarService.openSnackBar('success','El vuelo se guardo de manera exitosa','success');
-        this.loading = false;
-      }, error => {
-      });
+        this.vueloService.updateVuelo(vueloPUT, this.data.idVuelo).subscribe(
+          (data) => {
+            this.vueloService.getVuelos('').subscribe(
+              (vuelos) => {
+                this.vueloService.vuelos = vuelos;
+                this.vueloService.emisor.next(this.vueloService.vuelos);
+                this.dialogRef.close();
+              },
+              (err) => {}
+            );
+            this.snackBarService.openSnackBar(
+              'Éxito',
+              'El vuelo se guardo de manera exitosa',
+              'Éxito'
+            );
+            this.loading = false;
+          },
+          (error) => {}
+        );
       }
-    }else{
-      this.snackBarService.openSnackBar('warning','El formulario no es valido','Warning');
-    } 
-    
+    } else {
+      this.snackBarService.openSnackBar(
+        'error',
+        'El formulario no es valido',
+        'error'
+      );
+    }
   }
 }

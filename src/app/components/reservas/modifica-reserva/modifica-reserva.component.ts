@@ -184,9 +184,9 @@ export class ModificaReservaComponent implements OnInit {
         .subscribe(
           (data) => {
             this.snackBarService.openSnackBar(
-              'success',
+              'Éxito',
               'La reserva fue modificada exitosamente',
-              'Reserva Actualizada'
+              'Éxito'
             );
             this.dialogRef.close();
           },
@@ -194,9 +194,9 @@ export class ModificaReservaComponent implements OnInit {
         );
     } else {
       this.snackBarService.openSnackBar(
-        'error',
+        'Advertencia',
         'El formulario no es valido',
-        'Reserva incorrecta'
+        'Advertencia'
       );
     }
   }
@@ -306,9 +306,9 @@ export class ModificaReservaComponent implements OnInit {
         this.cuartos = cuartosAuxiliar;
         if (this.cuartos.length === 0) {
           this.snackBarService.openSnackBar(
-            'warning',
+            'error',
             'Este Hotel no cuenta con cuartos',
-            'Reserva incorrecta'
+            'error'
           );
         }
       },
