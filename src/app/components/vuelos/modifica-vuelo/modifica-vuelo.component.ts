@@ -114,7 +114,7 @@ export class ModificaVueloComponent implements OnInit {
     console.log(vueloPUT);
     if(this.modificacionVuelo.valid === true){
       if( vueloPUT.origen === vueloPUT.destino){
-        this.snackBarService.openSnackBar('warning','La ciudad de origen debe ser diferente a la ciudad de destino','warning');
+        this.snackBarService.openSnackBar('error','La ciudad de origen debe ser diferente a la ciudad de destino','error');
       }else{
         this.loading = true;
         this.vueloService.updateVuelo(vueloPUT, this.data.idVuelo).subscribe( data => {
@@ -124,13 +124,13 @@ export class ModificaVueloComponent implements OnInit {
           this.dialogRef.close();
         }, err => {
         });
-        this.snackBarService.openSnackBar('success','El vuelo se guardo de manera exitosa','success');
+        this.snackBarService.openSnackBar('success','El vuelo se guardo de manera exitosa','Éxito');
         this.loading = false;
       }, error => {
       });
       }
     }else{
-      this.snackBarService.openSnackBar('warning','El formulario no es valido','Warning');
+      this.snackBarService.openSnackBar('error','El formulario no es valido','error');
     } 
     
   }

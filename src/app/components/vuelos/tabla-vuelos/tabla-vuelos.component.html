@@ -1,9 +1,6 @@
 <br><br>
 <div>
-  <div id="alta" class="col text-end">
-    <button mat-stroked-button color="primary" (click)="altaReserva()"><i class="fa fa-plus"> Alta de Vuelo</i></button>
-    <br/>
-  </div>
+  
     <table mat-table [dataSource]="dataSource" *ngIf="!loading">
         <!-- Position Column -->
         <ng-container matColumnDef="Origen">

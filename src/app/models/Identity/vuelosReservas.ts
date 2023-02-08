@@ -11,5 +11,5 @@ export class VuelosReservas{
     horaSalida!: Time;
     horaLlegada!: Time;
     codigoVuelo!: String;
-    costo!: number;
+    costo!: Float32Array;
 }

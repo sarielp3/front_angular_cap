@@ -30,26 +30,28 @@
             <td>
                 <mat-form-field class="form-element">
                     <mat-label>Hora Salida</mat-label>
-                    <input type="time" formControlName="horaSalidaControl" matInput placeholder="Hora Salida" value="">
+                    <input autocomplete="off" type="time" formControlName="horaSalidaControl" matInput placeholder="Hora Salida" value="">
                 </mat-form-field> 
             </td>
             <td>
                 <mat-form-field class="form-element">
                     <mat-label>Hora Llegada</mat-label>
-                    <input type="time" formControlName="horaLlegadaControl" matInput placeholder="Hora Llegada" value="">
+                    <input autocomplete="off" type="time" formControlName="horaLlegadaControl" matInput placeholder="Hora Llegada" value="">
                 </mat-form-field> 
             </td>
         </table>                
         <br />
 
         <mat-form-field class="form-element">
-            <mat-label>Codigo</mat-label>
-            <input formControlName="codigoControl" matInput placeholder="Codigo" value="">
+            <mat-label>C&oacute;digo</mat-label>
+            <input style="text-transform:uppercase;" autocomplete="off" maxlength="10" minlength="10" formControlName="codigoControl" matInput placeholder="Codigo" value=""
+            onkeypress="return (event.charCode == 209 || event.charCode == 241 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 48 && event.charCode <= 57))">
         </mat-form-field>
         
         <mat-form-field class="form-element">
             <mat-label>Costo</mat-label>
-            <input type="number" formControlName="costoControl" matInput placeholder="Costo" value="">
+            <input maxlength="5" placeholder="Ej. 4000" value="30000" type="text" autocomplete="off" formControlName="costoControl" matInput placeholder="Costo"
+            onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 46">
         </mat-form-field>       
         <table class="form-element">
             <td>
