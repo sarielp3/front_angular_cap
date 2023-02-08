@@ -83,7 +83,7 @@
 
         <ng-container matColumnDef="direccion">
           <th id="direccion" mat-header-cell *matHeaderCellDef>Direccion</th>
-          <td id="direccion" mat-cell *matCellDef="let element">
+          <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 300px;" id="direccion" mat-cell *matCellDef="let element">
             <a matTooltip="{{ element.direccion }}">
               {{ element.direccion }}
             </a>
