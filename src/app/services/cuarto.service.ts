@@ -17,13 +17,15 @@ export class CuartoService {
     );
   }
 
-  obtenerListaFiltro(id:number):Observable<Cuarto[]>{
-    return this.httpClient.get<Cuarto[]>(environment.apiUrl + 'cuartos/filter-cuartos/' + id);
+  obtenerListaFiltro(id: number): Observable<Cuarto[]> {
+    return this.httpClient.get<Cuarto[]>(
+      environment.apiUrl + 'cuartos/filter-cuartos/' + id
+    );
   }
 
-  registraHabitaciones(habitacion: Cuarto,id:number): Observable<Object> {
+  registraHabitaciones(habitacion: Cuarto, id: number): Observable<Object> {
     return this.httpClient.post(
-      environment.apiUrl + 'cuartos/agregar/'+id,
+      environment.apiUrl + 'cuartos/agregar/' + id,
       habitacion
     );
   }

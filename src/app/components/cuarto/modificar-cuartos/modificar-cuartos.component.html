@@ -1,57 +1,59 @@
-
-  <mat-toolbar color="primary">
-    <span class="fill-remaining-space">Modificar habitaciones</span>
+<mat-toolbar color="primary">
+  <span class="fill-remaining-space">Modificar habitaciones</span>
 </mat-toolbar>
-<br>
- <div class="container">
+<br />
+<div class="container">
   <form [formGroup]="modificarForm" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="fill" class="form-element">
       <mat-label>Nombre del cuarto</mat-label>
       <input
         matInput
+        maxlength="22"
         formControlName="nombreCuarto"
-        placeholder="Nombre del cuarto"
+        placeholder="Ej. Juan Carlos"
         value=""
         onkeypress="return (event.charCode == 32 || event.charCode == 209 || event.charCode == 241 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
       />
     </mat-form-field>
 
-    <mat-form-field  appearance="fill" class="form-element">
-      <mat-label>Descripcion</mat-label>
+    <mat-form-field appearance="fill" class="form-element">
+      <mat-label>Descripción</mat-label>
       <textarea
         matInput
         formControlName="descripcion"
-        placeholder="Este es un cuarto..."
+        maxlength="300"
+        placeholder="Ej. Este es un cuarto..."
         onkeypress="return (event.charCode == 32 || event.charCode == 209 || event.charCode == 241 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
       ></textarea>
     </mat-form-field>
-<table class="form-element">
-  <td>
-    <mat-form-field appearance="fill" class="form-element">
-      <mat-label>Numero de personas</mat-label>
-      <input
-        matInput
-        maxlength="2"
-        formControlName="numeroPersonas"
-        placeholder="Ex. 3"
-        value="99"
-        onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
-      />
-    </mat-form-field>
-  </td>
-  <td>
-    <mat-form-field appearance="fill" class="form-element">
-      <mat-label>Codigo Cuarto</mat-label>
-      <input
-        matInput
-        formControlName="codigoCuarto"
-        placeholder="Nombre del cuarto"
-        value=""
-        onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
-      />
-    </mat-form-field>
-  </td>
-</table>
+    <table class="form-element">
+      <td>
+        <mat-form-field appearance="fill" class="form-element">
+          <mat-label>Número de personas</mat-label>
+          <input
+            matInput
+            maxlength="2"
+            formControlName="numeroPersonas"
+            placeholder="Ej. 2"
+            value="10"
+            onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
+          />
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field appearance="fill" class="form-element">
+          <mat-label>Código Cuarto</mat-label>
+          <input
+            matInput
+            maxlength="10"
+            formControlName="codigoCuarto"
+            placeholder="Ej. JCFACAP223"
+            value="1000000000"
+            onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+          />
+        </mat-form-field>
+      </td>
+    </table>
 
     <mat-form-field appearance="fill" class="form-element">
       <mat-label>Costo por noche</mat-label>
@@ -59,8 +61,8 @@
         matInput
         formControlName="costoNoche"
         maxlength="5"
-        placeholder="Ex. 400"
-        value="3000"
+        placeholder="Ej. 4000"
+        value="30000"
         onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
       />
     </mat-form-field>
@@ -78,7 +80,13 @@
 
     <br />
     <button mat-raised-button color="primary" type="submit">Guardar</button>
-    <button id="centrarboton" mat-raised-button color="primary" type="button" (click)="cancelar()">
+    <button
+      id="centrarboton"
+      mat-raised-button
+      color="primary"
+      type="button"
+      (click)="cancelar()"
+    >
       Cancelar
     </button>
   </form>

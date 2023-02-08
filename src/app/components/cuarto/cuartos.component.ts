@@ -15,9 +15,9 @@ import { BoundElementProperty } from '@angular/compiler';
   styleUrls: ['./cuartos.component.css'],
 })
 export class CuartosComponent implements OnInit {
-  loading:boolean = false;
+  loading: boolean = false;
   @Input() idHotel: number;
-  hotelID:any;
+  hotelID: any;
   displayedColumns: string[] = [
     'Nombre del cuarto',
     'Descripcion',
@@ -41,9 +41,8 @@ export class CuartosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    
     //this.obtenerHabitaciones();
-    console.log("modificar" + this.idHotel);
+    console.log('modificar' + this.idHotel);
     this.hotelID = this.idHotel;
     this.obtenerHabitacionesFiltro();
   }
@@ -64,7 +63,7 @@ export class CuartosComponent implements OnInit {
     );
   }
 
-  public obtenerHabitacionesFiltro(){
+  public obtenerHabitacionesFiltro() {
     this.cuartoService.obtenerListaFiltro(this.idHotel).subscribe(
       (habitaciones) => {
         console.log(habitaciones);
@@ -104,25 +103,23 @@ export class CuartosComponent implements OnInit {
 
   eliminarHabitacion(elemento: number): void {
     console.log(elemento);
-      const dialogoRef = this.dialog.open(ConfirmDialogComponent, {
-        disableClose: true,
-        data: true
-      });
-      dialogoRef.afterClosed().subscribe((respuesta) => {
-        console.log(respuesta);
-        if (respuesta) {
-          this.cuartoService.eliminarHabitacion(elemento).subscribe((dato) => {
-            this.snackBarService.openSnackBar(
+    const dialogoRef = this.dialog.open(ConfirmDialogComponent, {
+      disableClose: true,
+      data: true,
+    });
+    dialogoRef.afterClosed().subscribe((respuesta) => {
+      console.log(respuesta);
+      if (respuesta) {
+        this.cuartoService.eliminarHabitacion(elemento).subscribe((dato) => {
+          this.snackBarService.openSnackBar(
             'success',
             'registro eliminado',
             'success'
           );
           this.obtenerHabitacionesFiltro();
-          });
-          
-        }
-      });
-   
+        });
+      }
+    });
   }
 
   cambiarStatus(enable: boolean, elemento, check: MatSlideToggleChange) {

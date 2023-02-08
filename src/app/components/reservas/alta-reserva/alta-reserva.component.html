@@ -1,118 +1,209 @@
 <mat-toolbar color="primary">
-    <span class="fill-remaining-space">Alta Reserva</span>
+  <span class="fill-remaining-space">Alta Reserva</span>
 </mat-toolbar>
 <div class="container">
-    <form [formGroup]='altaReserva'>
-        <table class="form-element">
-            <td>
-                <mat-form-field appearance="fill" class="form-element">
-            
-                    <mat-label>Origen</mat-label>
-                    <mat-select (selectionChange)="origenChange()" formControlName="origenSelect">
-                        <mat-option *ngFor="let ciudadOrigen of ciudadesOrigen"
-                            [value]="ciudadOrigen.idCiudad">{{ciudadOrigen.nombreCiudad}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </td>
-            <td>
-                <mat-form-field appearance="fill" class="form-element">
-                    <mat-label>Destino</mat-label>
-                    <mat-select (selectionChange)="destinoChange()" formControlName="destinoSelect">
-                        <mat-option *ngFor="let ciudad of ciudadesDestino"
-                            [value]="ciudad.idCiudad">{{ciudad.nombreCiudad}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </td>
-        </table>
+  <form [formGroup]="altaReserva">
+    <table class="form-element">
+      <td>
         <mat-form-field appearance="fill" class="form-element">
-            <mat-label>Vuelos</mat-label>
-            <mat-select (selectionChange)="vueloChange()" formControlName="vueloSelect">
-                <mat-option *ngFor="let vuelo of vuelos"
-                    [value]="vuelo.idVuelo">{{vuelo.codigoVuelo}}</mat-option>
-            </mat-select>
+          <mat-label>Origen</mat-label>
+          <mat-select
+            (selectionChange)="origenChange()"
+            formControlName="origenSelect"
+          >
+            <mat-option
+              *ngFor="let ciudadOrigen of ciudadesOrigen"
+              [value]="ciudadOrigen.idCiudad"
+              >{{ ciudadOrigen.nombreCiudad }}</mat-option
+            >
+          </mat-select>
         </mat-form-field>
+      </td>
+      <td>
         <mat-form-field appearance="fill" class="form-element">
-            <mat-label>Hotel</mat-label>
-            <mat-select (selectionChange)="hotelChange()" formControlName="hotelSelect">
-                <mat-option *ngFor="let hotel of hoteles"
-                    [value]="hotel.idHotel">{{hotel.nombreHotel}}</mat-option>
-            </mat-select>
+          <mat-label>Destino</mat-label>
+          <mat-select
+            (selectionChange)="destinoChange()"
+            formControlName="destinoSelect"
+          >
+            <mat-option
+              *ngFor="let ciudad of ciudadesDestino"
+              [value]="ciudad.idCiudad"
+              >{{ ciudad.nombreCiudad }}</mat-option
+            >
+          </mat-select>
         </mat-form-field>
-        <table class="form-element">
-            <td>
-                <mat-form-field appearance="fill" class="form-element">
-                    <mat-label>Tipo de Cuarto</mat-label>
-                    <mat-select (selectionChange)="cuartoChange()" formControlName="cuartoSelect">
-                        <mat-option *ngFor="let c of cuartos"
-                            [value]="c.idCuarto">{{c.tipoCuarto}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </td>
-            <td>
-                <mat-form-field  appearance="fill" class="form-element">
-                    <mat-label>Costo</mat-label>
-                    <input formControlName="costoCuarto" matInput #postalCode maxlength="5">
-                </mat-form-field>
-            </td>
-        </table>
-        <table class="form-element">
-            <td>
-                <mat-form-field style="width: 241px;">
-                    <mat-label>Fecha Inicio</mat-label>
-                    <input formControlName="fechaInicioSelect" matInput [matDatepicker]="datepicker">
-                    <mat-hint>MM/DD/YYYY</mat-hint>
-                    <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
-                    <mat-datepicker #datepicker>
-                        <mat-datepicker-actions>
-                            <button mat-button matDatepickerCancel>Cancelar</button>
-                            <button mat-raised-button color="primary" matDatepickerApply>Aceptar</button>
-                        </mat-datepicker-actions>
-                    </mat-datepicker>
-                </mat-form-field>
-            </td>
-            <td>
-                <mat-form-field style="width: 240px;">
-                    <mat-label>Fecha Fin</mat-label>
-                    <input formControlName="fechaFinSelect" matInput [matDatepicker]="datepickerFin">
-                    <mat-hint>MM/DD/YYYY</mat-hint>
-                    <mat-datepicker-toggle matIconSuffix [for]="datepickerFin"></mat-datepicker-toggle>
-                    <mat-datepicker #datepickerFin>
-                        <mat-datepicker-actions>
-                            <button mat-button matDatepickerCancel>Cancelar</button>
-                            <button mat-raised-button color="primary" matDatepickerApply>Aceptar</button>
-                        </mat-datepicker-actions>
-                    </mat-datepicker>
-                </mat-form-field>
-            </td>
-        </table>                
-        <br />
+      </td>
+    </table>
+    <mat-form-field appearance="fill" class="form-element">
+      <mat-label>Vuelos</mat-label>
+      <mat-select
+        (selectionChange)="vueloChange()"
+        formControlName="vueloSelect"
+      >
+        <mat-option *ngFor="let vuelo of vuelos" [value]="vuelo.idVuelo">{{
+          vuelo.codigoVuelo
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="form-element">
+      <mat-label>Hotel</mat-label>
+      <mat-select
+        (selectionChange)="hotelChange()"
+        formControlName="hotelSelect"
+      >
+        <mat-option *ngFor="let hotel of hoteles" [value]="hotel.idHotel">{{
+          hotel.nombreHotel
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <table class="form-element">
+      <td>
+        <mat-form-field appearance="fill" class="form-element">
+          <mat-label>Tipo de Cuarto</mat-label>
+          <mat-select
+            (selectionChange)="cuartoChange()"
+            formControlName="cuartoSelect"
+          >
+            <mat-option *ngFor="let c of cuartos" [value]="c.idCuarto">{{
+              c.tipoCuarto
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field appearance="fill" class="form-element">
+          <mat-label>Costo</mat-label>
+          <input
+            formControlName="costoCuarto"
+            matInput
+            #postalCode
+            maxlength="5"
+          />
+        </mat-form-field>
+      </td>
+    </table>
+    <table class="form-element">
+      <td>
+        <mat-form-field style="width: 241px">
+          <mat-label>Fecha Inicio</mat-label>
+          <input
+            formControlName="fechaInicioSelect"
+            matInput
+            [matDatepicker]="datepicker"
+            onkeydown="return false"
+          />
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="datepicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #datepicker>
+            <mat-datepicker-actions>
+              <button mat-button matDatepickerCancel>Cancelar</button>
+              <button mat-raised-button color="primary" matDatepickerApply>
+                Aceptar
+              </button>
+            </mat-datepicker-actions>
+          </mat-datepicker>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field style="width: 240px">
+          <mat-label>Fecha Fin</mat-label>
+          <input
+            formControlName="fechaFinSelect"
+            matInput
+            [matDatepicker]="datepickerFin"
+            onkeydown="return false"
+          />
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="datepickerFin"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #datepickerFin>
+            <mat-datepicker-actions>
+              <button mat-button matDatepickerCancel>Cancelar</button>
+              <button mat-raised-button color="primary" matDatepickerApply>
+                Aceptar
+              </button>
+            </mat-datepicker-actions>
+          </mat-datepicker>
+        </mat-form-field>
+      </td>
+    </table>
+    <br />
+    <mat-form-field class="form-element">
+      <mat-label>Nombre</mat-label>
+      <input
+        onkeypress="return (event.charCode == 32 || event.charCode == 209 || event.charCode == 241 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+        formControlName="nombreSelect"
+        matInput
+        maxlength="22"
+        placeholder="Ej. Juan Carlos"
+        value=""
+      />
+    </mat-form-field>
+    <table class="form-element">
+      <td>
         <mat-form-field class="form-element">
-            <mat-label>Nombre</mat-label>
-            <input formControlName="nombreSelect" matInput placeholder="Nombre" value="">
+          <mat-label>Apellido Paterno</mat-label>
+          <input
+            onkeypress="return (event.charCode == 32 || event.charCode == 209 || event.charCode == 241 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+            formControlName="apellidoPaternoSelect"
+            matInput
+            maxlength="22"
+            placeholder="Ej. Acosta"
+            value=""
+          />
         </mat-form-field>
-       <table class="form-element">
-       <td>
+      </td>
+      <td>
         <mat-form-field class="form-element">
-            <mat-label>Apellido Paterno</mat-label>
-            <input formControlName="apellidoPaternoSelect" matInput placeholder="Apellido Paterno" value="">
+          <mat-label>Apellido Materno</mat-label>
+          <input
+            onkeypress="return (event.charCode == 32 || event.charCode == 209 || event.charCode == 241 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+            formControlName="apellidoMaternoSelect"
+            matInput
+            maxlength="22"
+            placeholder="Ej. Lechuga"
+            value=""
+          />
         </mat-form-field>
-        </td>
-        <td>
-        <mat-form-field class="form-element">
-            <mat-label>Apellido Materno</mat-label>
-            <input formControlName="apellidoMaternoSelect" matInput placeholder="Apellido Paterno" value="">
-        </mat-form-field>
-        </td>
+      </td>
     </table>
     <mat-form-field class="form-element">
-        <mat-label>Descripcion</mat-label>
-        <input formControlName="descripcionSelect" matInput placeholder="Descripcion de la reserva" value="">
+      <mat-label>Descripción</mat-label>
+      <input
+        formControlName="descripcionSelect"
+        matInput
+        maxlength="300"
+        placeholder="Ej. Este es una reservación..."
+        onkeypress="return (event.charCode == 32 || event.charCode == 209 || event.charCode == 241 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+      />
     </mat-form-field>
-        <br />
-        
-                <button id="centrarboton" mat-raised-button color="primary" [disabled]="!altaReserva.valid" type="submit" (click)="guardar()">Guardar</button>
-            
-                <button id="centrarboton" mat-raised-button color="primary"  type="button" (click)="cancelar()">Cancelar</button>
-                                                    
-    </form>
+    <br />
+
+    <button
+      id="centrarboton"
+      mat-raised-button
+      color="primary"
+      [disabled]="!altaReserva.valid"
+      type="submit"
+      (click)="guardar()"
+    >
+      Guardar
+    </button>
+
+    <button
+      id="centrarboton"
+      mat-raised-button
+      color="primary"
+      type="button"
+      (click)="cancelar()"
+    >
+      Cancelar
+    </button>
+  </form>
 </div>

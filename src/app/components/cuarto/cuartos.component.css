@@ -1,21 +1,25 @@
 #divPadre {
-     align-items: center;
-     justify-content: center;
-   }
-   
-   td,
-   th {
-     text-align: center;
-   }
-   
-   th {
-     font-size: medium;
-   }
-   
-   p {
-     align-items: center;
-     text-align: center;
-     font-size: 20px;
-     font-weight: bold;
-   }
-   
+  align-items: center;
+  justify-content: center;
+}
+
+td,
+th {
+  text-align: center;
+  width: 130px;
+}
+
+th {
+  font-size: medium;
+}
+
+p {
+  align-items: center;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
