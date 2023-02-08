@@ -90,6 +90,8 @@
           <input
             formControlName="fechaInicioSelect"
             matInput
+            [min]="minDate"
+            [max]="maxDate"
             [matDatepicker]="datepicker"
             onkeydown="return false"
           />
@@ -114,6 +116,8 @@
           <input
             formControlName="fechaFinSelect"
             matInput
+            [min]="minDate"
+            [max]="maxDate"
             [matDatepicker]="datepickerFin"
             onkeydown="return false"
           />

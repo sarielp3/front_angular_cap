@@ -92,6 +92,8 @@
           <mat-label>Fecha Inicio</mat-label>
           <input
             matInput
+            [min]="minDate"
+            [max]="maxDate"
             [matDatepicker]="datepicker"
             onkeydown="return false"
             formControlName="fechaInicioSelect"
@@ -116,6 +118,8 @@
           <mat-label>Fecha Fin</mat-label>
           <input
             matInput
+            [min]="minDate"
+            [max]="maxDate"
             onkeydown="return false"
             [matDatepicker]="datepickerFin"
             formControlName="fechaFinSelect"

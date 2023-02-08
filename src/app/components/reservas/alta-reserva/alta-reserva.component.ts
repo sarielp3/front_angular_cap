@@ -2,7 +2,12 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Ciudades } from 'src/app/models/Identity/ciudades';
 import { CiudadesService } from 'src/app/services/ciudades.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
 import { VuelosService } from 'src/app/services/vuelos.service';
 import { HotelesServiceTsService } from 'src/app/services/hoteles.service';
@@ -18,11 +23,12 @@ import { MatTableDataSource } from '@angular/material/table';
 @Component({
   selector: 'app-alta-reserva',
   templateUrl: './alta-reserva.component.html',
-  styleUrls: ['./alta-reserva.component.css']
+  styleUrls: ['./alta-reserva.component.css'],
 })
 export class AltaReservaComponent implements OnInit {
   altaReserva: FormGroup;
-
+  minDate = new Date(2020, 0, 1);
+  maxDate = new Date(2022, 11, 31);
 
   ciudadesOrigen: Ciudades[];
   ciudadesDestino: Ciudades[];
@@ -40,7 +46,8 @@ export class AltaReservaComponent implements OnInit {
     private cuartosService: CuartoService,
     private snackBarService: SnackBarService,
     public dialogRef: MatDialogRef<AltaReservaComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,) { }
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
 
   ngOnInit() {
     this.altaReserva = this.fb.group({
@@ -55,23 +62,26 @@ export class AltaReservaComponent implements OnInit {
       costoCuarto: ['', Validators.required],
       fechaInicioSelect: ['', Validators.required],
       fechaFinSelect: ['', Validators.required],
-       descripcionSelect: ['', Validators.required]
+      descripcionSelect: ['', Validators.required],
     });
     this.ciudadesService.getCiudadesOrigen().subscribe(
-      data => {
-        console.log("Data =>", data);
+      (data) => {
+        console.log('Data =>', data);
         this.ciudadesOrigen = data;
-      }, error => {
-        console.log("Error =>", error);
+      },
+      (error) => {
+        console.log('Error =>', error);
       }
-    )
+    );
     this.ciudadesService.getCiudadesDestino().subscribe(
-      data => {
-        console.log("Data =>", data);
+      (data) => {
+        console.log('Data =>', data);
         this.ciudadesDestino = data;
-      }, error => {
-        console.log("Error =>", error);
-      });
+      },
+      (error) => {
+        console.log('Error =>', error);
+      }
+    );
     /*   this.vuelosService.getVuelos('').subscribe(
          vuelo => {
            console.log("Data =>", vuelo);
@@ -87,12 +97,14 @@ export class AltaReservaComponent implements OnInit {
         console.log("Error =>", error);
       });*/
     this.cuartosService.obtenerListaDeHabitaciones().subscribe(
-      cuarto => {
-        console.log("Data =>", cuarto);
+      (cuarto) => {
+        console.log('Data =>', cuarto);
         this.cuartos = cuarto;
-      }, error => {
-        console.log("Error =>", error);
-      });
+      },
+      (error) => {
+        console.log('Error =>', error);
+      }
+    );
     this.altaReserva.get('vueloSelect').disable();
     this.altaReserva.get('hotelSelect').disable();
     this.altaReserva.get('cuartoSelect').disable();
@@ -100,27 +112,43 @@ export class AltaReservaComponent implements OnInit {
   }
 
   guardar() {
-    this.reservaAlta.nombreCliente = this.altaReserva.controls['nombreSelect'].value;
-    this.reservaAlta.apellidoPaternoCliente = this.altaReserva.controls['apellidoPaternoSelect'].value;
-    this.reservaAlta.apellidoMaternoCliente = this.altaReserva.controls['apellidoMaternoSelect'].value;
-    this.reservaAlta.fechaInicio = this.altaReserva.controls['fechaInicioSelect'].value;
-    this.reservaAlta.fechaFin = this.altaReserva.controls['fechaFinSelect'].value;
+    this.reservaAlta.nombreCliente =
+      this.altaReserva.controls['nombreSelect'].value;
+    this.reservaAlta.apellidoPaternoCliente =
+      this.altaReserva.controls['apellidoPaternoSelect'].value;
+    this.reservaAlta.apellidoMaternoCliente =
+      this.altaReserva.controls['apellidoMaternoSelect'].value;
+    this.reservaAlta.fechaInicio =
+      this.altaReserva.controls['fechaInicioSelect'].value;
+    this.reservaAlta.fechaFin =
+      this.altaReserva.controls['fechaFinSelect'].value;
     this.reservaAlta.idVuelo = this.altaReserva.controls['vueloSelect'].value;
     this.reservaAlta.idHotel = this.altaReserva.controls['hotelSelect'].value;
     this.reservaAlta.idCuarto = this.altaReserva.controls['cuartoSelect'].value;
-    this.reservaAlta.descripcion = this.altaReserva.controls['descripcionSelect'].value
+    this.reservaAlta.descripcion =
+      this.altaReserva.controls['descripcionSelect'].value;
 
     this.reservaAlta.fechaInicio.setHours(18);
     this.reservaAlta.fechaFin.setHours(12);
     if (this.altaReserva.valid === true) {
-      this.reservaService.createReserva(this.reservaAlta).subscribe(data => {
-        this.reservaAlta.idReserva = data.idReserva;
-        this.snackBarService.openSnackBar('success', 'La reserva fue creada exitosamente', 'Reserva Registrada');
-        this.dialogRef.close();
-      }, error => { }
+      this.reservaService.createReserva(this.reservaAlta).subscribe(
+        (data) => {
+          this.reservaAlta.idReserva = data.idReserva;
+          this.snackBarService.openSnackBar(
+            'success',
+            'La reserva fue creada exitosamente',
+            'Reserva Registrada'
+          );
+          this.dialogRef.close();
+        },
+        (error) => {}
       );
     } else {
-      this.snackBarService.openSnackBar('warning', 'El formulario no es valido', 'Reserva incorrecta');
+      this.snackBarService.openSnackBar(
+        'warning',
+        'El formulario no es valido',
+        'Reserva incorrecta'
+      );
     }
   }
   cancelar() {
@@ -131,28 +159,30 @@ export class AltaReservaComponent implements OnInit {
     this.altaReserva.get('vueloSelect').enable();
     const origenId = this.altaReserva.getRawValue().origenSelect;
     const destinoId = this.altaReserva.getRawValue().destinoSelect;
-    console.log(origenId); // Llamamos a cargar Destino  
+    console.log(origenId); // Llamamos a cargar Destino
     let ciudadesDestinoAux = [];
     let vuelosAuxiliar = [];
     let ciudadesId = [];
-    this.vuelosService.getVuelos('?origen=' + origenId).subscribe(respuesta => {
-      const vuelos = respuesta;
-      vuelos.forEach(vuelo => {
-        if (!ciudadesId.includes(vuelo.destino.idCiudad)) {
-          ciudadesId.push(vuelo.destino.idCiudad)
-          ciudadesDestinoAux.push(vuelo.destino);
-        }
-        vuelosAuxiliar.push({ idVuelo: vuelo.idVuelo, codigoVuelo: vuelo.codigoVuelo });
-      });
-      console.log(ciudadesDestinoAux);
-      console.log(vuelosAuxiliar);
-      this.ciudadesDestino = ciudadesDestinoAux;
-      this.vuelos = vuelosAuxiliar;
-      
-    },
-      error => { }
+    this.vuelosService.getVuelos('?origen=' + origenId).subscribe(
+      (respuesta) => {
+        const vuelos = respuesta;
+        vuelos.forEach((vuelo) => {
+          if (!ciudadesId.includes(vuelo.destino.idCiudad)) {
+            ciudadesId.push(vuelo.destino.idCiudad);
+            ciudadesDestinoAux.push(vuelo.destino);
+          }
+          vuelosAuxiliar.push({
+            idVuelo: vuelo.idVuelo,
+            codigoVuelo: vuelo.codigoVuelo,
+          });
+        });
+        console.log(ciudadesDestinoAux);
+        console.log(vuelosAuxiliar);
+        this.ciudadesDestino = ciudadesDestinoAux;
+        this.vuelos = vuelosAuxiliar;
+      },
+      (error) => {}
     );
-
   }
 
   destinoChange() {
@@ -163,35 +193,42 @@ export class AltaReservaComponent implements OnInit {
     let ciudadesOrigenAux = [];
     let vuelosAuxiliar = [];
     let ciudadesId = [];
-    this.vuelosService.getVuelos('?destino=' + destinoId).subscribe(respuesta => {
-      const vuelos = respuesta;
-      vuelos.forEach(vuelo => {
-        if (!ciudadesId.includes(vuelo.origen.idCiudad)) {
-          ciudadesId.push(vuelo.origen.idCiudad)
-          ciudadesOrigenAux.push(vuelo.origen);
-          this.altaReserva.controls['origenSelect'].setValue(ciudadesId[0]);
-        }
-        vuelosAuxiliar.push({ idVuelo: vuelo.idVuelo, codigoVuelo: vuelo.codigoVuelo });
-      });
-      console.log(ciudadesOrigenAux);
-      console.log(vuelosAuxiliar);
-      //this.ciudadesOrigen = ciudadesOrigenAux;
-      this.vuelos = vuelosAuxiliar;
-     
-    },
-      error => { }
+    this.vuelosService.getVuelos('?destino=' + destinoId).subscribe(
+      (respuesta) => {
+        const vuelos = respuesta;
+        vuelos.forEach((vuelo) => {
+          if (!ciudadesId.includes(vuelo.origen.idCiudad)) {
+            ciudadesId.push(vuelo.origen.idCiudad);
+            ciudadesOrigenAux.push(vuelo.origen);
+            this.altaReserva.controls['origenSelect'].setValue(ciudadesId[0]);
+          }
+          vuelosAuxiliar.push({
+            idVuelo: vuelo.idVuelo,
+            codigoVuelo: vuelo.codigoVuelo,
+          });
+        });
+        console.log(ciudadesOrigenAux);
+        console.log(vuelosAuxiliar);
+        //this.ciudadesOrigen = ciudadesOrigenAux;
+        this.vuelos = vuelosAuxiliar;
+      },
+      (error) => {}
     );
     let hotelesAux = [];
-    if(destinoId != ''){
-      this.hotelesServices.getFiltrosHoteles('','',destinoId).subscribe(respuesta => {
+    if (destinoId != '') {
+      this.hotelesServices
+        .getFiltrosHoteles('', '', destinoId)
+        .subscribe((respuesta) => {
           const hoteles = respuesta;
-          hoteles.forEach(hotel => {
-            hotelesAux.push({idHotel:hotel.idHotel, nombreHotel:hotel.nombreHotel})
+          hoteles.forEach((hotel) => {
+            hotelesAux.push({
+              idHotel: hotel.idHotel,
+              nombreHotel: hotel.nombreHotel,
+            });
           });
           this.hoteles = hotelesAux;
-      });
+        });
     }
-
   }
 
   vueloChange() {
@@ -202,32 +239,40 @@ export class AltaReservaComponent implements OnInit {
     this.altaReserva.get('cuartoSelect').enable();
     const hotelId = this.altaReserva.getRawValue().hotelSelect;
     let cuartosAuxiliar = [];
-    this.cuartosService.obtenerListaFiltro(hotelId).subscribe(respuesta => {
-      const cuartos = respuesta;
-      cuartos.forEach(cuarto => {
+    this.cuartosService.obtenerListaFiltro(hotelId).subscribe(
+      (respuesta) => {
+        const cuartos = respuesta;
+        cuartos.forEach((cuarto) => {
+          cuartosAuxiliar.push({
+            idCuarto: cuarto.idCuarto,
+            tipoCuarto: cuarto.tipoCuarto,
+            costoNoche: cuarto.costoNoche,
+          });
+        });
 
-        cuartosAuxiliar.push({ idCuarto: cuarto.idCuarto, tipoCuarto: cuarto.tipoCuarto,costoNoche:cuarto.costoNoche });
-      });
-
-      console.log(cuartosAuxiliar);
-      this.cuartos = cuartosAuxiliar;
-      if(this.cuartos.length === 0){
-        this.snackBarService.openSnackBar('warning','Este Hotel no cuenta con cuartos','Reserva incorrecta');
-      }
-    },
-      error => { }
+        console.log(cuartosAuxiliar);
+        this.cuartos = cuartosAuxiliar;
+        if (this.cuartos.length === 0) {
+          this.snackBarService.openSnackBar(
+            'warning',
+            'Este Hotel no cuenta con cuartos',
+            'Reserva incorrecta'
+          );
+        }
+      },
+      (error) => {}
     );
   }
 
   cuartoChange() {
     const cuartoId = this.altaReserva.getRawValue().cuartoSelect;
     console.log('cuarto: ' + this.altaReserva.controls['cuartoSelect'].value);
-    const cuarto = this.cuartos.filter((cuarto) => cuarto.idCuarto === cuartoId); 
+    const cuarto = this.cuartos.filter(
+      (cuarto) => cuarto.idCuarto === cuartoId
+    );
     if (cuarto.length > 0) {
-       console.log(cuarto);
-      this.altaReserva.controls['costoCuarto'].setValue(cuarto[0].costoNoche); 
+      console.log(cuarto);
+      this.altaReserva.controls['costoCuarto'].setValue(cuarto[0].costoNoche);
     }
-
-
   }
 }
