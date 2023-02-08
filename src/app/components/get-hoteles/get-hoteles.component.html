@@ -1,32 +1,21 @@
-<p>Lista Hoteles</p>
-<mat-grid-list cols="4" rowHeight="150px">
-  <mat-grid-tile colspan="1" rowspan="3"
-    ><div class="campos">
-      <h3>Filtros</h3>
+<p>Administraci&oacute;n de Hoteles</p>
+    <mat-grid-list cols="4" rowHeight="150px">
+      <mat-grid-tile colspan="1" rowspan="3"><div class="campos">
+        <h3>Filtros</h3>
 
       <form [formGroup]="filtroForm" (ngSubmit)="onSubmit()">
         <mat-form-field>
           <mat-label>Nombre del Hotel</mat-label>
-          <mat-select formControlName="nombreHotel">
-            <mat-option
-              *ngFor="let nombre of NombreHoteles"
-              [value]="nombre.nombreHotel"
-            >
-              {{ nombre.nombreHotel }}
-            </mat-option>
-          </mat-select>
+          <input style="text-transform:uppercase;" autocomplete="off" formControlName="nombreHotel" maxlength="30" matInput placeholder="Hotel Ibis"
+                    onkeypress="return (event.charCode == 32 || event.charCode == 209 || event.charCode == 241 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 48 && event.charCode <= 57))"
+                    >
         </mat-form-field>
 
         <mat-form-field>
-          <mat-label>Codigo del Hotel</mat-label>
-          <mat-select formControlName="codigoHotel">
-            <mat-option
-              *ngFor="let codigo of NombreHoteles"
-              [value]="codigo.codigoHotel"
-            >
-              {{ codigo.codigoHotel }}
-            </mat-option>
-          </mat-select>
+          <mat-label>C&oacute;digo del Hotel</mat-label>
+          <input style="text-transform:uppercase;" autocomplete="off" minlength="10" maxlength="10" formControlName="codigoHotel" matInput placeholder="AB00000000"
+                    onkeypress="return (event.charCode == 209 || event.charCode == 241 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 48 && event.charCode <= 57))"
+                    >
         </mat-form-field>
 
         <mat-form-field>
@@ -89,7 +78,6 @@
             <a matTooltip="{{ element.codigoHotel }}">
               {{ element.codigoHotel }}
             </a>
-            {{ element.codigoHotel }}
           </td>
         </ng-container>
 

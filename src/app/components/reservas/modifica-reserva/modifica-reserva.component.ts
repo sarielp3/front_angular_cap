@@ -129,8 +129,8 @@ export class ModificaReservaComponent implements OnInit {
     this.reservaModificacion.idHotel = this.modificacionReserva.controls['hotelSelect'].value;
     this.reservaModificacion.idCuarto = this.modificacionReserva.controls['cuartoSelect'].value;
 
-    console.log(this.reservaModificacion);
-    console.log("valor cuarto: "+this.modificacionReserva.controls['cuartoSelect'].value);
+    this.reservaModificacion.fechaInicio.setHours(18);
+    this.reservaModificacion.fechaFin.setHours(12);
     this.modificacionReserva.controls['cuartoSelect'].setValidators([
       Validators.required,Validators.maxLength(1),
     ]);
@@ -143,7 +143,7 @@ export class ModificaReservaComponent implements OnInit {
     
 
     }else{
-      this.snackBarService.openSnackBar('warning','El formulario no es valido','Reserva incorrecta');
+      this.snackBarService.openSnackBar('error','El formulario no es valido','Reserva incorrecta');
     } 
     
   }
