@@ -19,9 +19,7 @@ th {
   font-size: medium;
 }
 
-#centrarboton{
-
-}
+mat-table { height: 300px; overflow: auto; }
 
   #direccion{
     width: 150px;
