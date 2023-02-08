@@ -26,7 +26,7 @@ import { SnackBarService } from 'src/app/services/snack-bar.service';
 export class ReservasComponent implements OnInit {
   loading:boolean = false;
   displayedColumns: string[] = ['Origen', 'Destino', 'Nombre del Cliente', 'Descripción de la reserva', 'Fecha Creacion', 'Modificar', 'Eliminar'];
-  titulo = 'Listado de Reservas';
+  titulo = 'Administración de Reservas';
   public reservas: Reservas[] = [];
   public hoteles: HotelesReservas[] = [];
   public cuartos: CuartosReservas[] = [];
