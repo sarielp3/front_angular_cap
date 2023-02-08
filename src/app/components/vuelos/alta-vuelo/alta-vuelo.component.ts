@@ -87,14 +87,14 @@ export class AltaVueloComponent {
     
     if(this.altaVuelo.valid === true){
       if( this.vueloAlta.origen === this.vueloAlta.destino){
-        this.snackBarService.openSnackBar('warning','La ciudad de origen debe ser diferente a la ciudad de destino','warning');
+        this.snackBarService.openSnackBar('error','La ciudad de origen debe ser diferente a la ciudad de destino','error');
         this.disableButon = false;
       }else{
         this.loading = true;
         this.vueloService.createVuelo(this.vueloAlta).subscribe( data =>{
           this.vueloService.vuelos.push(data);
           this.vueloService.emisor.next(this.vueloService.vuelos);
-          this.snackBarService.openSnackBar('success','El vuelo se guardo de manera exitosa','success');
+          this.snackBarService.openSnackBar('success','El vuelo se guardo de manera exitosa','Éxito');
           this.loading = false;
           this.disableButon = false;
           this.dialogRef.close();          
@@ -107,7 +107,7 @@ export class AltaVueloComponent {
       }
       
     }else{
-      this.snackBarService.openSnackBar('warning','El formulario no es valido','Warning');
+      this.snackBarService.openSnackBar('error','El formulario no es valido','error');
       this.disableButon = false;
     }    
     

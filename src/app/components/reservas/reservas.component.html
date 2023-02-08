@@ -1,4 +1,9 @@
 <p>{{ titulo }}</p>
+<div class="col text-end">
+  <button mat-stroked-button color="primary" (click)="altaReserva()">
+    <i class="fa fa-plus">Alta Reserva</i>
+  </button>
+</div>
 <mat-grid-list cols="4" rowHeight="120px">
   <mat-grid-tile colspan="1" rowspan="4">
     <div class="campos">
@@ -63,11 +68,7 @@
   </mat-grid-tile>
   <mat-grid-tile id="tabla" colspan="3" rowspan="4">
     <div class="container">
-      <div class="col text-end">
-        <button mat-stroked-button color="primary" (click)="altaReserva()">
-          <i class="fa fa-plus">Alta Reserva</i>
-        </button>
-      </div>
+      
       <br />
 
       <table mat-table [dataSource]="dataSource" *ngIf="!loading">
@@ -88,7 +89,7 @@
 
         <ng-container matColumnDef="Nombre del Cliente">
           <th mat-header-cell *matHeaderCellDef>Nombre del Cliente</th>
-          <td mat-cell *matCellDef="let element">
+          <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100px;" mat-cell *matCellDef="let element">
             {{ element.nombreCliente }} {{ element.apellidoPaternoCliente }}
             {{ element.apellidoMaternoCliente }}
           </td>
@@ -96,7 +97,7 @@
 
         <ng-container matColumnDef="Descripción de la reserva">
           <th mat-header-cell *matHeaderCellDef>Descripcion de la reserva</th>
-          <td mat-cell *matCellDef="let element">
+          <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 150px;" mat-cell *matCellDef="let element">
             <a matTooltip="{{ element.descripcion }}">{{
               element.descripcion
             }}</a>
