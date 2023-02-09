@@ -88,9 +88,9 @@ export class ModificarCuartosComponent implements OnInit {
           console.log(res);
 
           this.snackBarService.openSnackBar(
-            'Éxito',
-            'Cuarto modificado y guardado',
-            'Éxito'
+            'success',
+            'El cuarto fue modificado exitosamente',
+            'Cuarto modificado'
           );
           this.dialogRef.close();
         },
@@ -107,7 +107,7 @@ export class ModificarCuartosComponent implements OnInit {
       this.cambiosHabitacion();
     } else {
       this.snackBarService.openSnackBar(
-        'Advertencia',
+        'warning',
         'Llena todos los campos',
         'Advertencia'
       );

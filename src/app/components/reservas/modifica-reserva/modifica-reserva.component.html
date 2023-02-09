@@ -89,7 +89,9 @@
     <table class="form-element">
       <td>
         <mat-form-field style="width: 241px">
-          <mat-label>Fecha Inicio</mat-label>
+          <mat-label title="Selecciona fecha desde el icono calendario"
+            >Fecha Inicio</mat-label
+          >
           <input
             matInput
             [min]="minDate"
@@ -98,7 +100,7 @@
             onkeydown="return false"
             formControlName="fechaInicioSelect"
           />
-          <mat-hint>MM/DD/YYYY</mat-hint>
+
           <mat-datepicker-toggle
             matIconSuffix
             [for]="datepicker"
@@ -115,7 +117,9 @@
       </td>
       <td>
         <mat-form-field style="width: 240px">
-          <mat-label>Fecha Fin</mat-label>
+          <mat-label title="Selecciona fecha desde el icono calendario"
+            >Fecha Fin</mat-label
+          >
           <input
             matInput
             [min]="minDate"
@@ -124,7 +128,7 @@
             [matDatepicker]="datepickerFin"
             formControlName="fechaFinSelect"
           />
-          <mat-hint>YYYY-MM-DD</mat-hint>
+
           <mat-datepicker-toggle
             matIconSuffix
             [for]="datepickerFin"
@@ -147,7 +151,7 @@
         onkeypress="return (event.charCode == 32 || event.charCode == 209 || event.charCode == 241 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
         formControlName="nombreSelect"
         matInput
-        maxlength="22"
+        maxlength="40"
         placeholder="Ej. Juan Carlos"
         value=""
       />
@@ -159,6 +163,7 @@
           <input
             onkeypress="return (event.charCode == 32 || event.charCode == 209 || event.charCode == 241 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
             formControlName="apellidoPaternoSelect"
+            maxlength="40"
             matInput
             placeholder="Apellido Paterno"
             value=""
@@ -171,6 +176,7 @@
           <input
             onkeypress="return (event.charCode == 32 || event.charCode == 209 || event.charCode == 241 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
             formControlName="apellidoMaternoSelect"
+            maxlength="40"
             matInput
             placeholder="Apellido Paterno"
             value=""

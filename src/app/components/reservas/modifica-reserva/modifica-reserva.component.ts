@@ -20,8 +20,15 @@ import { VuelosService } from 'src/app/services/vuelos.service';
   styleUrls: ['./modifica-reserva.component.css'],
 })
 export class ModificaReservaComponent implements OnInit {
-  minDate = new Date(2023, 0, 1);
-  maxDate = new Date(2024, 11, 31);
+  today = new Date();
+
+  minDate = new Date(
+    this.today.getFullYear(),
+    this.today.getMonth(),
+    this.today.getDate()
+  );
+
+  maxDate = new Date(this.minDate.getFullYear() + 2, 11, 31);
   modificacionReserva: FormGroup;
   ciudadesOrigen: Ciudades[];
   ciudadesDestino: Ciudades[];
@@ -173,7 +180,7 @@ export class ModificaReservaComponent implements OnInit {
         this.modificacionReserva.controls['cuartoSelect'].value;
 
       this.reservaModificacion.fechaInicio.setHours(18);
-      this.reservaModificacion.fechaFin.setHours(12);
+      this.reservaModificacion.fechaFin.setHours(18);
       this.modificacionReserva.controls['cuartoSelect'].setValidators([
         Validators.required,
         Validators.maxLength(1),
@@ -184,9 +191,9 @@ export class ModificaReservaComponent implements OnInit {
         .subscribe(
           (data) => {
             this.snackBarService.openSnackBar(
-              'Éxito',
+              'success',
               'La reserva fue modificada exitosamente',
-              'Éxito'
+              'Reserva modificada'
             );
             this.dialogRef.close();
           },
@@ -194,7 +201,7 @@ export class ModificaReservaComponent implements OnInit {
         );
     } else {
       this.snackBarService.openSnackBar(
-        'Advertencia',
+        'warning',
         'El formulario no es valido',
         'Advertencia'
       );
@@ -308,7 +315,7 @@ export class ModificaReservaComponent implements OnInit {
           this.snackBarService.openSnackBar(
             'error',
             'Este Hotel no cuenta con cuartos',
-            'error'
+            'Error'
           );
         }
       },

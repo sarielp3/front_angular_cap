@@ -27,15 +27,22 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class AltaReservaComponent implements OnInit {
   altaReserva: FormGroup;
-  minDate = new Date(2020, 0, 1);
-  maxDate = new Date(2022, 11, 31);
-
   ciudadesOrigen: Ciudades[];
   ciudadesDestino: Ciudades[];
   vuelos: Vuelo[];
   hoteles: Hoteles[];
   cuartos: Cuarto[];
   reservaAlta: AltaReserva = new AltaReserva();
+
+  today = new Date();
+
+  minDate = new Date(
+    this.today.getFullYear(),
+    this.today.getMonth(),
+    this.today.getDate()
+  );
+
+  maxDate = new Date(this.minDate.getFullYear() + 2, 11, 31);
 
   constructor(
     private fb: FormBuilder,
@@ -129,15 +136,15 @@ export class AltaReservaComponent implements OnInit {
       this.altaReserva.controls['descripcionSelect'].value;
 
     this.reservaAlta.fechaInicio.setHours(18);
-    this.reservaAlta.fechaFin.setHours(12);
+    this.reservaAlta.fechaFin.setHours(18);
     if (this.altaReserva.valid === true) {
       this.reservaService.createReserva(this.reservaAlta).subscribe(
         (data) => {
           this.reservaAlta.idReserva = data.idReserva;
           this.snackBarService.openSnackBar(
-            'Éxito',
+            'success',
             'La reserva fue creada exitosamente',
-            'Éxito'
+            'Reserva Registrada'
           );
           this.dialogRef.close();
         },
@@ -145,9 +152,9 @@ export class AltaReservaComponent implements OnInit {
       );
     } else {
       this.snackBarService.openSnackBar(
-        'error',
-        'El formulario no es válido',
-        'error'
+        'warning',
+        'El formulario no es valido',
+        'Advertencia'
       );
     }
   }
@@ -254,9 +261,9 @@ export class AltaReservaComponent implements OnInit {
         this.cuartos = cuartosAuxiliar;
         if (this.cuartos.length === 0) {
           this.snackBarService.openSnackBar(
-            'error',
+            'warning',
             'Este Hotel no cuenta con cuartos',
-            'error'
+            'Advertencia'
           );
         }
       },

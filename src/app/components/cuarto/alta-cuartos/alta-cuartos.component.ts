@@ -82,9 +82,9 @@ export class RegistroCuartosComponent implements OnInit {
         console.log(data);
 
         this.snackBarService.openSnackBar(
-          'Éxito',
-          'El cuarto fue creado exitosamente',
-          'Éxito'
+          'success',
+          'Datos guardados correctamente',
+          'Cuarto registrado'
         );
         this.dialogRef.close();
       });
@@ -101,7 +101,7 @@ export class RegistroCuartosComponent implements OnInit {
       this.guardarHabitacion();
     } else {
       this.snackBarService.openSnackBar(
-        'Advertencia',
+        'warning',
         'Llena todos los campos',
         'Advertencia'
       );

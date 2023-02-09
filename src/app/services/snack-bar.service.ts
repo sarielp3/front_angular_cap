@@ -12,10 +12,10 @@ export class SnackBarService {
 
   getTypeComponent(type: string): void {
     switch (type) {
-      case 'Éxito':
+      case 'success':
         this.classSnack = 'success-snackbar';
         break;
-      case 'Advertencia':
+      case 'warning':
         this.classSnack = 'warning-snackbar';
         break;
       case 'error':
