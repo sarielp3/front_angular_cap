@@ -97,6 +97,7 @@
             [min]="minDate"
             [max]="maxDate"
             [matDatepicker]="datepicker"
+            (click)="datepicker.open()"
             onkeydown="return false"
             formControlName="fechaInicioSelect"
           />
@@ -126,6 +127,7 @@
             [max]="maxDate"
             onkeydown="return false"
             [matDatepicker]="datepickerFin"
+            (click)="datepickerFin.open()"
             formControlName="fechaFinSelect"
           />
 
@@ -148,6 +150,7 @@
     <mat-form-field class="form-element">
       <mat-label>Nombre</mat-label>
       <input
+      style="text-transform: uppercase"
         onkeypress="return (event.charCode == 32 || event.charCode == 209 || event.charCode == 241 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
         formControlName="nombreSelect"
         matInput
@@ -161,6 +164,7 @@
         <mat-form-field class="form-element">
           <mat-label>Apellido Paterno</mat-label>
           <input
+          style="text-transform: uppercase"
             onkeypress="return (event.charCode == 32 || event.charCode == 209 || event.charCode == 241 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
             formControlName="apellidoPaternoSelect"
             maxlength="40"
@@ -174,6 +178,7 @@
         <mat-form-field class="form-element">
           <mat-label>Apellido Materno</mat-label>
           <input
+          style="text-transform: uppercase"
             onkeypress="return (event.charCode == 32 || event.charCode == 209 || event.charCode == 241 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
             formControlName="apellidoMaternoSelect"
             maxlength="40"

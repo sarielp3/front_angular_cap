@@ -26,17 +26,23 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./alta-reserva.component.css'],
 })
 export class AltaReservaComponent implements OnInit {
-  today = new Date();  minDate = new Date(    this.today.getFullYear(),    this.today.getMonth(),    this.today.getDate()  );  maxDate = new Date(this.minDate.getFullYear() + 2, 11, 31);
   altaReserva: FormGroup;
- // minDate = new Date(2020, 0, 1);
- // maxDate = new Date(2022, 11, 31);
-
   ciudadesOrigen: Ciudades[];
   ciudadesDestino: Ciudades[];
   vuelos: Vuelo[];
   hoteles: Hoteles[];
   cuartos: Cuarto[];
   reservaAlta: AltaReserva = new AltaReserva();
+
+  today = new Date();
+
+  minDate = new Date(
+    this.today.getFullYear(),
+    this.today.getMonth(),
+    this.today.getDate()
+  );
+
+  maxDate = new Date(this.minDate.getFullYear() + 2, 11, 31);
 
   constructor(
     private fb: FormBuilder,
@@ -129,8 +135,8 @@ export class AltaReservaComponent implements OnInit {
     this.reservaAlta.descripcion =
       this.altaReserva.controls['descripcionSelect'].value;
 
-    this.reservaAlta.fechaInicio.setHours(18);
-    this.reservaAlta.fechaFin.setHours(12);
+    this.reservaAlta.fechaInicio.setHours(12);
+    this.reservaAlta.fechaFin.setHours(18);
     if (this.altaReserva.valid === true) {
       this.reservaService.createReserva(this.reservaAlta).subscribe(
         (data) => {
@@ -148,7 +154,7 @@ export class AltaReservaComponent implements OnInit {
       this.snackBarService.openSnackBar(
         'warning',
         'El formulario no es valido',
-        'Reserva incorrecta'
+        'Advertencia'
       );
     }
   }
@@ -201,7 +207,7 @@ export class AltaReservaComponent implements OnInit {
           if (!ciudadesId.includes(vuelo.origen.idCiudad)) {
             ciudadesId.push(vuelo.origen.idCiudad);
             ciudadesOrigenAux.push(vuelo.origen);
-            this.altaReserva.controls['origenSelect'].setValue(ciudadesId[0]);
+            
           }
           vuelosAuxiliar.push({
             idVuelo: vuelo.idVuelo,
@@ -228,6 +234,12 @@ export class AltaReservaComponent implements OnInit {
             });
           });
           this.hoteles = hotelesAux;
+        },error =>{
+          this.snackBarService.openSnackBar(
+            'warning',
+            'No hay hoteles en la ciudad de destino seleccionada',
+            'Advertencia'
+          );
         });
     }
   }
@@ -257,7 +269,7 @@ export class AltaReservaComponent implements OnInit {
           this.snackBarService.openSnackBar(
             'warning',
             'Este Hotel no cuenta con cuartos',
-            'Reserva incorrecta'
+            'Advertencia'
           );
         }
       },
