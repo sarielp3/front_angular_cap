@@ -16,9 +16,11 @@
       <form [formGroup]="filtroForm" (ngSubmit)="onSubmit()">
         <mat-form-field>
           <mat-label>Nombre del Hotel</mat-label>
-          <input style="text-transform:uppercase;" autocomplete="off" formControlName="nombreHotel" maxlength="30" matInput placeholder="Hotel Ibis"
+          
+          <input style="text-transform:uppercase;" formControlName="nombreHotel" maxlength="30" matInput placeholder="Hotel Ibis"
                     onkeypress="return (event.charCode == 32 || event.charCode == 209 || event.charCode == 241 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 48 && event.charCode <= 57))"
-                    >
+                    autocomplete="NombreHoteles.nombreHotel">
+          
         </mat-form-field>
 
         <mat-form-field>

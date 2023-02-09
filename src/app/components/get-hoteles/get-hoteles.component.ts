@@ -11,8 +11,9 @@ import { ModificarHotelesComponent } from '../../components/get-hoteles/modifica
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
-
-
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-get-hoteles',
@@ -28,7 +29,9 @@ export class GetHotelesComponent implements OnInit,AfterViewInit {
   public ciudades:Ciudades[] = [];
   public loading!: boolean;
   public filtroForm: UntypedFormGroup;
+  public nomHoteles = [];
   dataSource!:MatTableDataSource<Hoteles>;
+
   constructor(private serviceHoteles:HotelesServiceTsService, public dialog: MatDialog,private snackBarService: SnackBarService){
     this.filtroForm = new UntypedFormGroup({
       nombreHotel: new UntypedFormControl(''),
@@ -47,7 +50,10 @@ export class GetHotelesComponent implements OnInit,AfterViewInit {
     
     //this.onSubmit();
     this.dataSource = new MatTableDataSource<Hoteles>(this.ListaHoteles);
+
+    
   }
+
 
   ngAfterViewInit(){
     
@@ -72,6 +78,7 @@ export class GetHotelesComponent implements OnInit,AfterViewInit {
             this.ListaHoteles=data; 
             this.NombreHoteles=data; 
             this.loading = false;  
+            
           }
         )
         

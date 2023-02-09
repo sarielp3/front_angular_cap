@@ -26,9 +26,10 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./alta-reserva.component.css'],
 })
 export class AltaReservaComponent implements OnInit {
+  today = new Date();  minDate = new Date(    this.today.getFullYear(),    this.today.getMonth(),    this.today.getDate()  );  maxDate = new Date(this.minDate.getFullYear() + 2, 11, 31);
   altaReserva: FormGroup;
-  minDate = new Date(2020, 0, 1);
-  maxDate = new Date(2022, 11, 31);
+ // minDate = new Date(2020, 0, 1);
+ // maxDate = new Date(2022, 11, 31);
 
   ciudadesOrigen: Ciudades[];
   ciudadesDestino: Ciudades[];
