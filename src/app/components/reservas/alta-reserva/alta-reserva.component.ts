@@ -26,23 +26,17 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./alta-reserva.component.css'],
 })
 export class AltaReservaComponent implements OnInit {
+  today = new Date();  minDate = new Date(    this.today.getFullYear(),    this.today.getMonth(),    this.today.getDate()  );  maxDate = new Date(this.minDate.getFullYear() + 2, 11, 31);
   altaReserva: FormGroup;
+ // minDate = new Date(2020, 0, 1);
+ // maxDate = new Date(2022, 11, 31);
+
   ciudadesOrigen: Ciudades[];
   ciudadesDestino: Ciudades[];
   vuelos: Vuelo[];
   hoteles: Hoteles[];
   cuartos: Cuarto[];
   reservaAlta: AltaReserva = new AltaReserva();
-
-  today = new Date();
-
-  minDate = new Date(
-    this.today.getFullYear(),
-    this.today.getMonth(),
-    this.today.getDate()
-  );
-
-  maxDate = new Date(this.minDate.getFullYear() + 2, 11, 31);
 
   constructor(
     private fb: FormBuilder,
@@ -136,7 +130,7 @@ export class AltaReservaComponent implements OnInit {
       this.altaReserva.controls['descripcionSelect'].value;
 
     this.reservaAlta.fechaInicio.setHours(18);
-    this.reservaAlta.fechaFin.setHours(18);
+    this.reservaAlta.fechaFin.setHours(12);
     if (this.altaReserva.valid === true) {
       this.reservaService.createReserva(this.reservaAlta).subscribe(
         (data) => {
@@ -154,7 +148,7 @@ export class AltaReservaComponent implements OnInit {
       this.snackBarService.openSnackBar(
         'warning',
         'El formulario no es valido',
-        'Advertencia'
+        'Reserva incorrecta'
       );
     }
   }
@@ -263,7 +257,7 @@ export class AltaReservaComponent implements OnInit {
           this.snackBarService.openSnackBar(
             'warning',
             'Este Hotel no cuenta con cuartos',
-            'Advertencia'
+            'Reserva incorrecta'
           );
         }
       },

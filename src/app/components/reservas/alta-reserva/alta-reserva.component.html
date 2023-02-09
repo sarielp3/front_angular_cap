@@ -86,18 +86,17 @@
     <table class="form-element">
       <td>
         <mat-form-field style="width: 241px">
-          <mat-label title="Selecciona fecha desde el icono calendario"
-            >Fecha Inicio</mat-label
-          >
-          <input
+          <mat-label>Fecha Inicio</mat-label>
+          <input autocomplete="off"
             readonly="readonly"
-            style="pointer-events: none"
             formControlName="fechaInicioSelect"
             matInput
             [min]="minDate"
             [max]="maxDate"
             [matDatepicker]="datepicker"
+            onkeydown="return false"
           />
+          
           <mat-datepicker-toggle
             matIconSuffix
             [for]="datepicker"
@@ -114,19 +113,17 @@
       </td>
       <td>
         <mat-form-field style="width: 240px">
-          <mat-label title="Selecciona fecha desde el icono calendario"
-            >Fecha Fin</mat-label
-          >
-          <input
+          <mat-label>Fecha Fin</mat-label>
+          <input autocomplete="off"
             readonly="readonly"
-            style="pointer-events: none"
+            formControlName="fechaFinSelect"
             matInput
             [min]="minDate"
             [max]="maxDate"
             [matDatepicker]="datepickerFin"
             onkeydown="return false"
           />
-
+          
           <mat-datepicker-toggle
             matIconSuffix
             [for]="datepickerFin"
@@ -149,7 +146,7 @@
         onkeypress="return (event.charCode == 32 || event.charCode == 209 || event.charCode == 241 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
         formControlName="nombreSelect"
         matInput
-        maxlength="40"
+        maxlength="22"
         placeholder="Ej. Juan Carlos"
         value=""
       />
@@ -162,7 +159,7 @@
             onkeypress="return (event.charCode == 32 || event.charCode == 209 || event.charCode == 241 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
             formControlName="apellidoPaternoSelect"
             matInput
-            maxlength="40"
+            maxlength="22"
             placeholder="Ej. Acosta"
             value=""
           />
@@ -175,7 +172,7 @@
             onkeypress="return (event.charCode == 32 || event.charCode == 209 || event.charCode == 241 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
             formControlName="apellidoMaternoSelect"
             matInput
-            maxlength="40"
+            maxlength="22"
             placeholder="Ej. Lechuga"
             value=""
           />
