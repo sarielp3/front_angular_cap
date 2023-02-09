@@ -131,7 +131,7 @@ export class ModificaVueloComponent implements OnInit {
         this.snackBarService.openSnackBar(
           'warning',
           'La ciudad de origen debe ser diferente a la ciudad de destino',
-          'Advertencia'
+          'warning'
         );
       } else {
         this.loading = true;
@@ -148,7 +148,7 @@ export class ModificaVueloComponent implements OnInit {
             this.snackBarService.openSnackBar(
               'success',
               'El vuelo se guardo de manera exitosa',
-              'Vuelo mofificado'
+              'success'
             );
             this.loading = false;
           },
@@ -158,8 +158,8 @@ export class ModificaVueloComponent implements OnInit {
     } else {
       this.snackBarService.openSnackBar(
         'warning',
-        'El formulario no es válido',
-        'Advertencia'
+        'El formulario no es valido',
+        'Warning'
       );
     }
   }

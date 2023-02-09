@@ -136,7 +136,7 @@ export class GetHotelesComponent implements OnInit, AfterViewInit {
             this.snackBarService.openSnackBar(
               'Éxito',
               'Estatus cambiado correctamente',
-              'Exito'
+              'Estatus Hotel'
             );
             this.getHoteles();
           });
@@ -145,7 +145,7 @@ export class GetHotelesComponent implements OnInit, AfterViewInit {
         this.snackBarService.openSnackBar(
           'error',
           'Solicitud de estatus cancelada',
-          'error'
+          'Error al cambiar estatus'
         );
       }
     });
@@ -162,7 +162,7 @@ export class GetHotelesComponent implements OnInit, AfterViewInit {
         this.serviceHoteles.eliminar(elemento.idHotel).subscribe((data) => {
           console.log('Eliminamos Registro con Id', elemento.idHotel);
           this.snackBarService.openSnackBar(
-            'Éxito',
+            'success',
             'registro eliminado con exito',
             'Exito'
           );

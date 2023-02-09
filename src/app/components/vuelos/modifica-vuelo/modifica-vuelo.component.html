@@ -42,12 +42,14 @@
         </table>                
         <br />
         <mat-form-field class="form-element">
-            <mat-label>Codigo del vuelo</mat-label>
-            <input formControlName="codigoControl" matInput placeholder="Codigo del vuelo" value="">
+            <mat-label>C&oacute;digo del vuelo</mat-label>
+            <input style="text-transform:uppercase;" autocomplete="off" maxlength="10" minlength="10" formControlName="codigoControl" matInput placeholder="Codigo del vuelo" value=""
+            onkeypress="return (event.charCode == 209 || event.charCode == 241 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 48 && event.charCode <= 57))">
         </mat-form-field>
         <mat-form-field class="form-element">
             <mat-label>Costo del vuelo</mat-label>
-            <input type="number" formControlName="costoControl" matInput placeholder="Costo del vuelo" value="">
+            <input formControlName="costoControl" maxlength="5" placeholder="Ej. 4000" value="30000" type="text" autocomplete="off" matInput placeholder="Costo del vuelo"
+            onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 46" >
         </mat-form-field>       
         <table class="form-element">
             <td>
