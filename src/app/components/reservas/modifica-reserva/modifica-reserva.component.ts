@@ -74,8 +74,13 @@ export class ModificaReservaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const fechaInicio = this.data.fechaInicio.toString().replaceAll('-', '/');
-    const fechaFin = this.data.fechaFin.toString().replaceAll('-', '/');
+    console.log(this.data);
+
+    let fechaInicio = this.data.fechaInicio.toString().replaceAll('-', '/');
+    let fechaFin = this.data.fechaFin.toString().replaceAll('-', '/');
+    console.log(this.data.fechaInicio);
+    console.log(new Date(this.data.fechaInicio).toISOString());
+    console.log(new Date(this.data.fechaInicio).toISOString());
     this.modificacionReserva.controls['fechaInicioSelect'].setValue(
       new Date(fechaInicio)
     );
@@ -171,8 +176,9 @@ export class ModificaReservaComponent implements OnInit {
         this.modificacionReserva.controls['hotelSelect'].value;
       this.reservaModificacion.idCuarto =
         this.modificacionReserva.controls['cuartoSelect'].value;
-
-      this.reservaModificacion.fechaInicio.setHours(18);
+      console.log(this.reservaModificacion.fechaInicio);
+      console.log(this.reservaModificacion.fechaFin);
+      this.reservaModificacion.fechaInicio.setHours(12);
       this.reservaModificacion.fechaFin.setHours(18);
       this.modificacionReserva.controls['cuartoSelect'].setValidators([
         Validators.required,
@@ -245,9 +251,7 @@ export class ModificaReservaComponent implements OnInit {
           if (!ciudadesId.includes(vuelo.origen.idCiudad)) {
             ciudadesId.push(vuelo.origen.idCiudad);
             ciudadesOrigenAux.push(vuelo.origen);
-            this.modificacionReserva.controls['origenSelect'].setValue(
-              ciudadesId[0]
-            );
+            
           }
           vuelosAuxiliar.push({
             idVuelo: vuelo.idVuelo,
@@ -273,7 +277,14 @@ export class ModificaReservaComponent implements OnInit {
             });
           });
           this.hoteles = hotelesAux;
-        });
+        },error =>{
+          this.snackBarService.openSnackBar(
+            'warning',
+            'No hay hoteles en la ciudad de destino seleccionada',
+            'Advertencia'
+          );
+        }
+        );
     }
   }
 

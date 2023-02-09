@@ -126,7 +126,7 @@ export class AltaReservaComponent implements OnInit {
     this.reservaAlta.descripcion =
       this.altaReserva.controls['descripcionSelect'].value;
 
-    this.reservaAlta.fechaInicio.setHours(18);
+    this.reservaAlta.fechaInicio.setHours(12);
     this.reservaAlta.fechaFin.setHours(18);
     if (this.altaReserva.valid === true) {
       this.reservaService.createReserva(this.reservaAlta).subscribe(
@@ -198,7 +198,7 @@ export class AltaReservaComponent implements OnInit {
           if (!ciudadesId.includes(vuelo.origen.idCiudad)) {
             ciudadesId.push(vuelo.origen.idCiudad);
             ciudadesOrigenAux.push(vuelo.origen);
-            this.altaReserva.controls['origenSelect'].setValue(ciudadesId[0]);
+            
           }
           vuelosAuxiliar.push({
             idVuelo: vuelo.idVuelo,
@@ -225,6 +225,12 @@ export class AltaReservaComponent implements OnInit {
             });
           });
           this.hoteles = hotelesAux;
+        },error =>{
+          this.snackBarService.openSnackBar(
+            'warning',
+            'No hay hoteles en la ciudad de destino seleccionada',
+            'Advertencia'
+          );
         });
     }
   }
