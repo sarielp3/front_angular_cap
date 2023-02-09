@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject,Input } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import { Cuarto } from '../../../models/cuarto';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
 import { CuartoService } from '../../../services/cuarto.service';
@@ -55,7 +55,7 @@ export class RegistroCuartosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   console.log(this.data);
+    console.log(this.data);
   }
 
   guardarHabitacion() {
@@ -77,14 +77,14 @@ export class RegistroCuartosComponent implements OnInit {
     this.habitacion.status = 1;
 
     this.habitacionServicio
-      .registraHabitaciones(this.habitacion,this.data)
+      .registraHabitaciones(this.habitacion, this.data)
       .subscribe((data) => {
         console.log(data);
 
         this.snackBarService.openSnackBar(
           'success',
           'Datos guardados correctamente',
-          'success'
+          'Cuarto registrado'
         );
         this.dialogRef.close();
       });
@@ -103,7 +103,7 @@ export class RegistroCuartosComponent implements OnInit {
       this.snackBarService.openSnackBar(
         'warning',
         'Llena todos los campos',
-        'warning'
+        'Advertencia'
       );
     }
   }
