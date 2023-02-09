@@ -1,0 +1,14 @@
+.error.mat-snack-bar-container {
+  background: #910000;
+  color: white;
+}
+
+.success.mat-snack-bar-container {
+  background: #099109;
+  color: white;
+}
+
+.warning.mat-snack-bar-container {
+  background: #e0a604;
+  color: white;
+}

@@ -134,7 +134,7 @@ export class GetHotelesComponent implements OnInit, AfterViewInit {
           .cambiarEstatus(elemento.idHotel)
           .subscribe((respuesta) => {
             this.snackBarService.openSnackBar(
-              'Éxito',
+              'success',
               'Estatus cambiado correctamente',
               'Estatus Hotel'
             );

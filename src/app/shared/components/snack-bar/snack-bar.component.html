@@ -1,2 +1,19 @@
-<h1>{{data.titulo}}</h1>
-{{data.mensaje}}
+<h1>
+  <mat-icon
+    [ngClass]="{
+      'warning-icon': data.type === 'warning',
+      'success-icon': data.type === 'success',
+      'error-icon': data.type === 'error'
+    }"
+  >
+    {{
+      data.type === "warning"
+        ? "warning"
+        : data.type === "success"
+        ? "check_circle"
+        : "cancel"
+    }}
+  </mat-icon>
+  {{ data.titulo }}
+</h1>
+{{ data.mensaje }}
