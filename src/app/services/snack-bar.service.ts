@@ -30,6 +30,7 @@ export class SnackBarService {
       data: {
         titulo: titulo,
         mensaje: text,
+        type: type,
       },
       horizontalPosition: 'right',
       verticalPosition: 'top',

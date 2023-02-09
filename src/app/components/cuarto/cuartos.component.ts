@@ -113,8 +113,8 @@ export class CuartosComponent implements OnInit {
         this.cuartoService.eliminarHabitacion(elemento).subscribe((dato) => {
           this.snackBarService.openSnackBar(
             'success',
-            'registro eliminado',
-            'success'
+            'Se eliminó exitosamente la habitación',
+            'Habitación eliminada'
           );
           this.obtenerHabitacionesFiltro();
         });
@@ -134,17 +134,12 @@ export class CuartosComponent implements OnInit {
             this.snackBarService.openSnackBar(
               'success',
               'Estatus cambiado correctamente',
-              'success'
+              'Cambio de estatus'
             );
             this.obtenerHabitacionesFiltro();
           });
       } else {
         check.source.checked = !enable;
-        this.snackBarService.openSnackBar(
-          'warning',
-          'solicitud de estatus cancelada',
-          'warning'
-        );
       }
     });
   }

@@ -1,28 +1,33 @@
 body {
-    min-height: 100vh;
-    overflow-x: hidden; 
-    background-color:#fffffe;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: #fffffe;
 }
-
 
 .text-gray {
-    color: #aaa;
+  color: #aaa;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .success-snackbar {
-    --mdc-snackbar-container-color:rgb(56, 235, 46);  
-    width: auto;
-    height: auto;
+  --mdc-snackbar-container-color: rgb(9, 148, 2);
+  width: auto;
+  height: auto;
 }
-.warning-snackbar{
-    --mdc-snackbar-container-color:rgb(210, 205, 39);  
-    width: auto;
-    height: auto;
+.warning-snackbar {
+  --mdc-snackbar-container-color: rgb(214, 157, 0);
+  width: auto;
+  height: auto;
 }
-.error-snackbar{    
-    --mdc-snackbar-container-color:rgb(205, 29, 61);
-    width: auto;
-    height: auto;  
+.error-snackbar {
+  --mdc-snackbar-container-color: rgb(131, 0, 24);
+  width: auto;
+  height: auto;
 }

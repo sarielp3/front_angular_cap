@@ -42,6 +42,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { RegistroCuartosComponent } from './components/cuarto/alta-cuartos/alta-cuartos.component';
 import { ModificarCuartosComponent } from './components/cuarto/modificar-cuartos/modificar-cuartos.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { library, dom } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+
+library.add(fas);
+dom.watch();
 
 @NgModule({
   declarations: [
