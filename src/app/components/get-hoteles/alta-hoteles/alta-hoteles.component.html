@@ -15,27 +15,27 @@
                 </mat-form-field>
                 <mat-form-field>
                     <mat-label>Nombre de Hotel</mat-label>
-                    <input style="text-transform:uppercase;" autocomplete="off" formControlName="nombreHotel" maxlength="40" matInput placeholder="Hotel Ibis"
+                    <input style="text-transform:uppercase;" autocomplete="off" formControlName="nombreHotel" maxlength="40" matInput placeholder="Ej. Hotel Ibis"
                     onkeypress="return (event.charCode == 32 || event.charCode == 209 || event.charCode == 241 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 48 && event.charCode <= 57))"
                     >
                 </mat-form-field>
 
                 <mat-form-field>
                     <mat-label>C&oacute;digo de Hotel</mat-label>
-                    <input style="text-transform:uppercase;" autocomplete="off" minlength="10" maxlength="10" formControlName="codigoHotel" type="text" matInput placeholder="AB00000000"
+                    <input style="text-transform:uppercase;" autocomplete="off" minlength="10" maxlength="10" formControlName="codigoHotel" type="text" matInput placeholder="Ej. AB00000000"
                     onkeypress="return (event.charCode == 209 || event.charCode == 241 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 48 && event.charCode <= 57))"
                     >
                 </mat-form-field>
                 <mat-form-field>
                     <mat-label>Direcci&oacute;n</mat-label>
-                    <input maxlength="80" formControlName="direccion" matInput placeholder="Pirules 1849, Alamos 2"
+                    <input maxlength="80" formControlName="direccion" matInput placeholder="Ej. Pirules 1849, Alamos 2"
                     onkeypress="return (event.charCode == 32 || event.charCode == 44 || event.charCode == 209 || event.charCode == 241 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 48 && event.charCode <= 57))"
                     >
                 </mat-form-field>
 
                 <br>
-                    <label>Logo*:</label>
-                    <input formControlName="logo" (change) = "onFileChanged($event)" id="imagen" accept="image/*" type="file">
+                    <label class="logov">Logo*:</label>
+                    <input formControlName="logo" (change) = "onFileChanged($event)" id="imagen" accept="image/x-png, image/gif, image/jpeg" type="file">
                     <img [src]="imgURL" height="30" *ngIf="imgURL"><br>
                     <button mat-raised-button color="primary" type="submit" [disabled]="!altaForm.valid">Guardar</button>
                     <button mat-raised-button color="primary" (click)="cancelar()" type="button">Cancelar</button>

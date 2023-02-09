@@ -61,6 +61,8 @@ export class GetHotelesComponent implements OnInit, AfterViewInit {
 
     //this.onSubmit();
     this.dataSource = new MatTableDataSource<Hoteles>(this.ListaHoteles);
+
+    
   }
 
   ngAfterViewInit() {
@@ -84,19 +86,45 @@ export class GetHotelesComponent implements OnInit, AfterViewInit {
       );
   }
 
-  public getHoteles() {
-    this.loading = true;
-    this.serviceHoteles.getHoteles().subscribe((data) => {
-      this.ListaHoteles = data;
-      this.NombreHoteles = data;
-      this.loading = false;
-    });
+  public getHoteles(){
+    this.loading = true; 
+        this.serviceHoteles.getHoteles().subscribe(
+          (data)=>{
+            this.ListaHoteles=data; 
+            this.NombreHoteles=data; 
+            
+            this.ListaHoteles.sort(function (a, b) {
+              const nameA = a.ciudad.nombreCiudad.toUpperCase(); // ignore upper and lowercase
+              const nameB = b.ciudad.nombreCiudad.toUpperCase(); // ignore upper and lowercase
+              if (nameA < nameB) {
+                return -1;
+              }
+              if (nameA > nameB) {
+                return 1;
+              }
+              return 0;
+             });
+             this.loading = false;  
+            console.log(this.NombreHoteles);
+          }
+        )
+        
   }
 
-  public getCiudades() {
-    this.serviceHoteles.getCiudades().subscribe((data) => {
-      this.ciudades = data;
-    });
+  
+
+  public getCiudades(){
+    this.serviceHoteles.getCiudades().subscribe(
+      (data)=>{
+        this.ciudades=data;
+        this.ciudades.sort(function (a, b) {
+           if( a.nombreCiudad > b.nombreCiudad){
+            return 1;
+           }
+           return 0;
+          });
+      }
+    )
   }
 
   public altaHotel() {
@@ -135,18 +163,13 @@ export class GetHotelesComponent implements OnInit, AfterViewInit {
           .subscribe((respuesta) => {
             this.snackBarService.openSnackBar(
               'Éxito',
-              'Estatus cambiado correctamente',
-              'Estatus Hotel'
+              'Estatus de hotel cambiado correctamente',
+              'Estatus cambiado'
             );
             this.getHoteles();
           });
       } else {
         check.source.checked = !enable;
-        this.snackBarService.openSnackBar(
-          'error',
-          'Solicitud de estatus cancelada',
-          'Error al cambiar estatus'
-        );
       }
     });
   }
@@ -163,11 +186,14 @@ export class GetHotelesComponent implements OnInit, AfterViewInit {
           console.log('Eliminamos Registro con Id', elemento.idHotel);
           this.snackBarService.openSnackBar(
             'success',
-            'registro eliminado con exito',
-            'Exito'
+            'Registro eliminado con exito',
+            'Éxito'
           );
           this.getHoteles();
-        });
+        },err =>{
+          this.snackBarService.openSnackBar('error', 'No se puede eliminar un Hotel con cuartos reservados','Hotel Error');
+        }
+        );
       }
     });
   }

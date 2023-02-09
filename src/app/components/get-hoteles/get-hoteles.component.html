@@ -7,7 +7,7 @@
     (click)="altaHotel()"
   >
     <i class="fa fa-plus"> Alta Hotel</i>
-  </button>
+  </button><br><br>
 </div>
     <mat-grid-list cols="4" rowHeight="150px">
       <mat-grid-tile colspan="1" rowspan="3"><div class="campos">
@@ -16,14 +16,20 @@
       <form [formGroup]="filtroForm" (ngSubmit)="onSubmit()">
         <mat-form-field>
           <mat-label>Nombre del Hotel</mat-label>
-          <input style="text-transform:uppercase;" autocomplete="off" formControlName="nombreHotel" maxlength="30" matInput placeholder="Hotel Ibis"
+          
+          <input style="text-transform:uppercase;" formControlName="nombreHotel" maxlength="30" matInput placeholder="Ej. Hotel Ibis"
                     onkeypress="return (event.charCode == 32 || event.charCode == 209 || event.charCode == 241 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 48 && event.charCode <= 57))"
-                    >
+                    [matAutocomplete] = "auto">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                      <mat-option *ngFor="let nombre of NombreHoteles" [value]="nombre.nombreHotel">
+                        {{nombre.nombreHotel}}
+                      </mat-option>
+                    </mat-autocomplete>
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>C&oacute;digo del Hotel</mat-label>
-          <input style="text-transform:uppercase;" autocomplete="off" minlength="10" maxlength="10" formControlName="codigoHotel" matInput placeholder="AB00000000"
+          <input style="text-transform:uppercase;" autocomplete="off" minlength="10" maxlength="10" formControlName="codigoHotel" matInput placeholder="Ej. AB00000000"
                     onkeypress="return (event.charCode == 209 || event.charCode == 241 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 48 && event.charCode <= 57))"
                     >
         </mat-form-field>

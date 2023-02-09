@@ -52,8 +52,8 @@
         (selectionChange)="hotelChange()"
         formControlName="hotelSelect"
       >
-        <mat-option *ngFor="let hoteles of hoteles" [value]="hoteles.idHotel">{{
-          hoteles.nombreHotel
+        <mat-option *ngFor="let hotel of hoteles" [value]="hotel.idHotel">{{
+          hotel.nombreHotel
         }}</mat-option>
       </mat-select>
     </mat-form-field>

@@ -2,7 +2,7 @@
     <span class="fill-remaining-space">Modificar Vuelo</span>
 </mat-toolbar>
 <div class="container" *ngIf="!loading">
-    <form [formGroup]='modificacionVuelo'>
+    <form [formGroup]='modificacionVuelo' (ngSubmit)="guardar()"> 
         <mat-form-field appearance="fill" class="form-element">
             <mat-label>Origen</mat-label>
             <mat-select (selectionChange)="origenChange()" formControlName="origenControl">
@@ -43,20 +43,20 @@
         <br />
         <mat-form-field class="form-element">
             <mat-label>C&oacute;digo del vuelo</mat-label>
-            <input style="text-transform:uppercase;" autocomplete="off" maxlength="10" minlength="10" formControlName="codigoControl" matInput placeholder="Codigo del vuelo" value=""
+            <input style="text-transform:uppercase;" autocomplete="off" maxlength="10"  formControlName="codigoControl" matInput placeholder="Ej. AH93910392"
             onkeypress="return (event.charCode == 209 || event.charCode == 241 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 48 && event.charCode <= 57))">
         </mat-form-field>
         <mat-form-field class="form-element">
             <mat-label>Costo del vuelo</mat-label>
-            <input formControlName="costoControl" maxlength="5" placeholder="Ej. 4000" value="30000" type="text" autocomplete="off" matInput placeholder="Costo del vuelo"
+            <input formControlName="costoControl" maxlength="5" placeholder="Ej. 4000" value="30000" type="text" autocomplete="off" matInput
             onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 46" >
         </mat-form-field>       
         <table class="form-element">
             <td>
-                <button mat-raised-button color="primary" class="form-element" type="submit" (click)="guardar()">Guardar</button>
+                <button mat-raised-button color="primary" class="form-element" type="submit" [disabled]="!this.modificacionVuelo.valid">Guardar</button>
             </td>
             <td>
-                <button mat-raised-button color="primary" class="form-element" type="submit" (click)="cancelar()">Cancelar</button>
+                <button mat-raised-button color="primary" class="form-element" type="button" (click)="cancelar()">Cancelar</button>
             </td>
         </table>                                        
     </form>

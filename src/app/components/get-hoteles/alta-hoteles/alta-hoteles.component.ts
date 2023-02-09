@@ -5,6 +5,7 @@ import { Hoteles } from 'src/app/models/Identity/hoteles';
 import { Ciudades } from 'src/app/models/Identity/ciudades';
 import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { RegistroCuartosComponent } from '../../cuarto/alta-cuartos/alta-cuartos.component';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 @Component({
   selector: 'app-alta-hoteles',
@@ -35,7 +36,7 @@ export class AltaHotelesComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<AltaHotelesComponent>,
-    private serviceHoteles: HotelesServiceTsService) {
+    private serviceHoteles: HotelesServiceTsService,private snackBarService: SnackBarService) {
     this.altaForm = new UntypedFormGroup({
       nombreHotel: new UntypedFormControl('', [Validators.required, Validators.minLength(1)]),
       codigoHotel: new UntypedFormControl('', [Validators.required, Validators.minLength(1)]),
@@ -46,6 +47,8 @@ export class AltaHotelesComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    var a=document.querySelector<HTMLElement>(".logov");
+    a.style.color = "red"; 
     this.getCiudades();
   }
 
@@ -88,15 +91,32 @@ export class AltaHotelesComponent implements OnInit {
   }
 
   onFileChanged(event) {
-
     this.selectedFile = event.target.files[0];
-
-    let reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]);
-    reader.onload = (event2) => {
-      this.imgURL = reader.result;
-
-    };
+    var a=document.querySelector<HTMLElement>(".logov");
+    if(this.selectedFile == null){
+      
+      a.style.color = "red";
+    }else{
+      var archivo = this.selectedFile.name;
+      console.log(archivo.slice((archivo.lastIndexOf(".") - 1 >>> 0) + 2));
+      var extension = archivo.slice((archivo.lastIndexOf(".") - 1 >>> 0) + 2);
+      if(extension == 'jpg' || extension == 'jpeg' || extension == 'png' || extension == 'gif'){
+          a.style.color = "black";
+          console.log("imagen valida");
+          let reader = new FileReader();
+          reader.readAsDataURL(event.target.files[0]);
+          reader.onload = (event2) => {
+            this.imgURL = reader.result;
+      
+          };
+      }else{
+          console.log("archivo no valido");
+          this.snackBarService.openSnackBar('error', 'El archivo o imagen no es valido','Archivo no valido');
+          this.altaForm.controls['logo'].setValue(null);
+      }
+      
+    }
+   
   }
 
   cuarto() {

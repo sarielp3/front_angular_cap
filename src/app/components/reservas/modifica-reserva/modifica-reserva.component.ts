@@ -74,13 +74,8 @@ export class ModificaReservaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.data);
-
     const fechaInicio = this.data.fechaInicio.toString().replaceAll('-', '/');
     const fechaFin = this.data.fechaFin.toString().replaceAll('-', '/');
-    console.log(this.data.fechaInicio);
-    console.log(new Date(this.data.fechaInicio));
-    console.log(new Date(this.data.fechaInicio).toISOString());
     this.modificacionReserva.controls['fechaInicioSelect'].setValue(
       new Date(fechaInicio)
     );
@@ -128,6 +123,7 @@ export class ModificaReservaComponent implements OnInit {
           this.modificacionReserva.controls['hotelSelect'].setValue(
             this.data.cuarto.idHotel
           );
+          
         },
         (error) => {
           console.log('Error => ', error);
@@ -136,7 +132,6 @@ export class ModificaReservaComponent implements OnInit {
     this.cuartoService.obtenerListaFiltro(this.data.cuarto.idHotel).subscribe(
       (data) => {
         this.cuartos = data;
-        console.log(this.data.cuarto.idHotel);
         this.modificacionReserva.controls['cuartoSelect'].setValue(
           this.data.cuarto.idCuarto
         );
@@ -156,10 +151,8 @@ export class ModificaReservaComponent implements OnInit {
   }
 
   guardar() {
-    console.log('formulario valido:' + this.modificacionReserva.valid);
-
     if (this.modificacionReserva.valid) {
-      console.log(this.data.idReserva);
+      
       this.reservaModificacion.nombreCliente =
         this.modificacionReserva.controls['nombreSelect'].value;
       this.reservaModificacion.apellidoPaternoCliente =
@@ -212,7 +205,6 @@ export class ModificaReservaComponent implements OnInit {
     this.modificacionReserva.get('vueloSelect').enable();
     const origenId = this.modificacionReserva.getRawValue().origenSelect;
     const destinoId = this.modificacionReserva.getRawValue().destinoSelect;
-    console.log(origenId); // Llamamos a cargar Destino
     let ciudadesDestinoAux = [];
     let vuelosAuxiliar = [];
     let ciudadesId = [];
@@ -229,8 +221,6 @@ export class ModificaReservaComponent implements OnInit {
             codigoVuelo: vuelo.codigoVuelo,
           });
         });
-        console.log(ciudadesDestinoAux);
-        console.log(vuelosAuxiliar);
         this.ciudadesDestino = ciudadesDestinoAux;
         this.vuelos = vuelosAuxiliar;
       },
@@ -264,8 +254,6 @@ export class ModificaReservaComponent implements OnInit {
             codigoVuelo: vuelo.codigoVuelo,
           });
         });
-        console.log(ciudadesOrigenAux);
-        console.log(vuelosAuxiliar);
         //this.ciudadesOrigen = ciudadesOrigenAux;
         this.vuelos = vuelosAuxiliar;
       },
@@ -308,8 +296,6 @@ export class ModificaReservaComponent implements OnInit {
           });
         });
 
-        console.log(cuartosAuxiliar);
-
         this.cuartos = cuartosAuxiliar;
         if (this.cuartos.length === 0) {
           this.snackBarService.openSnackBar(
@@ -325,14 +311,11 @@ export class ModificaReservaComponent implements OnInit {
 
   cuartoChange() {
     const cuartoId = this.modificacionReserva.getRawValue().cuartoSelect;
-    console.log(
-      'cuarto: ' + this.modificacionReserva.controls['cuartoSelect'].value
-    );
     const cuarto = this.cuartos.filter(
       (cuarto) => cuarto.idCuarto === cuartoId
     );
     if (cuarto.length > 0) {
-      console.log(cuarto);
+      
       this.modificacionReserva.controls['costoCuarto'].setValue(
         cuarto[0].costoNoche
       );

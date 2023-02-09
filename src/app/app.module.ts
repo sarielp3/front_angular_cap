@@ -42,6 +42,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { RegistroCuartosComponent } from './components/cuarto/alta-cuartos/alta-cuartos.component';
 import { ModificarCuartosComponent } from './components/cuarto/modificar-cuartos/modificar-cuartos.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     VuelosModule,
     MatSlideToggleModule,
     MatTooltipModule,
+    MatAutocompleteModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

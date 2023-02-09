@@ -26,6 +26,7 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./alta-reserva.component.css'],
 })
 export class AltaReservaComponent implements OnInit {
+  today = new Date();  minDate = new Date(    this.today.getFullYear(),    this.today.getMonth(),    this.today.getDate()  );  maxDate = new Date(this.minDate.getFullYear() + 2, 11, 31);
   altaReserva: FormGroup;
   ciudadesOrigen: Ciudades[];
   ciudadesDestino: Ciudades[];
@@ -33,16 +34,6 @@ export class AltaReservaComponent implements OnInit {
   hoteles: Hoteles[];
   cuartos: Cuarto[];
   reservaAlta: AltaReserva = new AltaReserva();
-
-  today = new Date();
-
-  minDate = new Date(
-    this.today.getFullYear(),
-    this.today.getMonth(),
-    this.today.getDate()
-  );
-
-  maxDate = new Date(this.minDate.getFullYear() + 2, 11, 31);
 
   constructor(
     private fb: FormBuilder,

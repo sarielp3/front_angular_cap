@@ -80,8 +80,8 @@ export class AltaVueloComponent {
     );
   }
 
-  guardar() {
-    this.disableButon = true;
+  guardar(){        
+    
     this.vueloAlta.origen = this.altaVuelo.controls['origenControl'].value;
     this.vueloAlta.destino = this.altaVuelo.controls['destinoControl'].value;
     this.vueloAlta.aerolinea = this.altaVuelo.controls['aerolieaControl'].value;
@@ -94,40 +94,29 @@ export class AltaVueloComponent {
       this.altaVuelo.controls['costoControl'].value
     );
 
-    if (this.altaVuelo.valid === true) {
-      if (this.vueloAlta.origen === this.vueloAlta.destino) {
-        this.snackBarService.openSnackBar(
-          'error',
-          'La ciudad de origen debe ser diferente a la ciudad de destino',
-          'error'
-        );
+    
+    if(this.altaVuelo.valid === true){
+      if( this.vueloAlta.origen === this.vueloAlta.destino){
+        this.snackBarService.openSnackBar('error','La ciudad de origen debe ser diferente a la ciudad de destino','Error al guardar');
         this.disableButon = false;
-      } else {
+      }else{
         this.loading = true;
-        this.vueloService.createVuelo(this.vueloAlta).subscribe(
-          (data) => {
-            this.vueloService.vuelos.push(data);
-            this.vueloService.emisor.next(this.vueloService.vuelos);
-            this.snackBarService.openSnackBar(
-              'success',
-              'El vuelo se guardo de manera exitosa',
-              'Éxito'
-            );
-            this.loading = false;
-            this.disableButon = false;
-            this.dialogRef.close();
-          },
-          (error) => {
-            this.loading = false;
-          }
+        this.vueloService.createVuelo(this.vueloAlta).subscribe( data =>{
+          this.vueloService.vuelos.push(data);
+          this.vueloService.emisor.next(this.vueloService.vuelos);
+          this.snackBarService.openSnackBar('success','El vuelo se guardo de manera exitosa','Éxito');
+          this.loading = false;
+          this.disableButon = false;
+          this.dialogRef.close();          
+        }, error =>{
+          this.loading = false;
+        }
+        
         );
       }
-    } else {
-      this.snackBarService.openSnackBar(
-        'error',
-        'El formulario no es valido',
-        'error'
-      );
+      
+    }else{
+      this.snackBarService.openSnackBar('error','El formulario no es valido','Error al guardar');
       this.disableButon = false;
     }
   }
