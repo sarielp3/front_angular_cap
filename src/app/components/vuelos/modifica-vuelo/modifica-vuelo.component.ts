@@ -31,19 +31,21 @@ export class ModificaVueloComponent implements OnInit {
     private aerolineaService: AerolineaService,
     private snackBarService: SnackBarService,
     private vueloService: VuelosService
-  ){}
-
-  ngOnInit(): void {
-    
+  ){
     this.modificacionVuelo = this.fb.group({
       origenControl:[[],Validators.required],
       destinoControl:[[],Validators.required],
       aerolineaControl:[[],Validators.required],
       costoControl:[[this.data.costo],Validators.required],
-      codigoControl:[[this.data.codigoVuelo],Validators.required],
+      codigoControl:['',[Validators.required,Validators.minLength(10)]],
       horaSalidaContol:[[this.data.horaSalida],Validators.required],
       horaLlegadaControl:[[this.data.horaLlegada],Validators.required],
     });
+  }
+
+  ngOnInit(): void {
+    
+    this.modificacionVuelo.controls['codigoControl'].setValue(this.data.codigoVuelo);
     this.loading = true;
     this.ciudadesService.getCiudadesOrigen().subscribe(
       data => {        

@@ -77,8 +77,20 @@ export class GetHotelesComponent implements OnInit,AfterViewInit {
           (data)=>{
             this.ListaHoteles=data; 
             this.NombreHoteles=data; 
-            this.loading = false;  
             
+            this.ListaHoteles.sort(function (a, b) {
+              const nameA = a.ciudad.nombreCiudad.toUpperCase(); // ignore upper and lowercase
+              const nameB = b.ciudad.nombreCiudad.toUpperCase(); // ignore upper and lowercase
+              if (nameA < nameB) {
+                return -1;
+              }
+              if (nameA > nameB) {
+                return 1;
+              }
+              return 0;
+             });
+             this.loading = false;  
+            console.log(this.NombreHoteles);
           }
         )
         
@@ -90,6 +102,12 @@ export class GetHotelesComponent implements OnInit,AfterViewInit {
     this.serviceHoteles.getCiudades().subscribe(
       (data)=>{
         this.ciudades=data;
+        this.ciudades.sort(function (a, b) {
+           if( a.nombreCiudad > b.nombreCiudad){
+            return 1;
+           }
+           return 0;
+          });
       }
     )
   }
@@ -140,11 +158,6 @@ export class GetHotelesComponent implements OnInit,AfterViewInit {
       }
       else{
         check.source.checked = !enable;
-        this.snackBarService.openSnackBar(
-          'error',
-          'Solicitud de estatus cancelada',
-          'Error al cambiar estatus'
-        );
       }
     })
       
@@ -164,6 +177,8 @@ export class GetHotelesComponent implements OnInit,AfterViewInit {
             console.log('Eliminamos Registro con Id',elemento.idHotel );
             this.snackBarService.openSnackBar('success', 'Registro eliminado con exito','Hotel eliminado');
             this.getHoteles();
+          },err =>{
+            this.snackBarService.openSnackBar('error', 'No se puede eliminar un Hotel','Hotel Error');
           }
         )
       }
